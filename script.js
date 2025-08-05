@@ -1,170 +1,439 @@
-// Particle System
-class ParticleSystem {
+// Three.js Gravitational Singularity System
+class GravitationalSingularity {
     constructor(canvas) {
         this.canvas = canvas;
-        this.ctx = canvas.getContext('2d');
-        this.particles = [];
         this.mouse = { x: 0, y: 0 };
+        this.time = 0;
+        
         this.init();
+        this.createParticles();
+        this.createBackground();
         this.animate();
         this.setupEventListeners();
     }
 
     init() {
-        this.resize();
-        this.createParticles();
-    }
-
-    resize() {
-        this.canvas.width = window.innerWidth;
-        this.canvas.height = window.innerHeight;
+        // Scene setup
+        this.scene = new THREE.Scene();
+        this.camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+        this.renderer = new THREE.WebGLRenderer({ 
+            canvas: this.canvas, 
+            alpha: true, 
+            antialias: true 
+        });
+        
+        this.renderer.setSize(window.innerWidth, window.innerHeight);
+        this.renderer.setClearColor(0x000000, 0);
+        
+        // Camera position
+        this.camera.position.z = 5;
+        
+        // Singularity center (the black hole)
+        this.singularityCenter = new THREE.Vector3(0, 0, 0);
+        
+        // Particle groups
+        this.particleGroups = [];
+        this.backgroundMesh = null;
     }
 
     createParticles() {
-        const particleCount = Math.floor((this.canvas.width * this.canvas.height) / 15000);
+        // Create multiple particle systems with different behaviors
+        this.createFloatingStars();
+        this.createInformationStreams();
+        this.createQuantumField();
+    }
+
+    createFloatingStars() {
+        const starCount = 800;
+        const positions = new Float32Array(starCount * 3);
+        const velocities = new Float32Array(starCount * 3);
+        const sizes = new Float32Array(starCount);
+        const originalPositions = new Float32Array(starCount * 3);
         
-        for (let i = 0; i < particleCount; i++) {
-            const particleType = Math.random();
+        for (let i = 0; i < starCount; i++) {
+            const i3 = i * 3;
             
-            this.particles.push({
-                x: Math.random() * this.canvas.width,
-                y: Math.random() * this.canvas.height,
-                vx: (Math.random() - 0.5) * 0.8,
-                vy: (Math.random() - 0.5) * 0.8,
-                radius: particleType < 0.7 ? Math.random() * 1.5 + 0.5 : Math.random() * 3 + 2,
-                opacity: particleType < 0.7 ? Math.random() * 0.4 + 0.1 : Math.random() * 0.8 + 0.3,
-                type: particleType < 0.7 ? 'dot' : 'star',
-                twinkle: Math.random() * Math.PI * 2,
-                twinkleSpeed: Math.random() * 0.02 + 0.01,
-                blackHoleInfluence: 0
-            });
+            // Distribute in 3D space around the singularity
+            const radius = Math.random() * 8 + 2;
+            const theta = Math.random() * Math.PI * 2;
+            const phi = Math.random() * Math.PI;
+            
+            positions[i3] = originalPositions[i3] = radius * Math.sin(phi) * Math.cos(theta);
+            positions[i3 + 1] = originalPositions[i3 + 1] = radius * Math.sin(phi) * Math.sin(theta);
+            positions[i3 + 2] = originalPositions[i3 + 2] = radius * Math.cos(phi);
+            
+            velocities[i3] = (Math.random() - 0.5) * 0.02;
+            velocities[i3 + 1] = (Math.random() - 0.5) * 0.02;
+            velocities[i3 + 2] = (Math.random() - 0.5) * 0.02;
+            
+            sizes[i] = Math.random() * 3 + 1;
         }
+        
+        const geometry = new THREE.BufferGeometry();
+        geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+        geometry.setAttribute('size', new THREE.BufferAttribute(sizes, 1));
+        
+        const material = new THREE.ShaderMaterial({
+            uniforms: {
+                time: { value: 0 },
+                singularityPos: { value: this.singularityCenter },
+                singularityStrength: { value: 2.0 }
+            },
+            vertexShader: `
+                attribute float size;
+                uniform float time;
+                uniform vec3 singularityPos;
+                uniform float singularityStrength;
+                
+                varying float vIntensity;
+                
+                void main() {
+                    vec3 pos = position;
+                    
+                    // Calculate distance to singularity
+                    float dist = distance(pos, singularityPos);
+                    
+                    // Gravitational pull (inverse square law with artistic license)
+                    vec3 direction = normalize(singularityPos - pos);
+                    float force = singularityStrength / (dist * dist + 0.1);
+                    
+                    // Warp space-time around singularity
+                    pos += direction * force * 0.3;
+                    
+                    // Add swirling motion
+                    float angle = atan(pos.y, pos.x) + time * 0.5 + force * 2.0;
+                    mat2 rotation = mat2(cos(angle), -sin(angle), sin(angle), cos(angle));
+                    pos.xy = rotation * pos.xy;
+                    
+                    vIntensity = force * 2.0 + 0.3;
+                    
+                    vec4 mvPosition = modelViewMatrix * vec4(pos, 1.0);
+                    gl_PointSize = size * (300.0 / -mvPosition.z) * (1.0 + force);
+                    gl_Position = projectionMatrix * mvPosition;
+                }
+            `,
+            fragmentShader: `
+                varying float vIntensity;
+                
+                void main() {
+                    // Create star shape
+                    vec2 center = gl_PointCoord - 0.5;
+                    float dist = length(center);
+                    
+                    // Star pattern
+                    float angle = atan(center.y, center.x);
+                    float star = pow(abs(sin(angle * 4.0)), 0.3);
+                    
+                    float alpha = (1.0 - dist) * star * vIntensity;
+                    alpha = smoothstep(0.0, 1.0, alpha);
+                    
+                    // Color shifts based on intensity
+                    vec3 color = mix(vec3(1.0, 1.0, 1.0), vec3(0.8, 0.9, 1.0), vIntensity);
+                    
+                    gl_FragColor = vec4(color, alpha * 0.8);
+                }
+            `,
+            transparent: true,
+            blending: THREE.AdditiveBlending
+        });
+        
+        const stars = new THREE.Points(geometry, material);
+        this.scene.add(stars);
+        
+        this.particleGroups.push({
+            mesh: stars,
+            positions: positions,
+            velocities: velocities,
+            originalPositions: originalPositions,
+            type: 'stars'
+        });
+    }
+
+    createInformationStreams() {
+        // Create streams of data flowing toward the singularity
+        const streamCount = 200;
+        const positions = new Float32Array(streamCount * 3);
+        const velocities = new Float32Array(streamCount * 3);
+        const lifetimes = new Float32Array(streamCount);
+        
+        for (let i = 0; i < streamCount; i++) {
+            const i3 = i * 3;
+            
+            // Start from outer edge
+            const radius = Math.random() * 5 + 8;
+            const theta = Math.random() * Math.PI * 2;
+            const phi = Math.random() * Math.PI;
+            
+            positions[i3] = radius * Math.sin(phi) * Math.cos(theta);
+            positions[i3 + 1] = radius * Math.sin(phi) * Math.sin(theta);
+            positions[i3 + 2] = radius * Math.cos(phi);
+            
+            velocities[i3] = 0;
+            velocities[i3 + 1] = 0;
+            velocities[i3 + 2] = 0;
+            
+            lifetimes[i] = Math.random();
+        }
+        
+        const geometry = new THREE.BufferGeometry();
+        geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+        geometry.setAttribute('lifetime', new THREE.BufferAttribute(lifetimes, 1));
+        
+        const material = new THREE.ShaderMaterial({
+            uniforms: {
+                time: { value: 0 },
+                singularityPos: { value: this.singularityCenter }
+            },
+            vertexShader: `
+                attribute float lifetime;
+                uniform float time;
+                uniform vec3 singularityPos;
+                
+                varying float vLifetime;
+                varying float vDistance;
+                
+                void main() {
+                    vec3 pos = position;
+                    
+                    // Calculate pull toward singularity
+                    vec3 direction = normalize(singularityPos - pos);
+                    float dist = distance(pos, singularityPos);
+                    vDistance = dist;
+                    
+                    // Accelerate toward center with spiral motion
+                    float force = 3.0 / (dist + 0.5);
+                    pos += direction * sin(time + lifetime * 10.0) * force * 0.5;
+                    
+                    // Add orbital motion
+                    float orbitalSpeed = 1.0 / dist;
+                    float angle = time * orbitalSpeed + lifetime * 6.28;
+                    mat3 rotation = mat3(
+                        cos(angle), -sin(angle), 0,
+                        sin(angle), cos(angle), 0,
+                        0, 0, 1
+                    );
+                    pos = rotation * pos;
+                    
+                    vLifetime = lifetime;
+                    
+                    vec4 mvPosition = modelViewMatrix * vec4(pos, 1.0);
+                    gl_PointSize = 2.0 * (100.0 / -mvPosition.z);
+                    gl_Position = projectionMatrix * mvPosition;
+                }
+            `,
+            fragmentShader: `
+                varying float vLifetime;
+                varying float vDistance;
+                
+                void main() {
+                    vec2 center = gl_PointCoord - 0.5;
+                    float dist = length(center);
+                    
+                    float alpha = (1.0 - dist) * (1.0 - vDistance / 10.0);
+                    alpha = smoothstep(0.0, 1.0, alpha);
+                    
+                    // Information stream color - cyan/blue
+                    vec3 color = mix(vec3(0.0, 1.0, 1.0), vec3(0.0, 0.5, 1.0), vLifetime);
+                    
+                    gl_FragColor = vec4(color, alpha * 0.6);
+                }
+            `,
+            transparent: true,
+            blending: THREE.AdditiveBlending
+        });
+        
+        const streams = new THREE.Points(geometry, material);
+        this.scene.add(streams);
+        
+        this.particleGroups.push({
+            mesh: streams,
+            positions: positions,
+            velocities: velocities,
+            lifetimes: lifetimes,
+            type: 'streams'
+        });
+    }
+
+    createQuantumField() {
+        // Quantum foam effect - tiny particles that appear and disappear
+        const fieldCount = 1500;
+        const positions = new Float32Array(fieldCount * 3);
+        const phases = new Float32Array(fieldCount);
+        
+        for (let i = 0; i < fieldCount; i++) {
+            const i3 = i * 3;
+            
+            positions[i3] = (Math.random() - 0.5) * 20;
+            positions[i3 + 1] = (Math.random() - 0.5) * 20;
+            positions[i3 + 2] = (Math.random() - 0.5) * 10;
+            
+            phases[i] = Math.random() * Math.PI * 2;
+        }
+        
+        const geometry = new THREE.BufferGeometry();
+        geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+        geometry.setAttribute('phase', new THREE.BufferAttribute(phases, 1));
+        
+        const material = new THREE.ShaderMaterial({
+            uniforms: {
+                time: { value: 0 },
+                singularityPos: { value: this.singularityCenter }
+            },
+            vertexShader: `
+                attribute float phase;
+                uniform float time;
+                uniform vec3 singularityPos;
+                
+                varying float vIntensity;
+                
+                void main() {
+                    vec3 pos = position;
+                    
+                    float dist = distance(pos, singularityPos);
+                    float distortionFactor = 2.0 / (dist + 1.0);
+                    
+                    // Quantum fluctuations
+                    pos += sin(time * 3.0 + phase) * 0.1 * distortionFactor;
+                    
+                    vIntensity = sin(time * 2.0 + phase + dist) * 0.5 + 0.5;
+                    vIntensity *= distortionFactor;
+                    
+                    vec4 mvPosition = modelViewMatrix * vec4(pos, 1.0);
+                    gl_PointSize = 1.0 * (50.0 / -mvPosition.z);
+                    gl_Position = projectionMatrix * mvPosition;
+                }
+            `,
+            fragmentShader: `
+                varying float vIntensity;
+                
+                void main() {
+                    vec2 center = gl_PointCoord - 0.5;
+                    float dist = length(center);
+                    
+                    float alpha = (1.0 - dist) * vIntensity;
+                    
+                    gl_FragColor = vec4(1.0, 1.0, 1.0, alpha * 0.3);
+                }
+            `,
+            transparent: true,
+            blending: THREE.AdditiveBlending
+        });
+        
+        const field = new THREE.Points(geometry, material);
+        this.scene.add(field);
+        
+        this.particleGroups.push({
+            mesh: field,
+            type: 'quantum'
+        });
+    }
+
+    createBackground() {
+        // Create a background that warps toward the singularity
+        const geometry = new THREE.PlaneGeometry(30, 30, 100, 100);
+        
+        const material = new THREE.ShaderMaterial({
+            uniforms: {
+                time: { value: 0 },
+                singularityPos: { value: this.singularityCenter },
+                resolution: { value: new THREE.Vector2(window.innerWidth, window.innerHeight) }
+            },
+            vertexShader: `
+                uniform float time;
+                uniform vec3 singularityPos;
+                
+                varying vec2 vUv;
+                varying float vDistortion;
+                
+                void main() {
+                    vUv = uv;
+                    
+                    vec3 pos = position;
+                    
+                    // Calculate distance to singularity in screen space
+                    float dist = distance(pos, singularityPos);
+                    
+                    // Warp space toward singularity
+                    vec3 direction = normalize(singularityPos - pos);
+                    float warpFactor = 2.0 / (dist + 0.5);
+                    pos += direction * warpFactor * 0.3;
+                    
+                    vDistortion = warpFactor;
+                    
+                    gl_Position = projectionMatrix * modelViewMatrix * vec4(pos, 1.0);
+                }
+            `,
+            fragmentShader: `
+                uniform float time;
+                uniform vec2 resolution;
+                
+                varying vec2 vUv;
+                varying float vDistortion;
+                
+                void main() {
+                    vec2 center = vec2(0.5, 0.5);
+                    float dist = distance(vUv, center);
+                    
+                    // Create radial gradient that gets darker toward center
+                    float darkness = smoothstep(0.0, 0.8, dist);
+                    darkness = mix(0.05, 0.15, darkness);
+                    
+                    // Add some subtle noise
+                    float noise = sin(vUv.x * 100.0 + time) * sin(vUv.y * 100.0 + time) * 0.02;
+                    
+                    // Darken more with distortion
+                    darkness *= (2.0 - vDistortion);
+                    
+                    gl_FragColor = vec4(darkness + noise, darkness + noise, darkness + noise * 1.2, 0.3);
+                }
+            `,
+            transparent: true,
+            side: THREE.DoubleSide
+        });
+        
+        this.backgroundMesh = new THREE.Mesh(geometry, material);
+        this.backgroundMesh.position.z = -8;
+        this.scene.add(this.backgroundMesh);
     }
 
     setupEventListeners() {
         window.addEventListener('resize', () => {
-            this.resize();
-            this.particles = [];
-            this.createParticles();
+            this.camera.aspect = window.innerWidth / window.innerHeight;
+            this.camera.updateProjectionMatrix();
+            this.renderer.setSize(window.innerWidth, window.innerHeight);
         });
 
         window.addEventListener('mousemove', (e) => {
-            this.mouse.x = e.clientX;
-            this.mouse.y = e.clientY;
+            this.mouse.x = (e.clientX / window.innerWidth) * 2 - 1;
+            this.mouse.y = -(e.clientY / window.innerHeight) * 2 + 1;
         });
-    }
-
-    drawParticles() {
-        this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
-        
-        // Black hole center (approximate center of screen)
-        const blackHoleX = this.canvas.width / 2;
-        const blackHoleY = this.canvas.height / 2;
-        
-        this.particles.forEach((particle, i) => {
-            // Update twinkle animation
-            particle.twinkle += particle.twinkleSpeed;
-            
-            // Black hole attraction (much stronger than mouse)
-            const blackHoleDx = blackHoleX - particle.x;
-            const blackHoleDy = blackHoleY - particle.y;
-            const blackHoleDistance = Math.sqrt(blackHoleDx * blackHoleDx + blackHoleDy * blackHoleDy);
-            
-            if (blackHoleDistance < 400) {
-                const blackHoleForce = (400 - blackHoleDistance) / 400 * 0.15;
-                particle.vx += (blackHoleDx / blackHoleDistance) * blackHoleForce;
-                particle.vy += (blackHoleDy / blackHoleDistance) * blackHoleForce;
-                particle.blackHoleInfluence = blackHoleForce;
-            } else {
-                particle.blackHoleInfluence *= 0.95;
-            }
-            
-            // Update position
-            particle.x += particle.vx;
-            particle.y += particle.vy;
-            
-            // Wrap around edges (but less frequently due to black hole)
-            if (particle.x < -50) particle.x = this.canvas.width + 50;
-            if (particle.x > this.canvas.width + 50) particle.x = -50;
-            if (particle.y < -50) particle.y = this.canvas.height + 50;
-            if (particle.y > this.canvas.height + 50) particle.y = -50;
-            
-            // Mouse interaction (weaker now)
-            const dx = this.mouse.x - particle.x;
-            const dy = this.mouse.y - particle.y;
-            const distance = Math.sqrt(dx * dx + dy * dy);
-            
-            if (distance < 80) {
-                const force = (80 - distance) / 80;
-                particle.vx -= (dx / distance) * force * 0.05;
-                particle.vy -= (dy / distance) * force * 0.05;
-            }
-            
-            // Damping
-            particle.vx *= 0.98;
-            particle.vy *= 0.98;
-            
-            // Calculate dynamic opacity based on twinkle and black hole influence
-            const twinkleOpacity = Math.sin(particle.twinkle) * 0.3 + 0.7;
-            const dynamicOpacity = particle.opacity * twinkleOpacity * (1 + particle.blackHoleInfluence);
-            
-            // Draw particle based on type
-            if (particle.type === 'star') {
-                this.drawStar(particle.x, particle.y, particle.radius, dynamicOpacity);
-            } else {
-                this.ctx.beginPath();
-                this.ctx.arc(particle.x, particle.y, particle.radius, 0, Math.PI * 2);
-                this.ctx.fillStyle = `rgba(255, 255, 255, ${dynamicOpacity})`;
-                this.ctx.fill();
-            }
-            
-            // Draw connections (fewer and more subtle)
-            if (i % 3 === 0) {
-                this.particles.slice(i + 1, i + 5).forEach(other => {
-                    const dx = other.x - particle.x;
-                    const dy = other.y - particle.y;
-                    const distance = Math.sqrt(dx * dx + dy * dy);
-                    
-                    if (distance < 120) {
-                        this.ctx.beginPath();
-                        this.ctx.moveTo(particle.x, particle.y);
-                        this.ctx.lineTo(other.x, other.y);
-                        this.ctx.strokeStyle = `rgba(255, 255, 255, ${(1 - distance / 120) * 0.08})`;
-                        this.ctx.stroke();
-                    }
-                });
-            }
-        });
-    }
-    
-    drawStar(x, y, radius, opacity) {
-        const spikes = 4;
-        const outerRadius = radius;
-        const innerRadius = radius * 0.4;
-        
-        this.ctx.beginPath();
-        this.ctx.moveTo(x, y - outerRadius);
-        
-        for (let i = 0; i < spikes * 2; i++) {
-            const angle = (i * Math.PI) / spikes;
-            const r = i % 2 === 0 ? outerRadius : innerRadius;
-            const pointX = x + Math.cos(angle - Math.PI / 2) * r;
-            const pointY = y + Math.sin(angle - Math.PI / 2) * r;
-            this.ctx.lineTo(pointX, pointY);
-        }
-        
-        this.ctx.closePath();
-        this.ctx.fillStyle = `rgba(255, 255, 255, ${opacity})`;
-        this.ctx.fill();
     }
 
     animate() {
-        this.drawParticles();
+        this.time += 0.016;
+        
+        // Update all particle systems
+        this.particleGroups.forEach(group => {
+            if (group.mesh.material.uniforms) {
+                group.mesh.material.uniforms.time.value = this.time;
+            }
+        });
+        
+        // Update background
+        if (this.backgroundMesh) {
+            this.backgroundMesh.material.uniforms.time.value = this.time;
+        }
+        
+        // Subtle camera movement
+        this.camera.position.x = Math.sin(this.time * 0.1) * 0.1;
+        this.camera.position.y = Math.cos(this.time * 0.15) * 0.05;
+        
+        this.renderer.render(this.scene, this.camera);
         requestAnimationFrame(() => this.animate());
     }
 }
 
-// Orbit System Enhancement
+// Enhanced Orbit System with 3D feel
 class OrbitSystem {
     constructor() {
         this.icons = document.querySelectorAll('.app-icon');
@@ -176,25 +445,42 @@ class OrbitSystem {
     init() {
         this.setupHoverEffects();
         this.createConnectionPulses();
+        this.add3DEffects();
+    }
+
+    add3DEffects() {
+        // Add CSS 3D transforms for depth
+        this.icons.forEach((icon, index) => {
+            icon.style.transformStyle = 'preserve-3d';
+            
+            // Stagger Z positions for depth
+            const zPos = Math.sin(index * 0.5) * 20;
+            icon.style.transform += ` translateZ(${zPos}px)`;
+            
+            // Add subtle parallax on mouse move
+            document.addEventListener('mousemove', (e) => {
+                const x = (e.clientX / window.innerWidth - 0.5) * 20;
+                const y = (e.clientY / window.innerHeight - 0.5) * 20;
+                
+                icon.style.transform = icon.style.transform.replace(/translateX\([^)]*\)/, '') + ` translateX(${x * (index + 1) * 0.1}px)`;
+                icon.style.transform = icon.style.transform.replace(/translateY\([^)]*\)/, '') + ` translateY(${y * (index + 1) * 0.1}px)`;
+            });
+        });
     }
 
     setupHoverEffects() {
         this.icons.forEach(icon => {
             icon.addEventListener('mouseenter', () => {
-                // Pause rotation on hover
                 icon.style.animationPlayState = 'paused';
-                // Add glow to central hub
+                icon.style.transform += ' scale(1.2) translateZ(50px)';
                 this.hub.style.filter = 'drop-shadow(0 0 60px rgba(255, 255, 255, 1))';
-                // Draw connection line
                 this.drawConnection(icon);
             });
             
             icon.addEventListener('mouseleave', () => {
-                // Resume rotation
                 icon.style.animationPlayState = 'running';
-                // Reset hub glow
+                icon.style.transform = icon.style.transform.replace(/scale\([^)]*\)/, '').replace(/translateZ\(50px\)/, '');
                 this.hub.style.filter = '';
-                // Clear connection
                 this.clearConnections();
             });
         });
@@ -216,8 +502,8 @@ class OrbitSystem {
         line.setAttribute('x2', x2);
         line.setAttribute('y2', y2);
         line.setAttribute('stroke', 'white');
-        line.setAttribute('stroke-width', '1');
-        line.setAttribute('opacity', '0.5');
+        line.setAttribute('stroke-width', '2');
+        line.setAttribute('opacity', '0.8');
         line.classList.add('connection-line');
         
         this.connections.appendChild(line);
@@ -229,13 +515,12 @@ class OrbitSystem {
     }
 
     createConnectionPulses() {
-        // Create subtle pulsing connections
         setInterval(() => {
             if (!document.querySelector('.app-icon:hover')) {
                 const randomIcon = this.icons[Math.floor(Math.random() * this.icons.length)];
                 this.createPulse(randomIcon);
             }
-        }, 3000);
+        }, 2000);
     }
 
     createPulse(icon) {
@@ -249,23 +534,21 @@ class OrbitSystem {
         const y2 = (rect.top + rect.height / 2 - containerRect.top);
         
         const pulse = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
-        pulse.setAttribute('r', '2');
+        pulse.setAttribute('r', '3');
         pulse.setAttribute('fill', 'white');
-        pulse.style.opacity = '0.8';
+        pulse.style.opacity = '0.9';
         
         const animateMotion = document.createElementNS('http://www.w3.org/2000/svg', 'animateMotion');
-        animateMotion.setAttribute('dur', '1s');
+        animateMotion.setAttribute('dur', '1.5s');
         animateMotion.setAttribute('path', `M ${x1} ${y1} L ${x2} ${y2}`);
         animateMotion.setAttribute('fill', 'freeze');
         
         pulse.appendChild(animateMotion);
         this.connections.appendChild(pulse);
         
-        setTimeout(() => pulse.remove(), 1000);
+        setTimeout(() => pulse.remove(), 1500);
     }
 }
-
-// Removed scroll effects and navigation - page is now single hero section
 
 // Form Handler
 class FormHandler {
@@ -280,7 +563,6 @@ class FormHandler {
                 e.preventDefault();
                 const email = this.form.querySelector('input[type="email"]').value;
                 
-                // Animation feedback
                 const button = this.form.querySelector('.btn-primary');
                 const originalText = button.innerHTML;
                 
@@ -298,79 +580,17 @@ class FormHandler {
                     button.style.background = '';
                     this.form.reset();
                 }, 3000);
-                
-                // Early access form submitted
             });
         }
     }
 }
 
-// Ambient Cursor Effect
-class AmbientCursor {
-    constructor() {
-        this.cursor = null;
-        this.init();
-    }
-
-    init() {
-        this.createCursor();
-        this.setupEventListeners();
-    }
-
-    createCursor() {
-        this.cursor = document.createElement('div');
-        this.cursor.className = 'ambient-cursor';
-        this.cursor.style.cssText = `
-            position: fixed;
-            width: 20px;
-            height: 20px;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            border-radius: 50%;
-            pointer-events: none;
-            z-index: 9999;
-            transition: transform 0.2s, opacity 0.2s;
-            mix-blend-mode: difference;
-        `;
-        document.body.appendChild(this.cursor);
-    }
-
-    setupEventListeners() {
-        document.addEventListener('mousemove', (e) => {
-            this.cursor.style.left = e.clientX - 10 + 'px';
-            this.cursor.style.top = e.clientY - 10 + 'px';
-        });
-
-        document.addEventListener('mouseenter', () => {
-            this.cursor.style.opacity = '1';
-        });
-
-        document.addEventListener('mouseleave', () => {
-            this.cursor.style.opacity = '0';
-        });
-
-        // Hover effects
-        const interactiveElements = document.querySelectorAll('a, button, .tool-node, .feature-card');
-        
-        interactiveElements.forEach(el => {
-            el.addEventListener('mouseenter', () => {
-                this.cursor.style.transform = 'scale(2)';
-                this.cursor.style.borderColor = 'rgba(255, 255, 255, 0.5)';
-            });
-            
-            el.addEventListener('mouseleave', () => {
-                this.cursor.style.transform = 'scale(1)';
-                this.cursor.style.borderColor = 'rgba(255, 255, 255, 0.2)';
-            });
-        });
-    }
-}
-
 // Initialize everything
 document.addEventListener('DOMContentLoaded', () => {
-    // Initialize particle system
+    // Initialize Three.js gravitational singularity
     const canvas = document.getElementById('particles');
     if (canvas) {
-        new ParticleSystem(canvas);
+        new GravitationalSingularity(canvas);
     }
     
     // Initialize orbit system
@@ -382,26 +602,21 @@ document.addEventListener('DOMContentLoaded', () => {
     // Initialize form handler
     new FormHandler();
     
-    // Initialize ambient cursor
-    new AmbientCursor();
-    
-    // Add visible class to sections for animation
+    // Add CSS for 3D effects
     const style = document.createElement('style');
     style.textContent = `
-        section {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: opacity 0.8s, transform 0.8s;
+        .orbit-system {
+            perspective: 1000px;
+            transform-style: preserve-3d;
         }
         
-        section.visible {
-            opacity: 1;
-            transform: translateY(0);
+        .app-icon {
+            transform-style: preserve-3d;
+            transition: transform 0.3s ease;
         }
         
-        .hero {
-            opacity: 1;
-            transform: none;
+        .hero-visual {
+            perspective: 1500px;
         }
     `;
     document.head.appendChild(style);
