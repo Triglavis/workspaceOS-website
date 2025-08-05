@@ -129,6 +129,13 @@ body {
     font-size: 0.75rem;
     color: var(--gray-500);
     z-index: 2;
+    text-decoration: none;
+    transition: var(--transition);
+}
+
+.triglavis-brand:hover {
+    color: var(--gray-400);
+    opacity: 0.8;
 }
 
 .triglavis-brand svg {
@@ -292,13 +299,11 @@ body {
     display: flex;
     flex-direction: column;
     gap: 0.75rem;
-    max-width: 400px;
 }
 
 .early-access-form {
     display: flex;
     gap: 1rem;
-    max-width: 500px;
     margin: 0;
 }
 
@@ -390,7 +395,8 @@ body {
 /* Hero Visual */
 .hero-visual {
     position: relative;
-    height: 500px;
+    height: 700px;
+    width: 700px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -399,8 +405,8 @@ body {
 /* Orbit System */
 .orbit-system {
     position: relative;
-    width: 500px;
-    height: 500px;
+    width: 700px;
+    height: 700px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -409,94 +415,116 @@ body {
 .central-hub {
     position: absolute;
     z-index: 10;
-    animation: pulse-glow 4s infinite ease-in-out;
+    animation: black-hole-pulse 6s infinite ease-in-out;
 }
 
-@keyframes pulse-glow {
+@keyframes black-hole-pulse {
     0%, 100% {
-        filter: drop-shadow(0 0 20px rgba(255, 255, 255, 0.5));
+        filter: drop-shadow(0 0 60px rgba(255, 255, 255, 0.8)) 
+                drop-shadow(0 0 120px rgba(255, 255, 255, 0.4))
+                drop-shadow(0 0 200px rgba(255, 255, 255, 0.2));
+        transform: scale(1);
     }
     50% {
-        filter: drop-shadow(0 0 40px rgba(255, 255, 255, 0.8));
+        filter: drop-shadow(0 0 100px rgba(255, 255, 255, 1)) 
+                drop-shadow(0 0 200px rgba(255, 255, 255, 0.8))
+                drop-shadow(0 0 300px rgba(255, 255, 255, 0.4));
+        transform: scale(1.1);
     }
 }
 
 .orbit-track {
     position: absolute;
-    width: 400px;
-    height: 400px;
-    animation: orbit-spin 30s linear infinite;
+    width: 600px;
+    height: 600px;
+    animation: black-hole-spin 25s linear infinite;
     transform-origin: center center;
 }
 
-@keyframes orbit-spin {
+@keyframes black-hole-spin {
     from {
-        transform: rotate(0deg);
+        transform: rotate(0deg) scale(1);
+    }
+    50% {
+        transform: rotate(180deg) scale(0.95);
     }
     to {
-        transform: rotate(360deg);
+        transform: rotate(360deg) scale(1);
     }
 }
 
 .app-icon {
     position: absolute;
-    width: 48px;
-    height: 48px;
+    width: 64px;
+    height: 64px;
     display: flex;
     align-items: center;
     justify-content: center;
-    background: rgba(10, 10, 10, 0.8);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 12px;
-    backdrop-filter: blur(10px);
-    transition: var(--transition);
-    animation: counter-rotate 30s linear infinite;
+    background: linear-gradient(135deg, rgba(20, 20, 20, 0.9) 0%, rgba(10, 10, 10, 0.95) 100%);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 18px;
+    backdrop-filter: blur(20px);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    animation: counter-rotate 25s linear infinite;
+    box-shadow: 
+        0 4px 16px rgba(0, 0, 0, 0.4),
+        0 8px 32px rgba(0, 0, 0, 0.2),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1),
+        inset 0 -1px 0 rgba(0, 0, 0, 0.2);
 }
 
 @keyframes counter-rotate {
     from {
-        transform: rotate(360deg);
+        transform: rotate(360deg) scale(1);
+    }
+    50% {
+        transform: rotate(180deg) scale(1.05);
     }
     to {
-        transform: rotate(0deg);
+        transform: rotate(0deg) scale(1);
     }
 }
 
 .app-icon:hover {
-    transform: scale(1.2);
-    background: rgba(255, 255, 255, 0.1);
-    border-color: rgba(255, 255, 255, 0.3);
+    transform: scale(1.15);
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%);
+    border-color: rgba(255, 255, 255, 0.4);
+    box-shadow: 
+        0 8px 32px rgba(0, 0, 0, 0.6),
+        0 16px 64px rgba(0, 0, 0, 0.4),
+        0 0 40px rgba(255, 255, 255, 0.2),
+        inset 0 1px 0 rgba(255, 255, 255, 0.2);
 }
 
 /* Position each app icon on the orbit */
 .app-icon[data-app="figma"] {
-    top: -24px;
-    left: calc(50% - 24px);
+    top: -32px;
+    left: calc(50% - 32px);
 }
 
 .app-icon[data-app="vscode"] {
-    top: calc(25% - 24px);
-    right: -24px;
+    top: calc(25% - 32px);
+    right: -32px;
 }
 
 .app-icon[data-app="slack"] {
-    bottom: calc(25% - 24px);
-    right: -24px;
+    bottom: calc(25% - 32px);
+    right: -32px;
 }
 
 .app-icon[data-app="notion"] {
-    bottom: -24px;
-    left: calc(50% - 24px);
+    bottom: -32px;
+    left: calc(50% - 32px);
 }
 
 .app-icon[data-app="github"] {
-    bottom: calc(25% - 24px);
-    left: -24px;
+    bottom: calc(25% - 32px);
+    left: -32px;
 }
 
 .app-icon[data-app="linear"] {
-    top: calc(25% - 24px);
-    left: -24px;
+    top: calc(25% - 32px);
+    left: -32px;
 }
 
 .orbit-connections {
@@ -531,7 +559,6 @@ body {
     
     .hero-actions {
         align-items: center;
-        max-width: 100%;
     }
     
     .early-access-form {

@@ -21,16 +21,22 @@ class ParticleSystem {
     }
 
     createParticles() {
-        const particleCount = Math.floor((this.canvas.width * this.canvas.height) / 20000);
+        const particleCount = Math.floor((this.canvas.width * this.canvas.height) / 15000);
         
         for (let i = 0; i < particleCount; i++) {
+            const particleType = Math.random();
+            
             this.particles.push({
                 x: Math.random() * this.canvas.width,
                 y: Math.random() * this.canvas.height,
-                vx: (Math.random() - 0.5) * 0.5,
-                vy: (Math.random() - 0.5) * 0.5,
-                radius: Math.random() * 2 + 1,
-                opacity: Math.random() * 0.5 + 0.2
+                vx: (Math.random() - 0.5) * 0.8,
+                vy: (Math.random() - 0.5) * 0.8,
+                radius: particleType < 0.7 ? Math.random() * 1.5 + 0.5 : Math.random() * 3 + 2,
+                opacity: particleType < 0.7 ? Math.random() * 0.4 + 0.1 : Math.random() * 0.8 + 0.3,
+                type: particleType < 0.7 ? 'dot' : 'star',
+                twinkle: Math.random() * Math.PI * 2,
+                twinkleSpeed: Math.random() * 0.02 + 0.01,
+                blackHoleInfluence: 0
             });
         }
     }
@@ -51,53 +57,105 @@ class ParticleSystem {
     drawParticles() {
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
         
+        // Black hole center (approximate center of screen)
+        const blackHoleX = this.canvas.width / 2;
+        const blackHoleY = this.canvas.height / 2;
+        
         this.particles.forEach((particle, i) => {
+            // Update twinkle animation
+            particle.twinkle += particle.twinkleSpeed;
+            
+            // Black hole attraction (much stronger than mouse)
+            const blackHoleDx = blackHoleX - particle.x;
+            const blackHoleDy = blackHoleY - particle.y;
+            const blackHoleDistance = Math.sqrt(blackHoleDx * blackHoleDx + blackHoleDy * blackHoleDy);
+            
+            if (blackHoleDistance < 400) {
+                const blackHoleForce = (400 - blackHoleDistance) / 400 * 0.15;
+                particle.vx += (blackHoleDx / blackHoleDistance) * blackHoleForce;
+                particle.vy += (blackHoleDy / blackHoleDistance) * blackHoleForce;
+                particle.blackHoleInfluence = blackHoleForce;
+            } else {
+                particle.blackHoleInfluence *= 0.95;
+            }
+            
             // Update position
             particle.x += particle.vx;
             particle.y += particle.vy;
             
-            // Wrap around edges
-            if (particle.x < 0) particle.x = this.canvas.width;
-            if (particle.x > this.canvas.width) particle.x = 0;
-            if (particle.y < 0) particle.y = this.canvas.height;
-            if (particle.y > this.canvas.height) particle.y = 0;
+            // Wrap around edges (but less frequently due to black hole)
+            if (particle.x < -50) particle.x = this.canvas.width + 50;
+            if (particle.x > this.canvas.width + 50) particle.x = -50;
+            if (particle.y < -50) particle.y = this.canvas.height + 50;
+            if (particle.y > this.canvas.height + 50) particle.y = -50;
             
-            // Mouse interaction
+            // Mouse interaction (weaker now)
             const dx = this.mouse.x - particle.x;
             const dy = this.mouse.y - particle.y;
             const distance = Math.sqrt(dx * dx + dy * dy);
             
-            if (distance < 100) {
-                const force = (100 - distance) / 100;
-                particle.vx -= (dx / distance) * force * 0.1;
-                particle.vy -= (dy / distance) * force * 0.1;
+            if (distance < 80) {
+                const force = (80 - distance) / 80;
+                particle.vx -= (dx / distance) * force * 0.05;
+                particle.vy -= (dy / distance) * force * 0.05;
             }
             
             // Damping
-            particle.vx *= 0.99;
-            particle.vy *= 0.99;
+            particle.vx *= 0.98;
+            particle.vy *= 0.98;
             
-            // Draw particle
-            this.ctx.beginPath();
-            this.ctx.arc(particle.x, particle.y, particle.radius, 0, Math.PI * 2);
-            this.ctx.fillStyle = `rgba(255, 255, 255, ${particle.opacity})`;
-            this.ctx.fill();
+            // Calculate dynamic opacity based on twinkle and black hole influence
+            const twinkleOpacity = Math.sin(particle.twinkle) * 0.3 + 0.7;
+            const dynamicOpacity = particle.opacity * twinkleOpacity * (1 + particle.blackHoleInfluence);
             
-            // Draw connections
-            this.particles.slice(i + 1).forEach(other => {
-                const dx = other.x - particle.x;
-                const dy = other.y - particle.y;
-                const distance = Math.sqrt(dx * dx + dy * dy);
-                
-                if (distance < 150) {
-                    this.ctx.beginPath();
-                    this.ctx.moveTo(particle.x, particle.y);
-                    this.ctx.lineTo(other.x, other.y);
-                    this.ctx.strokeStyle = `rgba(255, 255, 255, ${(1 - distance / 150) * 0.1})`;
-                    this.ctx.stroke();
-                }
-            });
+            // Draw particle based on type
+            if (particle.type === 'star') {
+                this.drawStar(particle.x, particle.y, particle.radius, dynamicOpacity);
+            } else {
+                this.ctx.beginPath();
+                this.ctx.arc(particle.x, particle.y, particle.radius, 0, Math.PI * 2);
+                this.ctx.fillStyle = `rgba(255, 255, 255, ${dynamicOpacity})`;
+                this.ctx.fill();
+            }
+            
+            // Draw connections (fewer and more subtle)
+            if (i % 3 === 0) {
+                this.particles.slice(i + 1, i + 5).forEach(other => {
+                    const dx = other.x - particle.x;
+                    const dy = other.y - particle.y;
+                    const distance = Math.sqrt(dx * dx + dy * dy);
+                    
+                    if (distance < 120) {
+                        this.ctx.beginPath();
+                        this.ctx.moveTo(particle.x, particle.y);
+                        this.ctx.lineTo(other.x, other.y);
+                        this.ctx.strokeStyle = `rgba(255, 255, 255, ${(1 - distance / 120) * 0.08})`;
+                        this.ctx.stroke();
+                    }
+                });
+            }
         });
+    }
+    
+    drawStar(x, y, radius, opacity) {
+        const spikes = 4;
+        const outerRadius = radius;
+        const innerRadius = radius * 0.4;
+        
+        this.ctx.beginPath();
+        this.ctx.moveTo(x, y - outerRadius);
+        
+        for (let i = 0; i < spikes * 2; i++) {
+            const angle = (i * Math.PI) / spikes;
+            const r = i % 2 === 0 ? outerRadius : innerRadius;
+            const pointX = x + Math.cos(angle - Math.PI / 2) * r;
+            const pointY = y + Math.sin(angle - Math.PI / 2) * r;
+            this.ctx.lineTo(pointX, pointY);
+        }
+        
+        this.ctx.closePath();
+        this.ctx.fillStyle = `rgba(255, 255, 255, ${opacity})`;
+        this.ctx.fill();
     }
 
     animate() {
