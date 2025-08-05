@@ -475,67 +475,164 @@ document.addEventListener('DOMContentLoaded', () => {
     document.head.appendChild(style);
 });
 
-// Basic fallback particle system
+// Enhanced fallback particle system with dramatic gravitational effects
 function initBasicParticles(canvas) {
-    console.log('Initializing basic fallback particles');
+    console.log('Initializing enhanced fallback gravitational system');
     const ctx = canvas.getContext('2d');
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
     
     const particles = [];
-    const particleCount = 300;
+    const particleCount = 800;
+    let time = 0;
     
     // Create particles
     for (let i = 0; i < particleCount; i++) {
+        const angle = Math.random() * Math.PI * 2;
+        const radius = Math.random() * Math.min(canvas.width, canvas.height) * 0.6 + 200;
+        
         particles.push({
-            x: Math.random() * canvas.width,
-            y: Math.random() * canvas.height,
-            vx: (Math.random() - 0.5) * 2,
-            vy: (Math.random() - 0.5) * 2,
-            radius: Math.random() * 2 + 1,
-            opacity: Math.random() * 0.8 + 0.2,
-            type: Math.random() > 0.7 ? 'stream' : 'star'
+            x: canvas.width / 2 + Math.cos(angle) * radius,
+            y: canvas.height / 2 + Math.sin(angle) * radius,
+            originalX: canvas.width / 2 + Math.cos(angle) * radius,
+            originalY: canvas.height / 2 + Math.sin(angle) * radius,
+            vx: (Math.random() - 0.5) * 1,
+            vy: (Math.random() - 0.5) * 1,
+            radius: Math.random() * 2 + 0.5,
+            opacity: Math.random() * 0.8 + 0.3,
+            type: Math.random() > 0.7 ? 'stream' : 'star',
+            phase: Math.random() * Math.PI * 2,
+            twinkle: Math.random() * 0.02 + 0.01
         });
+    }
+    
+    function drawStar(x, y, radius, opacity) {
+        const spikes = 4;
+        const outerRadius = radius * 1.5;
+        const innerRadius = radius * 0.6;
+        
+        ctx.beginPath();
+        ctx.moveTo(x, y - outerRadius);
+        
+        for (let i = 0; i < spikes * 2; i++) {
+            const angle = (i * Math.PI) / spikes;
+            const r = i % 2 === 0 ? outerRadius : innerRadius;
+            const pointX = x + Math.cos(angle - Math.PI / 2) * r;
+            const pointY = y + Math.sin(angle - Math.PI / 2) * r;
+            ctx.lineTo(pointX, pointY);
+        }
+        
+        ctx.closePath();
+        ctx.fillStyle = `rgba(255, 255, 255, ${opacity})`;
+        ctx.fill();
     }
     
     function animate() {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
+        time += 0.016;
         
         const centerX = canvas.width / 2;
         const centerY = canvas.height / 2;
         
-        particles.forEach(particle => {
-            // Gravitational pull toward center
+        // Draw background distortion effect
+        const gradient = ctx.createRadialGradient(centerX, centerY, 0, centerX, centerY, 300);
+        gradient.addColorStop(0, 'rgba(0, 0, 0, 0.1)');
+        gradient.addColorStop(0.5, 'rgba(0, 0, 0, 0.05)');
+        gradient.addColorStop(1, 'rgba(0, 0, 0, 0)');
+        ctx.fillStyle = gradient;
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+        
+        particles.forEach((particle, index) => {
+            // Update twinkle
+            particle.phase += particle.twinkle;
+            
+            // Gravitational pull toward center with spiral motion
             const dx = centerX - particle.x;
             const dy = centerY - particle.y;
             const distance = Math.sqrt(dx * dx + dy * dy);
             
-            if (distance > 50) {
-                const force = 200 / (distance * distance);
-                particle.vx += (dx / distance) * force * 0.05;
-                particle.vy += (dy / distance) * force * 0.05;
+            if (distance > 30) {
+                // Strong gravitational force
+                const force = 300 / (distance * distance + 10);
+                const pullX = (dx / distance) * force;
+                const pullY = (dy / distance) * force;
+                
+                // Add spiral motion
+                const spiralAngle = time * 0.5 + index * 0.1;
+                const spiralStrength = force * 0.3;
+                
+                particle.vx += pullX * 0.08 + Math.cos(spiralAngle) * spiralStrength * 0.02;
+                particle.vy += pullY * 0.08 + Math.sin(spiralAngle) * spiralStrength * 0.02;
+                
+                // Damping
+                particle.vx *= 0.98;
+                particle.vy *= 0.98;
             }
             
             particle.x += particle.vx;
             particle.y += particle.vy;
             
-            // Wrap around edges
-            if (particle.x < -50) particle.x = canvas.width + 50;
-            if (particle.x > canvas.width + 50) particle.x = -50;
-            if (particle.y < -50) particle.y = canvas.height + 50;
-            if (particle.y > canvas.height + 50) particle.y = -50;
-            
-            // Draw particle
-            ctx.beginPath();
-            ctx.arc(particle.x, particle.y, particle.radius, 0, Math.PI * 2);
-            
-            if (particle.type === 'stream') {
-                ctx.fillStyle = `rgba(0, 200, 255, ${particle.opacity})`;
-            } else {
-                ctx.fillStyle = `rgba(255, 255, 255, ${particle.opacity})`;
+            // Respawn particles that get too close to center
+            if (distance < 30) {
+                const angle = Math.random() * Math.PI * 2;
+                const radius = Math.random() * 300 + 400;
+                particle.x = centerX + Math.cos(angle) * radius;
+                particle.y = centerY + Math.sin(angle) * radius;
+                particle.vx = (Math.random() - 0.5) * 1;
+                particle.vy = (Math.random() - 0.5) * 1;
             }
-            ctx.fill();
+            
+            // Wrap around edges
+            if (particle.x < -100) particle.x = canvas.width + 100;
+            if (particle.x > canvas.width + 100) particle.x = -100;
+            if (particle.y < -100) particle.y = canvas.height + 100;
+            if (particle.y > canvas.height + 100) particle.y = -100;
+            
+            // Calculate dynamic opacity with twinkle
+            const twinkleOpacity = Math.sin(particle.phase) * 0.3 + 0.7;
+            const finalOpacity = particle.opacity * twinkleOpacity;
+            
+            // Draw particle based on type
+            if (particle.type === 'star') {
+                drawStar(particle.x, particle.y, particle.radius, finalOpacity);
+            } else if (particle.type === 'stream') {
+                // Information streams - cyan/blue
+                ctx.beginPath();
+                ctx.arc(particle.x, particle.y, particle.radius * 1.2, 0, Math.PI * 2);
+                ctx.fillStyle = `rgba(0, 200, 255, ${finalOpacity})`;
+                ctx.fill();
+                
+                // Add glow effect for streams
+                ctx.beginPath();
+                ctx.arc(particle.x, particle.y, particle.radius * 2, 0, Math.PI * 2);
+                ctx.fillStyle = `rgba(0, 150, 255, ${finalOpacity * 0.2})`;
+                ctx.fill();
+            } else {
+                // Regular dots
+                ctx.beginPath();
+                ctx.arc(particle.x, particle.y, particle.radius, 0, Math.PI * 2);
+                ctx.fillStyle = `rgba(255, 255, 255, ${finalOpacity})`;
+                ctx.fill();
+            }
+            
+            // Draw connection lines occasionally
+            if (index % 50 === 0 && distance > 100) {
+                ctx.beginPath();
+                ctx.moveTo(particle.x, particle.y);
+                ctx.lineTo(centerX, centerY);
+                ctx.strokeStyle = `rgba(255, 255, 255, ${finalOpacity * 0.1})`;
+                ctx.lineWidth = 0.5;
+                ctx.stroke();
+            }
         });
+        
+        // Draw central black hole effect
+        const blackHoleGradient = ctx.createRadialGradient(centerX, centerY, 0, centerX, centerY, 100);
+        blackHoleGradient.addColorStop(0, 'rgba(255, 255, 255, 0.1)');
+        blackHoleGradient.addColorStop(0.3, 'rgba(255, 255, 255, 0.05)');
+        blackHoleGradient.addColorStop(1, 'rgba(255, 255, 255, 0)');
+        ctx.fillStyle = blackHoleGradient;
+        ctx.fillRect(centerX - 100, centerY - 100, 200, 200);
         
         requestAnimationFrame(animate);
     }
@@ -544,7 +641,18 @@ function initBasicParticles(canvas) {
     
     // Handle resize
     window.addEventListener('resize', () => {
+        const oldWidth = canvas.width;
+        const oldHeight = canvas.height;
         canvas.width = window.innerWidth;
         canvas.height = window.innerHeight;
+        
+        // Adjust particle positions for new canvas size
+        const scaleX = canvas.width / oldWidth;
+        const scaleY = canvas.height / oldHeight;
+        
+        particles.forEach(particle => {
+            particle.x *= scaleX;
+            particle.y *= scaleY;
+        });
     });
 }
