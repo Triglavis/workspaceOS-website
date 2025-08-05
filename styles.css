@@ -121,7 +121,7 @@ body {
 /* Triglavis Branding */
 .triglavis-brand {
     position: absolute;
-    top: 9px;
+    top: 21px;
     left: 50%;
     transform: translateX(-50%);
     display: flex;
@@ -130,7 +130,7 @@ body {
     gap: 4px;
     font-size: 9px;
     color: var(--gray-500);
-    z-index: 2;
+    z-index: 1000;
     text-decoration: none;
     transition: var(--transition);
 }
