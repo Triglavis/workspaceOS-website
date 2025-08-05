@@ -117,14 +117,20 @@ body {
 /* Hero Section */
 .hero {
     min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+    position: relative;
+}
+
+.hero-container {
+    max-width: 1400px;
+    width: 100%;
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 4rem;
     align-items: center;
-    padding: 4rem 2rem;
-    position: relative;
-    max-width: 1400px;
-    margin: 0 auto;
 }
 
 .hero-content {
@@ -345,6 +351,7 @@ body {
     width: 400px;
     height: 400px;
     animation: orbit-spin 30s linear infinite;
+    transform-origin: center center;
 }
 
 @keyframes orbit-spin {
@@ -373,18 +380,17 @@ body {
 
 @keyframes counter-rotate {
     from {
-        transform: rotate(0deg);
+        transform: rotate(360deg);
     }
     to {
-        transform: rotate(-360deg);
+        transform: rotate(0deg);
     }
 }
 
 .app-icon:hover {
-    transform: scale(1.2) rotate(0deg);
+    transform: scale(1.2);
     background: rgba(255, 255, 255, 0.1);
     border-color: rgba(255, 255, 255, 0.3);
-    animation-play-state: paused;
 }
 
 /* Position each app icon on the orbit */
@@ -430,7 +436,7 @@ body {
 
 /* Responsive */
 @media (max-width: 768px) {
-    .hero {
+    .hero-container {
         grid-template-columns: 1fr;
         text-align: center;
     }
