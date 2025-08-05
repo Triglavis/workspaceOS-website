@@ -298,7 +298,7 @@ class FormHandler {
                     this.form.reset();
                 }, 3000);
                 
-                console.log('Early access requested for:', email);
+                // Early access form submitted
             });
         }
     }
