@@ -23,27 +23,6 @@
         </div>
     </div>
 
-    <!-- Navigation -->
-    <nav class="nav-container">
-        <div class="nav-inner">
-            <div class="logo">
-                <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
-                    <circle cx="16" cy="16" r="2" fill="currentColor"/>
-                    <circle cx="16" cy="16" r="6" stroke="currentColor" stroke-width="1" opacity="0.5"/>
-                    <circle cx="16" cy="16" r="10" stroke="currentColor" stroke-width="1" opacity="0.3"/>
-                    <circle cx="16" cy="16" r="14" stroke="currentColor" stroke-width="1" opacity="0.1"/>
-                </svg>
-                <span>WorkspaceOS</span>
-            </div>
-            <div class="nav-links">
-                <a href="#vision" class="nav-link">Vision</a>
-                <a href="#features" class="nav-link">Features</a>
-                <a href="#architecture" class="nav-link">Architecture</a>
-                <a href="#contact" class="nav-link">Contact</a>
-            </div>
-        </div>
-    </nav>
-
     <!-- Hero Section -->
     <section class="hero">
         <div class="hero-content">
@@ -99,275 +78,73 @@
         </div>
 
         <div class="hero-visual">
-            <div class="flow-diagram">
-                <div class="tool-node" data-tool="figma">
-                    <div class="tool-icon">Figma</div>
+            <div class="orbit-system">
+                <!-- Central WorkspaceOS Logo -->
+                <div class="central-hub">
+                    <svg width="80" height="80" viewBox="0 0 80 80" fill="none">
+                        <circle cx="40" cy="40" r="8" fill="white"/>
+                        <circle cx="40" cy="40" r="16" stroke="white" stroke-width="2" opacity="0.6"/>
+                        <circle cx="40" cy="40" r="24" stroke="white" stroke-width="1.5" opacity="0.4"/>
+                        <circle cx="40" cy="40" r="32" stroke="white" stroke-width="1" opacity="0.2"/>
+                    </svg>
                 </div>
-                <div class="tool-node" data-tool="vscode">
-                    <div class="tool-icon">VS Code</div>
+                
+                <!-- Orbiting App Icons -->
+                <div class="orbit-track">
+                    <div class="app-icon" data-app="figma">
+                        <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+                            <rect x="10" y="2" width="12" height="12" rx="6" stroke="white" stroke-width="1.5" opacity="0.8"/>
+                            <circle cx="16" cy="20" r="6" stroke="white" stroke-width="1.5" opacity="0.8"/>
+                            <rect x="10" y="14" width="6" height="12" rx="3" stroke="white" stroke-width="1.5" opacity="0.8"/>
+                        </svg>
+                    </div>
+                    <div class="app-icon" data-app="vscode">
+                        <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+                            <path d="M24 2L12 14L4 8V24L12 18L24 30V2Z" stroke="white" stroke-width="1.5" fill="none" opacity="0.8"/>
+                        </svg>
+                    </div>
+                    <div class="app-icon" data-app="slack">
+                        <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+                            <rect x="6" y="6" width="8" height="8" rx="2" stroke="white" stroke-width="1.5" opacity="0.8"/>
+                            <rect x="18" y="6" width="8" height="8" rx="2" stroke="white" stroke-width="1.5" opacity="0.8"/>
+                            <rect x="6" y="18" width="8" height="8" rx="2" stroke="white" stroke-width="1.5" opacity="0.8"/>
+                            <rect x="18" y="18" width="8" height="8" rx="2" stroke="white" stroke-width="1.5" opacity="0.8"/>
+                        </svg>
+                    </div>
+                    <div class="app-icon" data-app="notion">
+                        <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+                            <path d="M4 8L4 24C4 26 6 28 8 28H24C26 28 28 26 28 24V8C28 6 26 4 24 4H8C6 4 4 6 4 8Z" stroke="white" stroke-width="1.5" opacity="0.8"/>
+                            <path d="M10 12H22M10 16H22M10 20H18" stroke="white" stroke-width="1.5" opacity="0.8"/>
+                        </svg>
+                    </div>
+                    <div class="app-icon" data-app="github">
+                        <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+                            <circle cx="16" cy="16" r="12" stroke="white" stroke-width="1.5" opacity="0.8"/>
+                            <path d="M16 20C11 20 11 16 11 16C11 12 13 10 16 10C19 10 21 12 21 16C21 16 21 20 16 20Z" stroke="white" stroke-width="1.5" opacity="0.8"/>
+                            <path d="M13 20V24M19 20V24" stroke="white" stroke-width="1.5" opacity="0.8"/>
+                        </svg>
+                    </div>
+                    <div class="app-icon" data-app="linear">
+                        <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+                            <circle cx="16" cy="16" r="2" fill="white" opacity="0.8"/>
+                            <path d="M16 4V28M4 16H28" stroke="white" stroke-width="1.5" opacity="0.8"/>
+                            <path d="M7 7L25 25M25 7L7 25" stroke="white" stroke-width="1" opacity="0.4"/>
+                        </svg>
+                    </div>
                 </div>
-                <div class="tool-node" data-tool="slack">
-                    <div class="tool-icon">Slack</div>
-                </div>
-                <div class="tool-node" data-tool="linear">
-                    <div class="tool-icon">Linear</div>
-                </div>
-                <div class="central-node">
-                    <div class="node-pulse"></div>
-                    <div class="node-core"></div>
-                </div>
-                <svg class="connections" viewBox="0 0 400 400">
+                
+                <!-- Connection Lines -->
+                <svg class="orbit-connections" viewBox="0 0 500 500">
                     <defs>
-                        <linearGradient id="flow-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                            <stop offset="0%" style="stop-color:#ffffff;stop-opacity:0" />
-                            <stop offset="50%" style="stop-color:#ffffff;stop-opacity:0.3" />
-                            <stop offset="100%" style="stop-color:#ffffff;stop-opacity:0" />
-                        </linearGradient>
+                        <radialGradient id="pulse-gradient">
+                            <stop offset="0%" style="stop-color:white;stop-opacity:0.8" />
+                            <stop offset="100%" style="stop-color:white;stop-opacity:0" />
+                        </radialGradient>
                     </defs>
                 </svg>
             </div>
         </div>
     </section>
-
-    <!-- Problem Section -->
-    <section class="problem-section">
-        <div class="container">
-            <div class="section-header">
-                <h2 class="section-title">The Coordination Crisis</h2>
-                <p class="section-subtitle">Modern teams lose $2.6M annually to tool fragmentation</p>
-            </div>
-            
-            <div class="problem-grid">
-                <div class="problem-card">
-                    <div class="problem-icon">
-                        <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
-                            <rect x="4" y="4" width="16" height="16" rx="2" stroke="currentColor" stroke-width="1.5" opacity="0.3"/>
-                            <rect x="28" y="4" width="16" height="16" rx="2" stroke="currentColor" stroke-width="1.5" opacity="0.3"/>
-                            <rect x="4" y="28" width="16" height="16" rx="2" stroke="currentColor" stroke-width="1.5" opacity="0.3"/>
-                            <rect x="28" y="28" width="16" height="16" rx="2" stroke="currentColor" stroke-width="1.5" opacity="0.3"/>
-                            <path d="M20 12H28M12 20V28M36 20V28M20 36H28" stroke="currentColor" stroke-width="1.5" stroke-dasharray="2 2"/>
-                        </svg>
-                    </div>
-                    <h3>Context Loss</h3>
-                    <p>Critical information disappears in handoffs between tools and team members</p>
-                </div>
-                
-                <div class="problem-card">
-                    <div class="problem-icon">
-                        <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
-                            <circle cx="24" cy="24" r="20" stroke="currentColor" stroke-width="1.5" opacity="0.3"/>
-                            <path d="M24 12V24L32 32" stroke="currentColor" stroke-width="1.5"/>
-                            <circle cx="24" cy="24" r="2" fill="currentColor"/>
-                        </svg>
-                    </div>
-                    <h3>Coordination Overhead</h3>
-                    <p>40% of knowledge work is spent on coordination rather than creation</p>
-                </div>
-                
-                <div class="problem-card">
-                    <div class="problem-icon">
-                        <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
-                            <path d="M8 24H16M32 24H40M16 24L24 16M24 16L32 24M24 16V32" stroke="currentColor" stroke-width="1.5"/>
-                            <circle cx="24" cy="24" r="4" stroke="currentColor" stroke-width="1.5" opacity="0.3"/>
-                        </svg>
-                    </div>
-                    <h3>Tool Proliferation</h3>
-                    <p>Average team uses 275+ tools with no intelligent orchestration</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Vision Section -->
-    <section id="vision" class="vision-section">
-        <div class="container">
-            <div class="vision-content">
-                <div class="vision-text">
-                    <h2 class="section-title">Ambient Intelligence, Not Another App</h2>
-                    <p class="vision-description">
-                        WorkspaceOS isn't trying to replace your tools or become the center of your workflow. It's the invisible infrastructure that makes your existing tools work together intelligently.
-                    </p>
-                    <p class="vision-description">
-                        Like an operating system manages hardware resources, WorkspaceOS orchestrates your software tools - preserving context, automating handoffs, and amplifying collective intelligence.
-                    </p>
-                    
-                    <div class="vision-features">
-                        <div class="vision-feature">
-                            <div class="feature-icon">⚡</div>
-                            <div>
-                                <h4>Zero Friction</h4>
-                                <p>Works invisibly with your existing tools</p>
-                            </div>
-                        </div>
-                        <div class="vision-feature">
-                            <div class="feature-icon">🧠</div>
-                            <div>
-                                <h4>Context Aware</h4>
-                                <p>Understands relationships across all workflows</p>
-                            </div>
-                        </div>
-                        <div class="vision-feature">
-                            <div class="feature-icon">🔐</div>
-                            <div>
-                                <h4>Privacy First</h4>
-                                <p>P2P architecture keeps data on your network</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="vision-visual">
-                    <div class="layer-stack">
-                        <div class="layer layer-apps">
-                            <span>Your Tools</span>
-                        </div>
-                        <div class="layer layer-os">
-                            <span>WorkspaceOS</span>
-                        </div>
-                        <div class="layer layer-infra">
-                            <span>Infrastructure</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Features Section -->
-    <section id="features" class="features-section">
-        <div class="container">
-            <h2 class="section-title">Transformative Capabilities</h2>
-            
-            <div class="features-grid">
-                <div class="feature-card">
-                    <div class="feature-glow"></div>
-                    <h3>Intelligent Handoffs</h3>
-                    <p>Design to development in 30 minutes, not 3 days. Context flows seamlessly between tools.</p>
-                    <div class="feature-metric">10x faster</div>
-                </div>
-                
-                <div class="feature-card">
-                    <div class="feature-glow"></div>
-                    <h3>Ambient Context</h3>
-                    <p>Never lose critical information. Every decision, discussion, and detail preserved across tools.</p>
-                    <div class="feature-metric">Zero loss</div>
-                </div>
-                
-                <div class="feature-card">
-                    <div class="feature-glow"></div>
-                    <h3>Team Cognition</h3>
-                    <p>Collective intelligence emerges from connected workflows. See patterns humans miss.</p>
-                    <div class="feature-metric">275+ tools</div>
-                </div>
-                
-                <div class="feature-card">
-                    <div class="feature-glow"></div>
-                    <h3>Pure Performance</h3>
-                    <p>Native Rust architecture. No Electron bloat. Runs in less memory than a single browser tab.</p>
-                    <div class="feature-metric">&lt;30MB RAM</div>
-                </div>
-                
-                <div class="feature-card">
-                    <div class="feature-glow"></div>
-                    <h3>P2P Architecture</h3>
-                    <p>No servers, no cloud dependency. Your data stays on your network, under your control.</p>
-                    <div class="feature-metric">100% private</div>
-                </div>
-                
-                <div class="feature-card">
-                    <div class="feature-glow"></div>
-                    <h3>Individual Power</h3>
-                    <p>Personal ambient intelligence that handles busy work while you focus on what matters.</p>
-                    <div class="feature-metric">40% time saved</div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Architecture Section -->
-    <section id="architecture" class="architecture-section">
-        <div class="container">
-            <h2 class="section-title">Built Different</h2>
-            <p class="section-subtitle">Revolutionary architecture for impossible performance</p>
-            
-            <div class="arch-showcase">
-                <div class="arch-card">
-                    <div class="arch-label">Language</div>
-                    <div class="arch-value">Pure Rust</div>
-                    <div class="arch-detail">Zero garbage collection overhead</div>
-                </div>
-                
-                <div class="arch-card">
-                    <div class="arch-label">Memory</div>
-                    <div class="arch-value">&lt;30MB</div>
-                    <div class="arch-detail">Less than a browser tab</div>
-                </div>
-                
-                <div class="arch-card">
-                    <div class="arch-label">Network</div>
-                    <div class="arch-value">P2P Mesh</div>
-                    <div class="arch-detail">No servers required</div>
-                </div>
-                
-                <div class="arch-card">
-                    <div class="arch-label">Intelligence</div>
-                    <div class="arch-value">Edge AI</div>
-                    <div class="arch-detail">Privacy-preserving ML</div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- CTA Section -->
-    <section id="contact" class="cta-section">
-        <div class="container">
-            <div class="cta-content">
-                <h2 class="cta-title">Ready for Ambient Intelligence?</h2>
-                <p class="cta-subtitle">Join forward-thinking teams reimagining knowledge work</p>
-                
-                <form class="cta-form">
-                    <input type="email" placeholder="your@email.com" class="cta-input" required>
-                    <button type="submit" class="btn btn-primary">
-                        Request Early Access
-                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-                            <path d="M7 10H13M13 10L10 7M13 10L10 13" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                        </svg>
-                    </button>
-                </form>
-                
-                <p class="cta-note">No spam. No cloud dependency. Your data stays yours.</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-brand">
-                    <div class="logo">
-                        <svg width="24" height="24" viewBox="0 0 32 32" fill="none">
-                            <circle cx="16" cy="16" r="2" fill="currentColor"/>
-                            <circle cx="16" cy="16" r="6" stroke="currentColor" stroke-width="1" opacity="0.5"/>
-                            <circle cx="16" cy="16" r="10" stroke="currentColor" stroke-width="1" opacity="0.3"/>
-                        </svg>
-                        <span>WorkspaceOS</span>
-                    </div>
-                    <p>The connective tissue for modern knowledge work</p>
-                </div>
-                
-                <div class="footer-links">
-                    <a href="https://github.com/Triglavis/workspaceOS" target="_blank">GitHub</a>
-                    <a href="mailto:hello@workspaceos.com">Contact</a>
-                    <a href="#">Documentation</a>
-                </div>
-            </div>
-            
-            <div class="footer-bottom">
-                <p>© 2025 Triglavis. Building the future of work.</p>
-            </div>
-        </div>
-    </footer>
 
     <script src="script.js"></script>
 </body>

@@ -106,165 +106,108 @@ class ParticleSystem {
     }
 }
 
-// Flow Diagram Animation
-class FlowDiagram {
+// Orbit System Enhancement
+class OrbitSystem {
     constructor() {
-        this.svg = document.querySelector('.connections');
-        this.tools = document.querySelectorAll('.tool-node');
-        this.central = document.querySelector('.central-node');
-        this.paths = [];
+        this.icons = document.querySelectorAll('.app-icon');
+        this.hub = document.querySelector('.central-hub');
+        this.connections = document.querySelector('.orbit-connections');
         this.init();
     }
 
     init() {
-        this.createConnections();
-        this.animateFlow();
         this.setupHoverEffects();
-    }
-
-    createConnections() {
-        const centerX = 200;
-        const centerY = 200;
-        
-        const positions = [
-            { x: 200, y: 40 },   // top
-            { x: 200, y: 360 },  // bottom
-            { x: 40, y: 200 },   // left
-            { x: 360, y: 200 }   // right
-        ];
-
-        positions.forEach((pos, i) => {
-            const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
-            const d = `M ${centerX} ${centerY} Q ${(centerX + pos.x) / 2} ${(centerY + pos.y) / 2} ${pos.x} ${pos.y}`;
-            
-            path.setAttribute('d', d);
-            path.setAttribute('stroke', 'url(#flow-gradient)');
-            path.setAttribute('stroke-width', '2');
-            path.setAttribute('fill', 'none');
-            path.setAttribute('opacity', '0');
-            path.classList.add('flow-path');
-            
-            this.svg.appendChild(path);
-            this.paths.push(path);
-        });
-    }
-
-    animateFlow() {
-        this.paths.forEach((path, i) => {
-            const length = path.getTotalLength();
-            path.style.strokeDasharray = length;
-            path.style.strokeDashoffset = length;
-            
-            const animate = () => {
-                path.style.opacity = '1';
-                path.style.transition = 'stroke-dashoffset 2s ease-in-out';
-                path.style.strokeDashoffset = '0';
-                
-                setTimeout(() => {
-                    path.style.transition = 'opacity 0.5s';
-                    path.style.opacity = '0';
-                    
-                    setTimeout(() => {
-                        path.style.transition = 'none';
-                        path.style.strokeDashoffset = length;
-                        setTimeout(animate, Math.random() * 2000 + 1000);
-                    }, 500);
-                }, 2000);
-            };
-            
-            setTimeout(animate, i * 500);
-        });
+        this.createConnectionPulses();
     }
 
     setupHoverEffects() {
-        this.tools.forEach(tool => {
-            tool.addEventListener('mouseenter', () => {
-                this.central.style.transform = 'translate(-50%, -50%) scale(1.1)';
+        this.icons.forEach(icon => {
+            icon.addEventListener('mouseenter', () => {
+                // Pause rotation on hover
+                icon.style.animationPlayState = 'paused';
+                // Add glow to central hub
+                this.hub.style.filter = 'drop-shadow(0 0 60px rgba(255, 255, 255, 1))';
+                // Draw connection line
+                this.drawConnection(icon);
             });
             
-            tool.addEventListener('mouseleave', () => {
-                this.central.style.transform = 'translate(-50%, -50%) scale(1)';
+            icon.addEventListener('mouseleave', () => {
+                // Resume rotation
+                icon.style.animationPlayState = 'running';
+                // Reset hub glow
+                this.hub.style.filter = '';
+                // Clear connection
+                this.clearConnections();
             });
         });
     }
-}
 
-// Scroll Effects
-class ScrollEffects {
-    constructor() {
-        this.nav = document.querySelector('.nav-container');
-        this.sections = document.querySelectorAll('section');
-        this.init();
-    }
-
-    init() {
-        this.setupScrollListener();
-        this.setupIntersectionObserver();
-    }
-
-    setupScrollListener() {
-        let lastScroll = 0;
+    drawConnection(icon) {
+        const rect = icon.getBoundingClientRect();
+        const hubRect = this.hub.getBoundingClientRect();
+        const containerRect = this.connections.getBoundingClientRect();
         
-        window.addEventListener('scroll', () => {
-            const currentScroll = window.pageYOffset;
-            
-            // Nav background
-            if (currentScroll > 50) {
-                this.nav.classList.add('scrolled');
-            } else {
-                this.nav.classList.remove('scrolled');
+        const x1 = (hubRect.left + hubRect.width / 2 - containerRect.left);
+        const y1 = (hubRect.top + hubRect.height / 2 - containerRect.top);
+        const x2 = (rect.left + rect.width / 2 - containerRect.left);
+        const y2 = (rect.top + rect.height / 2 - containerRect.top);
+        
+        const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+        line.setAttribute('x1', x1);
+        line.setAttribute('y1', y1);
+        line.setAttribute('x2', x2);
+        line.setAttribute('y2', y2);
+        line.setAttribute('stroke', 'white');
+        line.setAttribute('stroke-width', '1');
+        line.setAttribute('opacity', '0.5');
+        line.classList.add('connection-line');
+        
+        this.connections.appendChild(line);
+    }
+
+    clearConnections() {
+        const lines = this.connections.querySelectorAll('.connection-line');
+        lines.forEach(line => line.remove());
+    }
+
+    createConnectionPulses() {
+        // Create subtle pulsing connections
+        setInterval(() => {
+            if (!document.querySelector('.app-icon:hover')) {
+                const randomIcon = this.icons[Math.floor(Math.random() * this.icons.length)];
+                this.createPulse(randomIcon);
             }
-            
-            lastScroll = currentScroll;
-        });
+        }, 3000);
     }
 
-    setupIntersectionObserver() {
-        const options = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -100px 0px'
-        };
-
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                }
-            });
-        }, options);
-
-        this.sections.forEach(section => {
-            observer.observe(section);
-        });
-    }
-}
-
-// Smooth Scroll for Navigation
-class SmoothNavigation {
-    constructor() {
-        this.links = document.querySelectorAll('.nav-link');
-        this.init();
-    }
-
-    init() {
-        this.links.forEach(link => {
-            link.addEventListener('click', (e) => {
-                e.preventDefault();
-                const targetId = link.getAttribute('href');
-                
-                if (targetId && targetId !== '#') {
-                    const target = document.querySelector(targetId);
-                    if (target) {
-                        target.scrollIntoView({
-                            behavior: 'smooth',
-                            block: 'start'
-                        });
-                    }
-                }
-            });
-        });
+    createPulse(icon) {
+        const rect = icon.getBoundingClientRect();
+        const hubRect = this.hub.getBoundingClientRect();
+        const containerRect = this.connections.getBoundingClientRect();
+        
+        const x1 = (hubRect.left + hubRect.width / 2 - containerRect.left);
+        const y1 = (hubRect.top + hubRect.height / 2 - containerRect.top);
+        const x2 = (rect.left + rect.width / 2 - containerRect.left);
+        const y2 = (rect.top + rect.height / 2 - containerRect.top);
+        
+        const pulse = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+        pulse.setAttribute('r', '2');
+        pulse.setAttribute('fill', 'white');
+        pulse.style.opacity = '0.8';
+        
+        const animateMotion = document.createElementNS('http://www.w3.org/2000/svg', 'animateMotion');
+        animateMotion.setAttribute('dur', '1s');
+        animateMotion.setAttribute('path', `M ${x1} ${y1} L ${x2} ${y2}`);
+        animateMotion.setAttribute('fill', 'freeze');
+        
+        pulse.appendChild(animateMotion);
+        this.connections.appendChild(pulse);
+        
+        setTimeout(() => pulse.remove(), 1000);
     }
 }
+
+// Removed scroll effects and navigation - page is now single hero section
 
 // Form Handler
 class FormHandler {
@@ -372,17 +315,11 @@ document.addEventListener('DOMContentLoaded', () => {
         new ParticleSystem(canvas);
     }
     
-    // Initialize flow diagram
-    const flowDiagram = document.querySelector('.flow-diagram');
-    if (flowDiagram) {
-        new FlowDiagram();
+    // Initialize orbit system
+    const orbitSystem = document.querySelector('.orbit-system');
+    if (orbitSystem) {
+        new OrbitSystem();
     }
-    
-    // Initialize scroll effects
-    new ScrollEffects();
-    
-    // Initialize smooth navigation
-    new SmoothNavigation();
     
     // Initialize form handler
     new FormHandler();
