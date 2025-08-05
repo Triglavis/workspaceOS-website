@@ -118,6 +118,23 @@ body {
     }
 }
 
+/* Triglavis Branding */
+.triglavis-brand {
+    position: absolute;
+    top: 16px;
+    left: 16px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.75rem;
+    color: var(--gray-500);
+    z-index: 2;
+}
+
+.triglavis-brand svg {
+    opacity: 0.6;
+}
+
 /* Hero Section */
 .hero {
     width: 100%;
@@ -286,7 +303,7 @@ body {
 }
 
 .email-input {
-    flex: 1;
+    flex-grow: 1;
     padding: 0.875rem 1.25rem;
     background: var(--black);
     border: 1px solid var(--gray-800);
@@ -294,6 +311,7 @@ body {
     color: var(--white);
     font-size: 0.875rem;
     transition: var(--transition);
+    min-width: 0;
 }
 
 .email-input::placeholder {
@@ -326,6 +344,8 @@ body {
     border: none;
     position: relative;
     overflow: hidden;
+    white-space: nowrap;
+    flex-shrink: 0;
 }
 
 .btn::before {
