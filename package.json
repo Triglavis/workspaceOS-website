@@ -1,0 +1,12 @@
+{
+  "name": "workspaceos-website",
+  "version": "1.0.0",
+  "description": "WorkspaceOS - Ambient Intelligence for Knowledge Work",
+  "scripts": {
+    "dev": "npx http-server -p 3000 -o",
+    "serve": "python3 -m http.server 3000"
+  },
+  "keywords": ["workspaceos", "ambient-intelligence", "productivity", "tools"],
+  "author": "Triglavis",
+  "license": "MIT"
+}
