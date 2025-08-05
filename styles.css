@@ -35,22 +35,26 @@ html {
 
 body {
     font-family: var(--font-sans);
-    background: var(--black);
+    background: #111;
     color: var(--gray-100);
     line-height: 1.6;
-    overflow-x: hidden;
+    overflow: hidden;
     position: relative;
+    width: 100dvw;
+    height: 100dvh;
+    padding: 12px;
 }
 
 /* Ambient Background */
 .ambient-bg {
-    position: fixed;
+    position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    z-index: -1;
+    z-index: 0;
     overflow: hidden;
+    border-radius: 9px;
 }
 
 #particles {
@@ -116,12 +120,20 @@ body {
 
 /* Hero Section */
 .hero {
-    min-height: 100vh;
+    width: 100%;
+    height: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
     padding: 2rem;
     position: relative;
+    background: var(--black);
+    border-radius: 9px;
+    border: 1px solid #222;
+    box-shadow: 
+        0 2px 4px rgba(0,0,0,0.5),
+        0 8px 16px rgba(0,0,0,0.3),
+        inset 0 1px 0 rgba(255,255,255,0.02);
 }
 
 .hero-container {
@@ -131,6 +143,8 @@ body {
     grid-template-columns: 1fr 1fr;
     gap: 4rem;
     align-items: center;
+    position: relative;
+    z-index: 1;
 }
 
 .hero-content {
@@ -241,21 +255,59 @@ body {
 }
 
 .stat-value {
-    font-size: 1.5rem;
-    font-weight: 600;
+    font-size: 1.125rem;
+    font-weight: 500;
     color: var(--white);
-    margin-bottom: 0.25rem;
+    margin-bottom: 0.5rem;
+    line-height: 1.2;
 }
 
 .stat-label {
-    font-size: 0.875rem;
-    color: var(--gray-500);
+    font-size: 0.8125rem;
+    color: var(--gray-400);
+    line-height: 1.4;
+    max-width: 200px;
 }
 
 .hero-actions {
     display: flex;
-    gap: 1rem;
-    flex-wrap: wrap;
+    flex-direction: column;
+    gap: 0.75rem;
+    max-width: 400px;
+}
+
+.early-access-form {
+    display: flex;
+    gap: 0.75rem;
+    width: 100%;
+}
+
+.email-input {
+    flex: 1;
+    padding: 0.875rem 1.25rem;
+    background: var(--gray-900);
+    border: 1px solid var(--gray-800);
+    border-radius: 8px;
+    color: var(--white);
+    font-size: 0.875rem;
+    transition: var(--transition);
+}
+
+.email-input::placeholder {
+    color: var(--gray-600);
+}
+
+.email-input:focus {
+    outline: none;
+    border-color: var(--gray-600);
+    background: var(--black);
+}
+
+.form-note {
+    font-size: 0.75rem;
+    color: var(--gray-500);
+    text-align: center;
+    margin: 0;
 }
 
 .btn {
@@ -455,6 +507,11 @@ body {
     }
     
     .hero-actions {
-        justify-content: center;
+        align-items: center;
+        max-width: 100%;
+    }
+    
+    .early-access-form {
+        flex-direction: column;
     }
 }

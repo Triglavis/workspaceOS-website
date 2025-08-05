@@ -212,7 +212,7 @@ class OrbitSystem {
 // Form Handler
 class FormHandler {
     constructor() {
-        this.form = document.querySelector('.cta-form');
+        this.form = document.querySelector('.early-access-form');
         this.init();
     }
 
