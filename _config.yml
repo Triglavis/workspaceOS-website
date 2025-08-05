@@ -1,0 +1,8 @@
+# GitHub Pages Configuration
+title: WorkspaceOS - Ambient Intelligence
+description: The connective tissue for modern knowledge work. Ambient intelligence that orchestrates your tools, preserves context, and amplifies team cognition.
+baseurl: "" # Leave empty if using custom domain or github.io/workspaceOS-website
+url: "https://triglavis.github.io/workspaceOS-website"
+
+# Build settings
+theme: null # We're using custom HTML/CSS/JS

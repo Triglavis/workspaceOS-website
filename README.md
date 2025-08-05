@@ -2,6 +2,8 @@
 
 Modern, monochromatic landing page for WorkspaceOS - The ambient intelligence layer for knowledge work.
 
+🌐 **Live Site**: [https://triglavis.github.io/workspaceOS-website](https://triglavis.github.io/workspaceOS-website)
+
 ## Quick Start
 
 ### View the site locally:
@@ -52,8 +54,16 @@ Unlike typical landing pages, this site embodies the "ambient intelligence" conc
 
 ## Deployment
 
-Ready for static hosting on:
-- GitHub Pages
+### GitHub Pages (Active)
+The site is automatically deployed to GitHub Pages when you push to the `main` branch.
+
+**Setup Instructions:**
+1. Push your code to GitHub
+2. Go to Settings → Pages in your GitHub repository
+3. Source: Deploy from GitHub Actions (already configured)
+4. The site will be available at: https://triglavis.github.io/workspaceOS-website
+
+### Alternative Hosting Options
 - Netlify
 - Vercel
 - Any static web server
