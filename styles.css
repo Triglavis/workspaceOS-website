@@ -57,14 +57,37 @@ body {
     border-radius: 9px;
 }
 
-.hero #particles {
+.canvas-wrapper {
+    position: absolute;
+    top: 0;
+    right: -100px;
+    width: 800px;
+    height: 100%;
+    z-index: 1;
+    pointer-events: none;
+}
+
+#particles {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+}
+
+.gradient-overlay {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    z-index: 1;
-    opacity: 0.6;
+    background: linear-gradient(to right, 
+        rgba(0,0,0,1) 0%, 
+        rgba(0,0,0,0.95) 20%, 
+        rgba(0,0,0,0.7) 40%, 
+        rgba(0,0,0,0.3) 60%, 
+        rgba(0,0,0,0) 80%);
+    z-index: 2;
     pointer-events: none;
 }
 
