@@ -208,20 +208,18 @@ body {
 /* Hero Section */
 .hero {
     min-height: 100vh;
-    display: flex;
-    align-items: center;
-    padding: 8rem 2rem 4rem;
-    position: relative;
-}
-
-.hero-content {
-    max-width: 1400px;
-    margin: 0 auto;
-    width: 100%;
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 4rem;
     align-items: center;
+    padding: 8rem 2rem 4rem;
+    position: relative;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.hero-content {
+    width: 100%;
 }
 
 .hero-badge {
@@ -893,7 +891,7 @@ body {
         display: none;
     }
     
-    .hero-content {
+    .hero {
         grid-template-columns: 1fr;
     }
     
