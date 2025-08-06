@@ -38,7 +38,7 @@ class GravitationalSingularity {
         this.cameraControlsEnabled = false;
         this.lookAtTarget = new THREE.Vector3(-14, 3.5, -20);
         this.cameraDistance = 21.5;
-        this.defaultCameraPos = new THREE.Vector3(10.5, -5, 21.5);
+        this.defaultCameraPos = new THREE.Vector3(18, -5, 21.5);
         this.minZoom = 10;
         this.maxZoom = 80;
         
@@ -71,9 +71,17 @@ class GravitationalSingularity {
             1000
         );
         // Position camera with user's preferred view but start zoomed out for animation
-        this.camera.position.x = this.defaultCameraPos.x;
-        this.camera.position.y = this.defaultCameraPos.y;
-        this.camera.position.z = this.initialZoomDistance; // Start zoomed out
+        // Adjust camera position for mobile to show sun partially
+        const isMobile = window.innerWidth <= 768;
+        if (isMobile) {
+            this.camera.position.x = 21; // Position to show sun on right edge
+            this.camera.position.y = this.defaultCameraPos.y;
+            this.camera.position.z = this.initialZoomDistance;
+        } else {
+            this.camera.position.x = this.defaultCameraPos.x;
+            this.camera.position.y = this.defaultCameraPos.y;
+            this.camera.position.z = this.initialZoomDistance; // Start zoomed out
+        }
         this.camera.lookAt(this.lookAtTarget);
         
         // Start the zoom animation
@@ -88,6 +96,10 @@ class GravitationalSingularity {
         this.renderer.setSize(window.innerWidth, window.innerHeight);
         this.renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2)); // Limit pixel ratio for performance
         this.renderer.setClearColor(0x000000, 0.95); // Slight opacity for subtle transparency
+        
+        // Enable shadows for dramatic lighting effects
+        this.renderer.shadowMap.enabled = true;
+        this.renderer.shadowMap.type = THREE.PCFSoftShadowMap;
         
         // Create gravitational singularity
         this.createSingularity();
@@ -195,10 +207,20 @@ class GravitationalSingularity {
         
         // Store glow layers reference for updates (remove old single material reference)
         
-        // Very subtle lighting to maintain greyscale aesthetic
-        const mainLight = new THREE.PointLight(0xffffff, 1, 200, 0.8);
-        mainLight.position.set(0, 0, 0);
+        // Intense point light emanating from the sun itself
+        const mainLight = new THREE.PointLight(0xffffff, 8, 500, 0.5);
+        mainLight.position.set(0, 0, 0); // Light at center of sun
+        mainLight.castShadow = true;
+        mainLight.shadow.mapSize.width = 2048;
+        mainLight.shadow.mapSize.height = 2048;
+        mainLight.shadow.camera.near = 0.5;
+        mainLight.shadow.camera.far = 500;
         this.singularity.add(mainLight);
+        
+        // Add a second point light for better omnidirectional lighting from the sun
+        const secondaryLight = new THREE.PointLight(0xffffff, 3, 300, 0.8);
+        secondaryLight.position.set(0, 0, 0); // Also at center of sun
+        this.singularity.add(secondaryLight);
         
         // Create 3 asteroid belt rings with actual 3D asteroids using instancing
         const createAsteroidBelt = (radius, asteroidCount, tilt, orbitSpeed, thickness) => {
@@ -217,17 +239,20 @@ class GravitationalSingularity {
             // Use the first geometry as base for all asteroids (single instanced mesh)
             const mergedGeometry = asteroidGeometries[0].clone();
             
-            // Create instanced mesh with consistent material for all belts
+            // Create instanced mesh with varied greyscale materials
             const material = new THREE.MeshPhongMaterial({
-                color: 0xffffff, // White base to let instance colors show through clearly
-                emissive: 0x111111, // Darker emissive for more contrast
-                shininess: 3, // Consistent shininess
+                color: 0xffffff, // White base to let instance colors show through
+                emissive: 0x111111, // Darker emissive for contrast
+                shininess: 5, // Slightly more shininess for better shadows
                 flatShading: true, // Gives low-poly look
                 fog: true
             });
             
             const instancedMesh = new THREE.InstancedMesh(mergedGeometry, material, asteroidCount);
             instancedMesh.instanceMatrix.setUsage(THREE.DynamicDrawUsage); // For animation
+            instancedMesh.instanceColor = new THREE.InstancedBufferAttribute(new Float32Array(asteroidCount * 3), 3);
+            instancedMesh.castShadow = true;
+            instancedMesh.receiveShadow = true;
             
             // Store orbital data for each asteroid
             const asteroidData = [];
@@ -240,6 +265,8 @@ class GravitationalSingularity {
                 
                 // Random size variation - same for all belts
                 const scale = 0.3 + Math.random() * 1.2;
+                
+                // Color will be set in the loop below
                 
                 // Store data for animation
                 asteroidData.push({
@@ -274,32 +301,16 @@ class GravitationalSingularity {
                 instancedMesh.setMatrixAt(i, dummy.matrix);
             }
             
-            // Apply color variations for more realism with darker greys
+            // Apply varied greyscale colors to each asteroid
             const colors = [];
             for (let i = 0; i < asteroidCount; i++) {
-                // Wider range of darker greys for better variation
-                const baseGrey = 0.15 + Math.random() * 0.35; // Range from very dark (0.15) to medium grey (0.5)
+                // Much more varied greyscale range - from dark to light grey
+                const greyValue = 0.3 + Math.random() * 0.7; // Range from dark grey (0.3) to white (1.0)
                 
-                // Add subtle color tints for variety
-                const tintChoice = Math.random();
-                let r, g, b;
-                
-                if (tintChoice < 0.33) {
-                    // Bluish grey (cooler asteroids)
-                    r = baseGrey * 0.9;
-                    g = baseGrey * 0.95;
-                    b = baseGrey;
-                } else if (tintChoice < 0.66) {
-                    // Brownish grey (rocky asteroids)
-                    r = baseGrey;
-                    g = baseGrey * 0.9;
-                    b = baseGrey * 0.85;
-                } else {
-                    // Pure grey (neutral asteroids)
-                    r = baseGrey;
-                    g = baseGrey;
-                    b = baseGrey;
-                }
+                // Pure greyscale only - no color tints for monochromatic aesthetic
+                const r = greyValue;
+                const g = greyValue;
+                const b = greyValue;
                 
                 colors.push(r, g, b);
             }
@@ -391,8 +402,8 @@ class GravitationalSingularity {
         // Create satellite group to hold all components
         const satelliteGroup = new THREE.Group();
         
-        // 1. Main body (central rectangular module) - realistic proportions
-        const bodyGeometry = new THREE.BoxGeometry(0.6, 0.4, 0.8);
+        // 1. Main body (central rectangular module) - much smaller
+        const bodyGeometry = new THREE.BoxGeometry(0.15, 0.1, 0.2);
         const bodyMaterial = new THREE.MeshStandardMaterial({
             color: 0xe8e8e8, // Light grey body
             metalness: 0.3,
@@ -402,8 +413,8 @@ class GravitationalSingularity {
         const body = new THREE.Mesh(bodyGeometry, bodyMaterial);
         satelliteGroup.add(body);
         
-        // 2. Solar panels (thin rectangles on sides) - larger and more realistic
-        const panelGeometry = new THREE.BoxGeometry(1.4, 0.08, 0.7);
+        // 2. Solar panels (thin rectangles on sides) - much smaller
+        const panelGeometry = new THREE.BoxGeometry(0.35, 0.02, 0.18);
         const panelMaterial = new THREE.MeshStandardMaterial({
             color: 0x1a1a2e, // Dark blue-grey solar panels
             metalness: 0.8,
@@ -413,16 +424,16 @@ class GravitationalSingularity {
         
         // Left solar panel
         const leftPanel = new THREE.Mesh(panelGeometry, panelMaterial);
-        leftPanel.position.set(-1.0, 0, 0);
+        leftPanel.position.set(-0.25, 0, 0);
         satelliteGroup.add(leftPanel);
         
         // Right solar panel
         const rightPanel = new THREE.Mesh(panelGeometry, panelMaterial);
-        rightPanel.position.set(1.0, 0, 0);
+        rightPanel.position.set(0.25, 0, 0);
         satelliteGroup.add(rightPanel);
         
-        // 3. Communication dish (parabolic dish)
-        const dishGeometry = new THREE.SphereGeometry(0.12, 8, 4, 0, Math.PI * 2, 0, Math.PI * 0.5);
+        // 3. Communication dish (parabolic dish) - much smaller
+        const dishGeometry = new THREE.SphereGeometry(0.03, 8, 4, 0, Math.PI * 2, 0, Math.PI * 0.5);
         const dishMaterial = new THREE.MeshStandardMaterial({
             color: 0xf0f0f0,
             metalness: 0.9,
@@ -430,12 +441,12 @@ class GravitationalSingularity {
             fog: true
         });
         const dish = new THREE.Mesh(dishGeometry, dishMaterial);
-        dish.position.set(0, 0.15, 0.2);
+        dish.position.set(0, 0.04, 0.05);
         dish.rotation.x = -Math.PI * 0.3; // Angle the dish
         satelliteGroup.add(dish);
         
-        // 4. Multiple antennas for realism
-        const antennaGeometry = new THREE.CylinderGeometry(0.008, 0.008, 0.2, 6);
+        // 4. Multiple antennas for realism - much smaller
+        const antennaGeometry = new THREE.CylinderGeometry(0.002, 0.002, 0.05, 6);
         const antennaMaterial = new THREE.MeshStandardMaterial({
             color: 0x888888,
             metalness: 0.7,
@@ -445,17 +456,17 @@ class GravitationalSingularity {
         
         // Main antenna
         const antenna1 = new THREE.Mesh(antennaGeometry, antennaMaterial);
-        antenna1.position.set(0, 0.25, -0.15);
+        antenna1.position.set(0, 0.06, -0.04);
         satelliteGroup.add(antenna1);
         
         // Side antenna
         const antenna2 = new THREE.Mesh(antennaGeometry, antennaMaterial);
-        antenna2.position.set(0.15, 0.2, 0.1);
+        antenna2.position.set(0.04, 0.05, 0.03);
         antenna2.rotation.z = Math.PI * 0.1;
         satelliteGroup.add(antenna2);
         
-        // 5. Blinking light (small sphere with emissive material) - use MeshStandardMaterial
-        const lightGeometry = new THREE.SphereGeometry(0.08, 8, 6); // Make it more visible
+        // 5. Blinking light (small sphere with emissive material) - much smaller
+        const lightGeometry = new THREE.SphereGeometry(0.02, 8, 6);
         const lightMaterial = new THREE.MeshStandardMaterial({
             color: 0xff3333,
             emissive: 0xff0000,
@@ -465,7 +476,7 @@ class GravitationalSingularity {
             fog: true
         });
         const blinkingLight = new THREE.Mesh(lightGeometry, lightMaterial);
-        blinkingLight.position.set(0, 0.15, -0.2);
+        blinkingLight.position.set(0, 0.04, -0.05);
         satelliteGroup.add(blinkingLight);
         
         // Start from a visible position near the button area
@@ -537,17 +548,7 @@ class GravitationalSingularity {
         console.log(`🛰️ Realistic satellite launched! Total satellites: ${this.satellites.length}`);
         console.log(`🎯 Satellite world position:`, satelliteGroup.position);
         
-        // Force update the satellite material to be more visible
-        satelliteGroup.traverse((child) => {
-            if (child.isMesh) {
-                child.material.transparent = false;
-                child.material.opacity = 1.0;
-                if (child.material.emissive) {
-                    child.material.emissive.setHex(0xff0000);
-                    child.material.emissiveIntensity = 2.0;
-                }
-            }
-        });
+        // Don't modify materials - let them use their original properties
     }
     
     createDistortionField() {
@@ -831,8 +832,8 @@ class GravitationalSingularity {
     } */
     
     setupLighting() {
-        // Softer ambient light to reduce harsh shadows
-        const ambientLight = new THREE.AmbientLight(0x202030, 0.3);
+        // Very subtle ambient light to prevent pitch black shadows
+        const ambientLight = new THREE.AmbientLight(0x0a0a0a, 0.2); // Very dark grey, low intensity
         this.scene.add(ambientLight);
         
         // Remove duplicate point light (already in singularity)
@@ -1183,9 +1184,18 @@ class GravitationalSingularity {
             // Use ease-out-cubic for fast-then-slow effect
             const easeOutCubic = 1 - Math.pow(1 - progress, 3);
             
+            // Check if mobile for x position
+            const isMobile = window.innerWidth <= 768;
+            const targetX = isMobile ? 21 : this.defaultCameraPos.x;
+            
             // Interpolate camera distance
             const currentDistance = this.initialZoomDistance + 
                 (this.finalZoomDistance - this.initialZoomDistance) * easeOutCubic;
+            
+            // Also interpolate X position during zoom if mobile
+            if (isMobile) {
+                this.camera.position.x = targetX;
+            }
             
             this.camera.position.z = currentDistance;
             this.cameraDistance = currentDistance; // Keep internal state in sync
@@ -1361,7 +1371,8 @@ class GravitationalSingularity {
         // Camera movement - only if controls are not being used
         if (!this.cameraControlsEnabled && !this.isInitialZoomAnimating) {
             // Keep camera completely still - no drift (but not during initial zoom)
-            this.camera.position.x = this.defaultCameraPos.x;
+            const isMobile = window.innerWidth <= 768;
+            this.camera.position.x = isMobile ? 21 : this.defaultCameraPos.x;
             this.camera.position.y = this.defaultCameraPos.y;
             this.camera.position.z = this.cameraDistance;
         } else {

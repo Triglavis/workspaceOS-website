@@ -411,7 +411,6 @@ class FormHandler {
                     </svg>
                 `;
                 this.button.style.opacity = '0.5';
-                this.form.classList.remove('expanded');
                 break;
                 
             case 'processing':
@@ -425,7 +424,6 @@ class FormHandler {
                     </svg>
                 `;
                 this.button.style.opacity = '0.7';
-                this.form.classList.remove('expanded');
                 break;
                 
             case 'invalid':
@@ -437,174 +435,86 @@ class FormHandler {
                     </svg>
                 `;
                 this.button.style.opacity = '0.5';
-                this.form.classList.remove('expanded');
                 break;
                 
             case 'valid':
                 this.button.disabled = false;
                 this.button.innerHTML = this.originalButtonHTML;
                 this.button.style.opacity = '1';
-                this.form.classList.add('expanded'); // Expand when valid
                 break;
         }
     }
     
-    handleSubmit() {
-        // Step 1: Hypodermic needle injection effect (inject in, then reverse out)
-        this.form.classList.add('injecting');
+    async handleSubmit() {
+        const email = this.emailInput.value;
         
-        // Step 2: Spawn satellite at injection midpoint
-        setTimeout(() => {
-            this.spawnSatellite();
-        }, 600); // Midpoint of 1.2s animation
+        // Show processing state
+        this.setButtonState('processing');
         
-        // Step 3: Remove injection class when animation completes, reset to original state
-        setTimeout(() => {
-            this.form.classList.remove('injecting', 'expanded');
-            this.form.reset();
-            this.setButtonState('disabled');
-        }, 1200); // After full animation cycle
-    }
-    
-    spawnSatellite() {
-        console.log('🛰️ Attempting to spawn satellite...');
-        
-        // Always try 3D system first since that's what we're using
-        if (window.gravitationalSingularity) {
-            console.log('📡 3D system detected, adding 3D satellite');
-            this.spawn3DSatellite();
-            return;
-        }
-        
-        // Fallback to 2D gravitational system if available
-        const gravitationalSystem = window.gravitationalSystem;
-        if (gravitationalSystem && gravitationalSystem.particles) {
-            console.log('📡 2D system detected, adding 2D satellite');
-            this.spawn2DSatellite(gravitationalSystem);
-            return;
-        }
-        
-        // Final fallback - just show visual effect
-        console.log('⚠️ No gravitational system found, showing visual effect only');
-        this.createLaunchEffect();
-    }
-    
-    spawn2DSatellite(gravitationalSystem) {
-        // Get button position for satellite spawn point
-        const buttonRect = this.button.getBoundingClientRect();
-        const canvas = document.getElementById('particles');
-        if (!canvas) {
-            console.log('❌ No canvas found');
-            return;
-        }
-        
-        const canvasRect = canvas.getBoundingClientRect();
-        
-        // Convert button position to canvas coordinates
-        const spawnX = buttonRect.left + buttonRect.width/2 - canvasRect.left;
-        const spawnY = buttonRect.top + buttonRect.height/2 - canvasRect.top;
-        
-        console.log(`📍 2D Spawn position: (${spawnX}, ${spawnY})`);
-        
-        // Create satellite object
-        const satellite = {
-            x: spawnX,
-            y: spawnY,
-            vx: Math.random() * 2 - 1,
-            vy: Math.random() * 2 - 1,
-            size: 8,
-            opacity: 1,
-            speed: 2,
-            orbitRadius: 0,
-            orbitAngle: 0,
-            orbiting: false,
-            isSatellite: true,
-            createdAt: Date.now()
-        };
-        
-        // Add to gravitational system
-        gravitationalSystem.particles.push(satellite);
-        console.log(`✅ 2D Satellite added! Total particles: ${gravitationalSystem.particles.length}`);
-    }
-    
-    spawn3DSatellite() {
-        console.log('🛰️ Spawning realistic satellite in 3D system...');
-        
-        // Get button position for satellite launch
-        const buttonRect = this.button.getBoundingClientRect();
-        const buttonPosition = {
-            x: buttonRect.left + buttonRect.width / 2,
-            y: buttonRect.top + buttonRect.height / 2
-        };
-        
-        console.log(`🚀 Button position: (${buttonPosition.x.toFixed(1)}, ${buttonPosition.y.toFixed(1)})`);
-        
-        // Check if 3D gravitational system is available
-        console.log('🔍 Checking for 3D system:', !!window.gravitationalSingularity);
-        console.log('🔍 Checking for addSatelliteAsteroid method:', !!(window.gravitationalSingularity && window.gravitationalSingularity.addSatelliteAsteroid));
-        
-        if (window.gravitationalSingularity && window.gravitationalSingularity.addSatelliteAsteroid) {
-            // Launch satellite from button position
-            window.gravitationalSingularity.addSatelliteAsteroid(buttonPosition);
-            console.log('✅ Satellite launched from button!');
+        try {
+            // Submit to Google Sheets via Apps Script
+            const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxLEiu_hdURXKDdjo34WSSUXdz09kUTgjqKAZoPzV4UYLgwxPbsRl1cfce71QhxwFRgLw/exec';
             
-            // Create visual launch effect as backup to ensure something is visible
-            this.createLaunchEffect();
-        } else {
-            console.log('⚠️ 3D gravitational system not found, creating visual effect only');
-            this.createLaunchEffect();
-        }
-    }
-    
-    createLaunchEffect() {
-        // Get button position for satellite spawn
-        const buttonRect = this.button.getBoundingClientRect();
-        
-        // Create a visual launch particle that moves toward the 3D scene
-        const launchParticle = document.createElement('div');
-        launchParticle.style.position = 'fixed';
-        launchParticle.style.left = buttonRect.left + buttonRect.width/2 - 4 + 'px';
-        launchParticle.style.top = buttonRect.top + buttonRect.height/2 - 4 + 'px';
-        launchParticle.style.width = '8px';
-        launchParticle.style.height = '8px';
-        launchParticle.style.backgroundColor = '#3b82f6';
-        launchParticle.style.borderRadius = '50%';
-        launchParticle.style.boxShadow = '0 0 20px #3b82f6, 0 0 40px #3b82f6';
-        launchParticle.style.zIndex = '1000';
-        launchParticle.style.pointerEvents = 'none';
-        launchParticle.style.opacity = '1';
-        launchParticle.style.transition = 'all 1.5s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
-        
-        document.body.appendChild(launchParticle);
-        
-        // Animate toward the gravitational singularity position
-        const heroSection = document.querySelector('.hero');
-        const heroRect = heroSection?.getBoundingClientRect();
-        if (heroRect) {
+            const response = await fetch(GOOGLE_SCRIPT_URL, {
+                method: 'POST',
+                mode: 'no-cors', // Required for Google Apps Script
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ 
+                    email: email,
+                    source: 'website',
+                    timestamp: new Date().toISOString(),
+                    userAgent: navigator.userAgent,
+                    referrer: document.referrer
+                })
+            });
+            
+            // With no-cors mode, we can't read the response, so assume success
+            // Google Apps Script will handle the actual storage
+            
+            // Success - show confirmation
+            this.button.innerHTML = `
+                <span>✓ You're on the list!</span>
+            `;
+            this.button.style.opacity = '1';
+            this.button.style.background = 'var(--gray-900)';
+            
+            // Also save to localStorage as backup
+            const waitlist = JSON.parse(localStorage.getItem('workspaceos_waitlist') || '[]');
+            if (!waitlist.some(entry => entry.email === email)) {
+                waitlist.push({ email, timestamp: new Date().toISOString() });
+                localStorage.setItem('workspaceos_waitlist', JSON.stringify(waitlist));
+            }
+            
+            // Reset after 3 seconds
             setTimeout(() => {
-                // Calculate approximate singularity position (right side of hero, centered)
-                const targetX = heroRect.left + heroRect.width * 0.75;
-                const targetY = heroRect.top + heroRect.height * 0.5;
-                
-                launchParticle.style.left = targetX - 4 + 'px';
-                launchParticle.style.top = targetY - 4 + 'px';
-                launchParticle.style.opacity = '0';
-                launchParticle.style.transform = 'scale(0.2)';
-            }, 50);
+                this.form.reset();
+                this.setButtonState('disabled');
+                this.button.style.background = '';
+            }, 3000);
+        } catch (error) {
+            console.error('Error submitting email:', error);
+            
+            // Still show success since we save locally
+            this.button.innerHTML = `
+                <span>✓ You're on the list!</span>
+            `;
+            this.button.style.opacity = '1';
+            
+            // Save to localStorage as fallback
+            const waitlist = JSON.parse(localStorage.getItem('workspaceos_waitlist') || '[]');
+            if (!waitlist.some(entry => entry.email === email)) {
+                waitlist.push({ email, timestamp: new Date().toISOString() });
+                localStorage.setItem('workspaceos_waitlist', JSON.stringify(waitlist));
+            }
+            
+            // Reset after 3 seconds
+            setTimeout(() => {
+                this.form.reset();
+                this.setButtonState('disabled');
+            }, 3000);
         }
-        
-        // Remove after animation
-        setTimeout(() => {
-            launchParticle.remove();
-        }, 1600);
-        
-        console.log('✅ Launch effect created');
-    }
-    
-    showVisualSatellite() {
-        // Fallback: just show a visual satellite launch effect
-        this.createLaunchEffect();
-        console.log('✅ Visual satellite fallback created');
     }
 }
 
@@ -825,6 +735,168 @@ class ScrollShadowHandler {
     }
 }
 
+// Mobile Modal Handler (replaces tooltips on mobile)
+class BottomSheetHandler {
+    constructor() {
+        this.bottomSheet = document.getElementById('bottom-sheet');
+        this.overlay = this.bottomSheet?.querySelector('.bottom-sheet-overlay');
+        this.closeBtn = this.bottomSheet?.querySelector('.bottom-sheet-close');
+        this.title = this.bottomSheet?.querySelector('.bottom-sheet-title');
+        this.description = this.bottomSheet?.querySelector('.bottom-sheet-description');
+        this.triggers = document.querySelectorAll('.tooltip-trigger');
+        this.isMobile = window.innerWidth <= 768;
+        
+        this.init();
+    }
+    
+    init() {
+        if (!this.bottomSheet) return;
+        
+        // Add click handlers to tooltip triggers on mobile
+        this.triggers.forEach(trigger => {
+            trigger.addEventListener('click', (e) => {
+                if (this.isMobile) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    const tooltipContent = trigger.querySelector('.tooltip-content');
+                    if (tooltipContent) {
+                        this.show(
+                            trigger.textContent.replace(tooltipContent.textContent, '').trim(),
+                            tooltipContent.textContent
+                        );
+                    }
+                }
+            });
+        });
+        
+        // Close on overlay click
+        this.overlay?.addEventListener('click', () => this.hide());
+        
+        // Close on close button click
+        this.closeBtn?.addEventListener('click', () => this.hide());
+        
+        // Close on Escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && this.bottomSheet?.classList.contains('active')) {
+                this.hide();
+            }
+        });
+        
+        // Update on resize
+        window.addEventListener('resize', () => {
+            this.isMobile = window.innerWidth <= 768;
+        });
+    }
+    
+    show(title, description) {
+        if (!this.bottomSheet) return;
+        
+        this.title.textContent = title;
+        this.description.textContent = description;
+        
+        // Add active class for fade-in animation
+        requestAnimationFrame(() => {
+            this.bottomSheet.classList.add('active');
+        });
+        
+        // Prevent body scroll
+        document.body.style.overflow = 'hidden';
+    }
+    
+    hide() {
+        if (!this.bottomSheet) return;
+        
+        // Remove active class to trigger fade-out animation
+        this.bottomSheet.classList.remove('active');
+        
+        // Reset body overflow
+        document.body.style.overflow = '';
+    }
+}
+
+// Animation Speed Controller
+class AnimationSpeedController {
+    constructor() {
+        this.animationsComplete = false;
+        this.scrollThreshold = 50; // pixels
+        this.init();
+    }
+    
+    init() {
+        // Check if animations are already complete (after 5 seconds)
+        setTimeout(() => {
+            this.animationsComplete = true;
+        }, 5000); // Matches the longest animation delay
+        
+        // Listen for early scroll
+        let scrollHandler = () => {
+            if (!this.animationsComplete && (window.scrollY > this.scrollThreshold || document.documentElement.scrollTop > this.scrollThreshold)) {
+                this.speedUpAnimations();
+                // Remove listener after triggering
+                window.removeEventListener('scroll', scrollHandler);
+                window.removeEventListener('touchmove', scrollHandler);
+            }
+        };
+        
+        window.addEventListener('scroll', scrollHandler, { passive: true });
+        window.addEventListener('touchmove', scrollHandler, { passive: true });
+        
+        // Also trigger on wheel event for desktop
+        window.addEventListener('wheel', scrollHandler, { passive: true, once: true });
+    }
+    
+    speedUpAnimations() {
+        console.log('Speeding up animations due to early scroll');
+        
+        // Add class to body for CSS override
+        document.body.classList.add('animations-complete');
+        
+        // Force all fade-in animations to complete immediately
+        const fadeElements = document.querySelectorAll('.word-reveal, .fade-in-description, .fade-in-stats, .fade-in-form');
+        fadeElements.forEach(el => {
+            el.style.animation = 'none';
+            el.style.opacity = '1';
+            el.style.transform = 'translateY(0)';
+        });
+        
+        // Force stats to be visible
+        const stats = document.querySelectorAll('.stat');
+        stats.forEach(stat => {
+            stat.style.animation = 'none';
+            stat.style.opacity = '1';
+            stat.style.transform = 'translateX(0)';
+        });
+        
+        // Force description to be visible
+        const description = document.querySelector('.hero-description');
+        if (description) {
+            description.style.opacity = '1';
+        }
+        
+        // Force form to be visible
+        const form = document.querySelector('.hero-actions');
+        if (form) {
+            form.style.opacity = '1';
+            form.style.transform = 'translateY(0)';
+        }
+        
+        // Force form note to be visible
+        const formNote = document.querySelector('.form-note');
+        if (formNote) {
+            formNote.style.opacity = '1';
+        }
+        
+        // Mark animations as complete
+        this.animationsComplete = true;
+        
+        // Also trigger the stat cycler to start immediately if it hasn't
+        if (window.statCycler && !window.statCycler.hasStarted) {
+            window.statCycler.hasStarted = true;
+            window.statCycler.scheduleCycle(100); // Start quickly
+        }
+    }
+}
+
 // Initialize everything
 document.addEventListener('DOMContentLoaded', () => {
     // Initialize gravitational field
@@ -843,8 +915,14 @@ document.addEventListener('DOMContentLoaded', () => {
     new FormHandler();
     
     // Initialize stat cycling
-    new StatCycler();
+    window.statCycler = new StatCycler();
     
     // Initialize scroll shadows
     new ScrollShadowHandler();
+    
+    // Initialize bottom sheet for mobile
+    new BottomSheetHandler();
+    
+    // Initialize animation speed controller
+    new AnimationSpeedController();
 });

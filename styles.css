@@ -312,6 +312,26 @@ body {
     z-index: 2;
 }
 
+/* Gradient overlay from bottom of canvas in hero */
+.hero::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 50%;
+    background: linear-gradient(to top,
+        #000000 0%,
+        rgba(0, 0, 0, 0.95) 10%,
+        rgba(0, 0, 0, 0.8) 25%,
+        rgba(0, 0, 0, 0.5) 45%,
+        rgba(0, 0, 0, 0.2) 70%,
+        rgba(0, 0, 0, 0) 100%);
+    pointer-events: none;
+    z-index: 3;
+    border-radius: 0 0 16px 16px;
+}
+
 .hero-container {
     max-width: 900px;
     width: 100%;
@@ -407,9 +427,8 @@ body {
 .hero-description {
     font-size: clamp(0.875rem, 1.5vw, 1rem);
     line-height: 1.6;
-    color: var(--gray-400);
+    color: var(--gray-300);
     margin-bottom: 1rem;
-    max-width: 90%;
     flex: 1;
     min-height: 0;
 }
@@ -479,17 +498,33 @@ body {
     border-top-color: var(--gray-800);
 }
 
-.tooltip-trigger:hover .tooltip-content {
-    opacity: 1;
-    transform: translateX(-50%) scale(1);
-    pointer-events: auto;
+/* Only show tooltips on hover for desktop */
+@media (min-width: 769px) {
+    .tooltip-trigger:hover .tooltip-content {
+        opacity: 1;
+        transform: translateX(-50%) scale(1);
+        pointer-events: auto;
+    }
+}
+
+/* Disable all tooltip hover effects on mobile */
+@media (max-width: 768px) {
+    .tooltip-trigger:hover .tooltip-content {
+        display: none !important;
+        opacity: 0 !important;
+        visibility: hidden !important;
+        pointer-events: none !important;
+    }
+    
+    .tooltip-content {
+        display: none !important;
+    }
 }
 
 .hero-stats {
     display: flex;
     justify-content: space-between;
     width: 100%;
-    max-width: 90%;
     margin-bottom: 1.5rem;
     padding: 1rem 0;
     position: relative;
@@ -565,21 +600,19 @@ body {
     flex-direction: column;
     justify-content: center;
     flex: 1;
+    text-align: left; /* Left align all stat text */
     max-width: 32%;
 }
 
 .stat:nth-child(2) {
-    text-align: left;
     animation-delay: 0s;
 }
 
 .stat:nth-child(3) {
-    text-align: center;
     animation-delay: 0.2s;
 }
 
 .stat:nth-child(4) {
-    text-align: right;
     animation-delay: 0.4s;
 }
 
@@ -646,6 +679,17 @@ body {
     animation: fadeInUp 0.8s ease-out 4.3s forwards;
 }
 
+/* Force animation completion for early scrollers */
+body.animations-complete .word-reveal,
+body.animations-complete .fade-in-description,
+body.animations-complete .fade-in-stats,
+body.animations-complete .fade-in-form,
+body.animations-complete .stat {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+}
+
 @keyframes fadeInUp {
     to {
         opacity: 1;
@@ -697,13 +741,13 @@ body {
 .stat-label .stat-cycle {
     display: block;
     min-height: 2.5em;
+    font-size: 12px;
 }
 
 .hero-actions {
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
-    max-width: 90%;
     flex-shrink: 0;
 }
 
@@ -712,68 +756,6 @@ body {
     gap: 1rem;
     margin: 0;
     position: relative;
-    transition: gap 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.early-access-form.expanded {
-    gap: 0;
-}
-
-.early-access-form.expanded .email-input {
-    border-top-right-radius: 0;
-    border-bottom-right-radius: 0;
-}
-
-.early-access-form.expanded .btn-primary {
-    border-top-left-radius: 0;
-    border-bottom-left-radius: 0;
-    border-left: none;
-}
-
-.early-access-form.expanded .btn-primary svg {
-    animation: arrowPulse 1.5s ease-in-out infinite;
-}
-
-@keyframes arrowPulse {
-    0%, 100% {
-        transform: translateX(0);
-    }
-    50% {
-        transform: translateX(3px);
-    }
-}
-
-/* Hypodermic needle effect */
-.early-access-form.injecting {
-    overflow: hidden;
-}
-
-.early-access-form.injecting .email-input {
-    animation: hypodermicNeedle 1.2s cubic-bezier(0.6, 0, 0.8, 1) forwards;
-    z-index: 1;
-    width: 100% !important;
-    min-width: 200px !important;
-    box-sizing: border-box !important;
-}
-
-.early-access-form.injecting .btn-primary {
-    overflow: hidden;
-    z-index: 2;
-}
-
-@keyframes hypodermicNeedle {
-    0% {
-        transform: translateX(0);
-        opacity: 1;
-    }
-    50% {
-        transform: translateX(80px);
-        opacity: 0.2;
-    }
-    100% {
-        transform: translateX(0);
-        opacity: 1;
-    }
 }
 
 .email-input {
@@ -880,6 +862,7 @@ body {
     z-index: 0 !important;
     pointer-events: none !important;
 }
+
 
 /* Hero Visual */
 .hero-visual {
@@ -1036,10 +1019,194 @@ body {
     }
 }
 
+/* Mobile Modal (formerly Bottom Sheet) */
+.bottom-sheet {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 9999;
+    pointer-events: none;
+    visibility: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    padding-bottom: calc(20px + env(safe-area-inset-bottom, 20px)); /* Account for Safari controls */
+}
+
+.bottom-sheet.active {
+    pointer-events: auto;
+    visibility: visible;
+}
+
+.bottom-sheet-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0);
+    backdrop-filter: blur(0px);
+    -webkit-backdrop-filter: blur(0px);
+    transition: all 0.3s ease;
+}
+
+.bottom-sheet.active .bottom-sheet-overlay {
+    background: rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+}
+
+.bottom-sheet-content {
+    position: relative;
+    background: var(--gray-900);
+    border-radius: 9px;
+    padding: 1.5rem;
+    opacity: 0;
+    transform: scale(0.9);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    max-width: calc(100vw - 40px);
+    max-height: calc(70vh - env(safe-area-inset-bottom, 0px)); /* Reduce height to account for Safari controls */
+    overflow-y: auto;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8);
+    margin-bottom: env(safe-area-inset-bottom, 0px); /* Additional margin for safety */
+}
+
+.bottom-sheet.active .bottom-sheet-content {
+    opacity: 1;
+    transform: scale(1);
+}
+
+/* Close button */
+.bottom-sheet-close {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    width: 28px;
+    height: 28px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    transition: background 0.2s ease;
+    padding: 0;
+}
+
+.bottom-sheet-close:hover {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.bottom-sheet-close svg {
+    width: 16px;
+    height: 16px;
+    stroke: var(--white);
+    stroke-width: 2;
+    transition: opacity 0.2s ease;
+    opacity: 0.7;
+}
+
+.bottom-sheet-close:hover svg {
+    opacity: 1;
+}
+
+.bottom-sheet-title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--white);
+    margin-bottom: 1rem;
+    padding-right: 2rem; /* Space for close button */
+    line-height: 123%;
+}
+
+.bottom-sheet-description {
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: var(--gray-300);
+}
+
 @media (max-width: 768px) {
+    body {
+        padding: 3px; /* Minimal padding around body edges */
+    }
+    
+    .hero {
+        overflow-y: auto; /* Make hero scrollable */
+        overflow-x: hidden;
+        align-items: flex-start; /* Start content at top */
+        justify-content: flex-start;
+        padding: 33px 15px 15px 15px; /* Normal padding */
+        padding-bottom: env(safe-area-inset-bottom, 15px); /* Just safe area padding */
+        width: calc(100vw - 6px); /* Account for body padding */
+        height: calc(100vh - env(safe-area-inset-bottom, 0px)); /* Reduce height by safe area */
+        margin: 0; /* Remove margin on mobile */
+        box-sizing: border-box; /* Include padding in width calculation */
+        -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
+    }
+    
     .hero-container {
         flex-direction: column;
         text-align: center;
+        padding: 0;
+        padding-top: env(safe-area-inset-top, 20px); /* Safe area for notches */
+        margin: 0;
+        min-height: 100vh; /* Ensure scrollable content */
+        width: 100%;
+        justify-content: flex-start; /* Start at top */
+        align-items: center;
+    }
+    
+    .hero-content {
+        padding-top: 2rem; /* Add padding above WorkspaceOS */
+        margin-top: 0;
+        width: 100%;
+        padding-left: 0;
+        padding-right: 0;
+    }
+    
+    .workspaceos-brand {
+        margin-top: 0;
+        margin-bottom: 12px; /* 12px gap before title */
+        display: flex;
+        justify-content: center; /* Center the brand horizontally */
+        width: 100%;
+        font-size: 0.9rem; /* Smaller font */
+        gap: 0.5rem; /* Smaller gap between icon and text */
+    }
+    
+    .workspaceos-icon {
+        width: 30px; /* Smaller icon */
+        height: 30px;
+    }
+    
+    /* Give title 75dvh space on mobile */
+    .hero-title {
+        min-height: 75dvh; /* Take up 75% of viewport */
+        max-width: 75dvw; /* Maximum width of 75% viewport width */
+        display: flex;
+        flex-direction: row; /* Keep words in a row */
+        flex-wrap: wrap; /* Allow wrapping to next line */
+        justify-content: center;
+        align-content: center; /* Use align-content instead of align-items for wrapped flex */
+        margin: 0 auto 2rem auto; /* Center with auto margins */
+        font-size: 3.5rem; /* Much larger font on mobile */
+        line-height: 1.2; /* Tighter line height */
+        padding: 0 1rem;
+        text-align: center;
+        gap: 0; /* No gap between wrapped lines */
+    }
+    
+    .hero-title br {
+        display: none; /* Remove line break on mobile */
+    }
+    
+    .hero-title .word-reveal {
+        display: inline-block;
+        margin: 0 0.3rem; /* Space between words */
     }
     
     .hero-visual {
@@ -1047,20 +1214,104 @@ body {
     }
     
     .hero-stats {
-        flex-direction: column;
-        gap: 1rem;
+        flex-direction: column; /* Stack vertically */
+        gap: 24px; /* Space between stats */
+        overflow-x: visible;
+        width: 100%;
+        justify-content: flex-start;
+        padding: 1.5rem 0;
+        margin: 0 0 33px 0;
+    }
+    
+    /* Add padding for fade-in-stats on mobile */
+    .hero-stats.fade-in-stats {
+        padding: 33px 0; /* 33px padding top and bottom */
+    }
+    
+    /* Ensure progress bars don't touch bullets */
+    .hero-stats .stat-progress-bar {
+        margin: 0.75rem 0; /* More space from bullets */
+    }
+    
+    .hero-stats .stat {
+        width: 100%;
+        min-width: 100%;
+        padding: 0;
+        text-align: left;
+        min-height: auto;
+        flex: none;
+    }
+    
+    .hero-stats .stat-value {
+        font-size: 1.5rem; /* Much larger font on mobile */
+        font-weight: 600;
+        line-height: 1.3;
+        margin-bottom: 0.5rem;
+        text-align: left;
+        color: var(--white);
+    }
+    
+    .hero-stats .stat-value .stat-cycle {
+        font-size: 1.5rem;
+        min-height: auto;
+    }
+    
+    .hero-stats .stat-label {
+        font-size: 0.875rem; /* Larger subtitle font */
+        line-height: 1.4;
+        text-align: left;
+        color: var(--gray-400);
+        max-width: 100%;
+    }
+    
+    .hero-stats .stat-label .stat-cycle {
+        font-size: 0.875rem;
+        min-height: auto;
     }
     
     .hero-description {
         max-width: 100%;
+        font-size: 1.1rem; /* Larger body text */
+        line-height: 1.8; /* More generous line height */
+        padding: 0 0; /* No horizontal padding to match full width */
+        margin-bottom: 33px; /* Specific padding below body copy */
+        text-align: left; /* Left align text */
+    }
+    
+    .hero-description br {
+        display: none; /* Remove extra line breaks on mobile */
+    }
+    
+    .hero-description .highlight-brand {
+        display: inline; /* Keep inline on mobile */
     }
     
     .hero-actions {
         align-items: center;
+        width: 100%;
+        padding: 0 0; /* Full width */
+        margin-bottom: 33px; /* Add margin-bottom on mobile */
     }
     
     .early-access-form {
-        flex-direction: column;
+        flex-direction: row; /* Keep input and button in a row */
+        gap: 0.5rem;
+        width: 100%;
+        max-width: 100%;
+        padding: 0; /* Full width */
+    }
+    
+    .early-access-form .email-input {
+        flex: 1; /* Take remaining space */
+        min-width: 0; /* Allow shrinking */
+    }
+    
+    .early-access-form .btn {
+        flex-shrink: 0; /* Don't shrink button */
+    }
+    
+    .form-note {
+        margin-bottom: 1.5rem; /* Normal margin */
     }
 }
 

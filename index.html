@@ -3,11 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>WorkspaceOS — Your Tools Working While You Think</title>
+    <title>WorkspaceOS — Work at the Speed of Thought</title>
     <meta name="description" content="Never explain what you're working on again. See your entire team's work live in Slack with one hover. Zero meetings. Zero interruptions. Pure flow.">
     
     <!-- Favicon -->
     <link rel="icon" type="image/png" href="workspaceos-icon.png">
+    <link rel="shortcut icon" type="image/png" href="workspaceos-icon.png">
     <link rel="apple-touch-icon" href="workspaceos-icon.png">
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -35,8 +36,8 @@
         <span>© 2025 Triglavis LLC™</span>
     </a>
 
-    <!-- Camera Controls -->
-    <div class="camera-controls">
+    <!-- Camera Controls - REMOVE BEFORE PRODUCTION -->
+    <!-- <div class="camera-controls">
         <h3>Camera Controls</h3>
         <div class="control-group">
             <label>X Position: <span id="cam-x-value">0</span></label>
@@ -63,7 +64,7 @@
             <input type="range" id="look-z" min="-30" max="30" value="-20" step="0.5">
         </div>
         <button id="reset-camera">Reset Camera</button>
-    </div>
+    </div> -->
 
     <!-- Hero Section -->
     <section class="hero">
@@ -212,7 +213,26 @@
         </div>
     </section>
 
+
     <script src="script.js"></script>
     <script src="gravitational-singularity.js"></script>
+    
+    <!-- Cloudflare Web Analytics -->
+    <script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "c71909abc8ce48cd99072246781b8353"}'></script>
+    <!-- End Cloudflare Web Analytics -->
+    <!-- Mobile Modal (Tooltip Replacement) -->
+    <div class="bottom-sheet" id="bottom-sheet">
+        <div class="bottom-sheet-overlay"></div>
+        <div class="bottom-sheet-content">
+            <button class="bottom-sheet-close" aria-label="Close">
+                <svg viewBox="0 0 24 24" fill="none">
+                    <path d="M18 6L6 18M6 6l12 12" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </button>
+            <h3 class="bottom-sheet-title"></h3>
+            <p class="bottom-sheet-description"></p>
+        </div>
+    </div>
+
 </body>
 </html>
