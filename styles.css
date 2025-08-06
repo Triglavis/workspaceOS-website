@@ -1167,9 +1167,9 @@ body.animations-complete .stat {
     .hero {
         /* Keep the same border as desktop, just adjust sizing */
         position: relative;
-        top: 44px; /* Push down from top to align with content */
+        top: 0; /* Remove top offset */
         width: calc(100vw - 6px); /* Account for body padding of 3px on each side */
-        height: calc(100vh - 50px); /* Reduce height by the amount we pushed down */
+        height: calc(100vh - 6px); /* Full height minus body padding */
         margin: 0 auto;
         overflow-y: auto;
         overflow-x: hidden;
@@ -1195,7 +1195,7 @@ body.animations-complete .stat {
     }
     
     .hero-content {
-        padding-top: 2rem; /* Add padding above WorkspaceOS */
+        padding-top: 0; /* Remove padding-top */
         margin-top: 0;
         width: 100%;
         padding-left: 0;
