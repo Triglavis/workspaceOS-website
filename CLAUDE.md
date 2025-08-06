@@ -1,5 +1,23 @@
 # WorkspaceOS Website - Claude Instructions
 
+## CRITICAL IMPLEMENTATION REQUIREMENTS
+
+### ⚠️ MANDATORY: Follow Exact Instructions
+**DO NOT** simplify, replace, or change the implementation approach to claim an issue is "solved". Solutions must:
+1. **Implement the exact feature requested** - not a simpler alternative
+2. **Maintain the full 3D gravitational vision** - no 2D substitutions
+3. **Follow the specific technical approach outlined** - don't pivot to easier solutions
+4. **Complete all aspects of the requirement** - partial solutions are not acceptable
+
+### Core Vision: 3D Gravitational Singularity
+The website must feature a **full 3D implementation** with:
+- **3D gravitational effect** swirling around the WorkspaceOS icon
+- **Background distortion** caused by the gravitational pull
+- **Work apps orbiting** in 3D space around the singularity
+- **Spatial warping effects** that bend the visual space
+
+This is NOT optional or negotiable. Do not replace with 2D animations or simpler effects.
+
 ## Project Overview
 Marketing/landing page for WorkspaceOS - an ambient intelligence layer that orchestrates tools for knowledge work.
 
@@ -7,17 +25,19 @@ Marketing/landing page for WorkspaceOS - an ambient intelligence layer that orch
 
 ## Design Philosophy
 - **Monochromatic black aesthetic** - Pure black (#000) with subtle gray gradients
-- **Ambient intelligence** represented through particle effects and orbiting animations
+- **3D gravitational singularity** - Full 3D implementation with spatial distortion
+- **Ambient intelligence** represented through gravitational effects and orbiting animations
 - **Single hero page** - Focus on above-the-fold impact, no scrolling required
 - **Minimalist approach** - Let the concept shine through the experience
 
-## Current Implementation
+## Current Implementation Goals
 
-### Visual Elements
-1. **Orbiting App Icons**: Six popular tools (Figma, VS Code, Slack, Notion, GitHub, Linear) orbit around central WorkspaceOS hub
-2. **Particle System**: Interactive particles that respond to mouse movement
-3. **Gradient Orbs**: Floating background elements for depth
-4. **Central Hub**: Pulsing WorkspaceOS logo with concentric rings
+### Required Visual Elements
+1. **3D Gravitational Center**: WorkspaceOS as a gravitational singularity with full 3D warping effects
+2. **Orbiting App Icons**: Tools orbit in 3D space with proper depth and perspective
+3. **Background Distortion**: Gravitational lensing effect that warps the background
+4. **Particle System**: Particles pulled into the gravitational field
+5. **Central Hub**: WorkspaceOS logo as the gravitational center
 
 ### Key Features
 - 30-second orbit animation with counter-rotation to keep icons upright
@@ -131,5 +151,29 @@ GitHub automatically provisions SSL after DNS verification (can take up to 24 ho
 ## Contact
 For questions about the WorkspaceOS vision or product, the landing page currently uses placeholder emails/links that should be updated when ready.
 
+## Implementation Standards
+
+### When Issues Arise
+If implementing the full 3D gravitational effect encounters challenges:
+1. **DO NOT** fall back to 2D solutions
+2. **DO NOT** remove features to simplify
+3. **DO** troubleshoot and fix the actual issue
+4. **DO** maintain all requested features
+5. **DO** ask for clarification if needed rather than assuming a simpler approach
+
+### Acceptable Technologies
+- Three.js for 3D rendering
+- WebGL shaders for distortion effects
+- GLSL for custom gravitational warping
+- Canvas API for particle systems
+- CSS 3D transforms only as supplements to full 3D
+
+### Unacceptable Substitutions
+- ❌ Replacing 3D with CSS animations
+- ❌ Using 2D canvas instead of WebGL
+- ❌ Removing gravitational distortion
+- ❌ Static orbits without gravitational physics
+- ❌ Flat particle systems without depth
+
 ---
-*Last Updated: 2025-08-05*
+*Last Updated: 2025-01-05*

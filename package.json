@@ -4,7 +4,9 @@
   "description": "WorkspaceOS - Ambient Intelligence for Knowledge Work",
   "scripts": {
     "dev": "npx http-server -p 3000 -o",
-    "serve": "python3 -m http.server 3000"
+    "serve": "python3 -m http.server 3000",
+    "test:flags": "node test-dev-flags.js",
+    "precommit": "node test-dev-flags.js"
   },
   "keywords": ["workspaceos", "ambient-intelligence", "productivity", "tools"],
   "author": "Triglavis",

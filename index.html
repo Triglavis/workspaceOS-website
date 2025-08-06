@@ -4,7 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>WorkspaceOS — Your Tools Working While You Think</title>
-    <meta name="description" content="Eliminate meetings forever. WorkspaceOS orchestrates your tools 24/7 with ambient intelligence - Figma to code in 30 minutes, not 3 days. Zero surveillance, pure productivity.">
+    <meta name="description" content="Never explain what you're working on again. See your entire team's work live in Slack with one hover. Zero meetings. Zero interruptions. Pure flow.">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="workspaceos-icon.png">
+    <link rel="apple-touch-icon" href="workspaceos-icon.png">
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -28,8 +32,38 @@
         <svg width="15" height="15" viewBox="0 0 200 207" fill="none">
             <path d="M20 115C36.5685 115 50 128.431 50 145V201.643C50 204.601 47.6012 207 44.6426 207C19.9872 207 0.000146651 187.013 0 162.357V124C2.96367e-06 119.029 4.02944 115 9 115H20ZM92.209 178.651C96.6967 174.82 103.303 174.82 107.791 178.651L122.438 191.155C128.8 196.586 124.96 207 116.596 207H83.4043C75.04 207 71.1999 196.586 77.5615 191.155L92.209 178.651ZM191 115C195.971 115 200 119.029 200 124V162.357C200 187.013 180.013 207 155.357 207C152.399 207 150 204.601 150 201.643V145C150 128.431 163.431 115 180 115H191ZM153.571 0C179.213 1.12084e-06 200 20.7869 200 46.4287C200 49.5056 197.506 51.9999 194.429 52H169C144.147 52 124 72.1472 124 97V156.506C124 158.533 121.549 159.549 120.115 158.115C109.006 147.006 90.994 147.006 79.8848 158.115C78.4511 159.549 76 158.533 76 156.506V97C76 72.1472 55.8528 52 31 52H5.57129C2.49438 51.9999 7.13985e-05 49.5056 0 46.4287C1.12084e-06 20.7869 20.7869 -1.12084e-06 46.4287 0H153.571Z" fill="currentColor"/>
         </svg>
-        <span>Triglavis LLC 2025</span>
+        <span>© 2025 Triglavis LLC™</span>
     </a>
+
+    <!-- Camera Controls -->
+    <div class="camera-controls">
+        <h3>Camera Controls</h3>
+        <div class="control-group">
+            <label>X Position: <span id="cam-x-value">0</span></label>
+            <input type="range" id="cam-x" min="-50" max="50" value="0" step="0.5">
+        </div>
+        <div class="control-group">
+            <label>Y Position: <span id="cam-y-value">0</span></label>
+            <input type="range" id="cam-y" min="-30" max="30" value="0" step="0.5">
+        </div>
+        <div class="control-group">
+            <label>Z Position: <span id="cam-z-value">39.5</span></label>
+            <input type="range" id="cam-z" min="10" max="60" value="39.5" step="0.5">
+        </div>
+        <div class="control-group">
+            <label>Look At X: <span id="look-x-value">-14</span></label>
+            <input type="range" id="look-x" min="-30" max="30" value="-14" step="0.5">
+        </div>
+        <div class="control-group">
+            <label>Look At Y: <span id="look-y-value">3.5</span></label>
+            <input type="range" id="look-y" min="-20" max="20" value="3.5" step="0.5">
+        </div>
+        <div class="control-group">
+            <label>Look At Z: <span id="look-z-value">-20</span></label>
+            <input type="range" id="look-z" min="-30" max="30" value="-20" step="0.5">
+        </div>
+        <button id="reset-camera">Reset Camera</button>
+    </div>
 
     <!-- Hero Section -->
     <section class="hero">
@@ -39,41 +73,61 @@
                 <div class="gradient-overlay"></div>
             </div>
             <div class="hero-content">
-                <div class="hero-badge">
-                    <span class="pulse"></span>
-                    <span>Meetings Are Obsolete</span>
+                <div class="workspaceos-brand">
+                    <img src="workspaceos-icon.png" alt="WorkspaceOS" class="workspaceos-icon">
+                    <span class="workspaceos-name">WorkspaceOS</span>
                 </div>
                 
                 <h1 class="hero-title">
-                <span class="word-reveal">Your</span>
-                <span class="word-reveal">Tools</span>
-                <span class="word-reveal">Working</span>
+                <span class="word-reveal">Work</span>
+                <span class="word-reveal">at</span>
+                <span class="word-reveal">the</span>
                 <br>
-                <span class="word-reveal">While</span>
-                <span class="word-reveal">You</span>
-                <span class="word-reveal gradient-text">Think</span>
+                <span class="word-reveal">Speed</span>
+                <span class="word-reveal">of</span>
+                <span class="word-reveal gradient-text">Thought</span>
             </h1>
             
-            <p class="hero-description">
-                Imagine Figma designs becoming code while you sleep. Slack threads resolving themselves. Your team finding answers before asking questions. WorkspaceOS is ambient intelligence that orchestrates your tools 24/7 - eliminating meetings, automating coordination, and letting you stay in deep work while the busy work handles itself.
+            <p class="hero-description fade-in-description">
+                Imagine never explaining what you're working on again. Never asking "what's the status?" Never sitting through another standup.
+                <br><br>
+                <span class="highlight-brand">WorkspaceOS</span> captures everything across your workspace through our <span class="tooltip-trigger">Universal Capture Layer<span class="tooltip-content">Works at the OS level to understand any application you can see. No integrations, APIs, or plugins required. If it's on your screen, WorkspaceOS understands it.</span></span>, becomes your AI collaborator. Our <span class="tooltip-trigger">Pattern-First Computing<span class="tooltip-content">Pattern-First Computing learns from repetitive workflows and caches behavioral patterns, eliminating redundant AI processing. Instead of treating every action as new, it recognizes patterns and reuses computations, driving costs from up to $0.10 down to $0.001 per action.</span></span> learns workflows once, handles repetitive tasks automatically. Our <span class="tooltip-trigger">Temporal Graph Architecture<span class="tooltip-content">Every action is connected to its context across time. Enables "time travel" through decisions, perfect project memory, and up to 10,000x semantic compression of your work history.</span></span> connects actions across time.
+                <br><br>
+                Unlike passive AI tools, WorkspaceOS actively collaborates - drafting updates from your progress, flagging blockers before they happen, connecting work across your team. Computing becomes conversational, not transactional.
+                <br><br>
+                Stay in deep focus. Your AI partner handles the rest.
             </p>
             
-            <div class="hero-stats">
-                <div class="stat">
-                    <div class="stat-value">30 Minutes Not 3 Days</div>
-                    <div class="stat-label">Designer to developer handoffs happen while you're getting coffee</div>
+            <div class="hero-stats fade-in-stats">
+                <div class="stat-progress-bar top"></div>
+                <div class="stat" data-cycle="1">
+                    <div class="stat-value">
+                        <span class="stat-cycle" data-messages='["Pattern-First Computing", "Learn Once, Reuse Forever", "100x Cost Reduction"]'>Pattern-First Computing</span>
+                    </div>
+                    <div class="stat-label">
+                        <span class="stat-cycle" data-messages='["Workflows cached, not reprocessed", "Patterns recognized instantly", "$0.10 → $0.001 per action"]'>Workflows cached, not reprocessed</span>
+                    </div>
                 </div>
-                <div class="stat">
-                    <div class="stat-value">Zero Meetings Mode</div>
-                    <div class="stat-label">Standup, sync, status - all automated through ambient intelligence</div>
+                <div class="stat" data-cycle="2">
+                    <div class="stat-value">
+                        <span class="stat-cycle" data-messages='["Active AI Collaboration", "Proactive Intelligence", "Conversational Computing"]'>Active AI Collaboration</span>
+                    </div>
+                    <div class="stat-label">
+                        <span class="stat-cycle" data-messages='["Handles repetitive tasks automatically", "Spots opportunities before you do", "Drafts updates from your progress"]'>Handles repetitive tasks automatically</span>
+                    </div>
                 </div>
-                <div class="stat">
-                    <div class="stat-value">Your Network, Your Rules</div>
-                    <div class="stat-label">P2P architecture means no cloud, no surveillance, just intelligence</div>
+                <div class="stat" data-cycle="3">
+                    <div class="stat-value">
+                        <span class="stat-cycle" data-messages='["Team-Wide Intelligence", "Universal Capture Layer", "Zero Friction Workspace"]'>Team-Wide Intelligence</span>
+                    </div>
+                    <div class="stat-label">
+                        <span class="stat-cycle" data-messages='["Connects work across your entire team", "Works with any app you can see", "Computing becomes collaborative"]'>Connects work across your entire team</span>
+                    </div>
                 </div>
+                <div class="stat-progress-bar bottom"></div>
             </div>
 
-            <div class="hero-actions">
+            <div class="hero-actions fade-in-form">
                 <form class="early-access-form">
                     <input type="email" placeholder="Enter your email" class="email-input" required>
                     <button type="submit" class="btn btn-primary">
@@ -159,5 +213,6 @@
     </section>
 
     <script src="script.js"></script>
+    <script src="gravitational-singularity.js"></script>
 </body>
 </html>
