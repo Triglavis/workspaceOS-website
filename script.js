@@ -473,12 +473,42 @@ class FormHandler {
             // With no-cors mode, we can't read the response, so assume success
             // Google Apps Script will handle the actual storage
             
+            // Setup smooth transitions FIRST
+            this.form.style.transition = 'all 0.5s cubic-bezier(0.4, 0, 0.2, 1)';
+            this.emailInput.style.transition = 'all 0.5s cubic-bezier(0.4, 0, 0.2, 1)';
+            this.button.style.transition = 'all 0.5s cubic-bezier(0.4, 0, 0.2, 1)';
+            
+            // Force browser to apply transition before making changes
+            this.form.offsetHeight;
+            
             // Success - show confirmation
             this.button.innerHTML = `
-                <span>✓ You're on the list!</span>
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                    <path d="M16.6666 5L7.49998 14.1667L3.33331 10" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                <span>Added</span>
             `;
             this.button.style.opacity = '1';
-            this.button.style.background = 'var(--gray-900)';
+            this.button.style.background = 'white !important';
+            this.button.style.color = 'black !important';
+            this.button.style.border = '1px solid white';
+            
+            // Animate input to zero width
+            this.emailInput.style.width = '0';
+            this.emailInput.style.minWidth = '0';
+            this.emailInput.style.padding = '0';
+            this.emailInput.style.margin = '0';
+            this.emailInput.style.opacity = '0';
+            this.emailInput.style.border = 'none';
+            
+            // Animate button to full width
+            this.button.style.flex = '1';
+            this.button.style.width = '100%';
+            
+            // After animation completes, hide input completely
+            setTimeout(() => {
+                this.emailInput.style.display = 'none';
+            }, 500);
             
             // Also save to localStorage as backup
             const waitlist = JSON.parse(localStorage.getItem('workspaceos_waitlist') || '[]');
@@ -489,18 +519,74 @@ class FormHandler {
             
             // Reset after 3 seconds
             setTimeout(() => {
-                this.form.reset();
-                this.setButtonState('disabled');
+                // Show input first (but still invisible)
+                this.emailInput.style.display = '';
+                
+                // Force reflow
+                this.emailInput.offsetHeight;
+                
+                // Animate back to original state
+                this.emailInput.style.width = '';
+                this.emailInput.style.minWidth = '';
+                this.emailInput.style.padding = '';
+                this.emailInput.style.margin = '';
+                this.emailInput.style.opacity = '';
+                this.emailInput.style.border = '';
+                
+                this.button.style.flex = '';
+                this.button.style.width = '';
                 this.button.style.background = '';
+                this.button.style.color = '';
+                this.button.style.border = '';
+                
+                // Clean up after animation
+                setTimeout(() => {
+                    this.form.style.transition = '';
+                    this.emailInput.style.transition = '';
+                    this.button.style.transition = '';
+                    this.form.reset();
+                    this.setButtonState('disabled');
+                }, 500);
             }, 3000);
         } catch (error) {
             console.error('Error submitting email:', error);
             
+            // Setup smooth transitions FIRST
+            this.form.style.transition = 'all 0.5s cubic-bezier(0.4, 0, 0.2, 1)';
+            this.emailInput.style.transition = 'all 0.5s cubic-bezier(0.4, 0, 0.2, 1)';
+            this.button.style.transition = 'all 0.5s cubic-bezier(0.4, 0, 0.2, 1)';
+            
+            // Force browser to apply transition before making changes
+            this.form.offsetHeight;
+            
             // Still show success since we save locally
             this.button.innerHTML = `
-                <span>✓ You're on the list!</span>
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                    <path d="M16.6666 5L7.49998 14.1667L3.33331 10" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                <span>Added</span>
             `;
             this.button.style.opacity = '1';
+            this.button.style.background = 'white !important';
+            this.button.style.color = 'black !important';
+            this.button.style.border = '1px solid white';
+            
+            // Animate input to zero width
+            this.emailInput.style.width = '0';
+            this.emailInput.style.minWidth = '0';
+            this.emailInput.style.padding = '0';
+            this.emailInput.style.margin = '0';
+            this.emailInput.style.opacity = '0';
+            this.emailInput.style.border = 'none';
+            
+            // Animate button to full width
+            this.button.style.flex = '1';
+            this.button.style.width = '100%';
+            
+            // After animation completes, hide input completely
+            setTimeout(() => {
+                this.emailInput.style.display = 'none';
+            }, 500);
             
             // Save to localStorage as fallback
             const waitlist = JSON.parse(localStorage.getItem('workspaceos_waitlist') || '[]');
@@ -511,8 +597,34 @@ class FormHandler {
             
             // Reset after 3 seconds
             setTimeout(() => {
-                this.form.reset();
-                this.setButtonState('disabled');
+                // Show input first (but still invisible)
+                this.emailInput.style.display = '';
+                
+                // Force reflow
+                this.emailInput.offsetHeight;
+                
+                // Animate back to original state
+                this.emailInput.style.width = '';
+                this.emailInput.style.minWidth = '';
+                this.emailInput.style.padding = '';
+                this.emailInput.style.margin = '';
+                this.emailInput.style.opacity = '';
+                this.emailInput.style.border = '';
+                
+                this.button.style.flex = '';
+                this.button.style.width = '';
+                this.button.style.background = '';
+                this.button.style.color = '';
+                this.button.style.border = '';
+                
+                // Clean up after animation
+                setTimeout(() => {
+                    this.form.style.transition = '';
+                    this.emailInput.style.transition = '';
+                    this.button.style.transition = '';
+                    this.form.reset();
+                    this.setButtonState('disabled');
+                }, 500);
             }, 3000);
         }
     }

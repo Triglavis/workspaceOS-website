@@ -93,6 +93,7 @@ class GravitationalSingularity {
             antialias: true,
             alpha: true
         });
+        
         this.renderer.setSize(window.innerWidth, window.innerHeight);
         this.renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2)); // Limit pixel ratio for performance
         this.renderer.setClearColor(0x000000, 0.95); // Slight opacity for subtle transparency

@@ -5,6 +5,31 @@
     box-sizing: border-box;
 }
 
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+}
+
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.3);
+}
+
+/* Firefox */
+* {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(255, 255, 255, 0.2) transparent;
+}
+
 :root {
     --black: #000000;
     --black-soft: #0a0a0a;
@@ -60,12 +85,12 @@ body {
 }
 
 .canvas-wrapper {
-    position: absolute;
+    position: fixed;
     top: 0;
     right: 0;
     width: 60%;
     min-width: 500px;
-    height: 100%;
+    height: 100vh;
     z-index: 1;
     pointer-events: none;
     transform: translateX(10%);
@@ -80,11 +105,11 @@ body {
 }
 
 .gradient-overlay {
-    position: absolute;
+    position: fixed;
     top: 0;
     left: 0;
-    width: 100%;
-    height: 100%;
+    width: 100vw;
+    height: 100vh;
     background: linear-gradient(to right, 
         rgba(0,0,0,1) 0%, 
         rgba(0,0,0,0.95) 20%, 
@@ -271,8 +296,8 @@ body {
     min-height: 500px;
     display: flex;
     align-items: flex-start; /* Start at top like mobile */
-    justify-content: flex-start; /* Start at top */
-    padding: 3rem;
+    justify-content: center; /* Center horizontally */
+    padding: 60px 3rem 3rem; /* Extra padding at top to prevent cutoff */
     overflow-y: auto; /* Scrollable like mobile */
     overflow-x: hidden;
     position: relative;
@@ -291,11 +316,11 @@ body {
 
 .hero::before {
     content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
+    position: fixed;
+    top: 12px;
+    left: 12px;
+    right: 12px;
+    bottom: 12px;
     border-radius: 16px;
     padding: 1px;
     background: linear-gradient(135deg, 
@@ -314,10 +339,10 @@ body {
 /* Gradient overlay from bottom of canvas in hero */
 .hero::after {
     content: '';
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
+    position: fixed;
+    bottom: 12px;
+    left: 12px;
+    right: 12px;
     height: 50%;
     background: linear-gradient(to top,
         #000000 0%,
@@ -338,12 +363,12 @@ body {
     display: flex;
     flex-direction: row;
     gap: 4rem;
-    align-items: center;
+    align-items: flex-start; /* Start from top */
     justify-content: space-between;
     position: relative;
     z-index: 100;
     margin: 0 auto;
-    padding: 2rem 0;
+    padding: 0; /* Remove vertical padding */
 }
 
 .hero-content {
@@ -365,9 +390,9 @@ body {
 }
 
 .workspaceos-icon {
-    width: 56px;
-    height: 56px;
-    border-radius: 12px;
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
     box-shadow: 
         0 2px 8px rgba(0, 0, 0, 0.3),
         0 4px 16px rgba(0, 0, 0, 0.2),
@@ -427,7 +452,6 @@ body {
     font-size: clamp(0.875rem, 1.5vw, 1rem);
     line-height: 1.6;
     color: var(--gray-300);
-    margin-bottom: 1rem;
     flex: 1;
     min-height: 0;
 }
@@ -524,7 +548,7 @@ body {
     display: flex;
     justify-content: space-between;
     width: 100%;
-    margin-bottom: 1.5rem;
+    margin: 45px 0;
     padding: 1rem 0;
     position: relative;
 }
@@ -748,6 +772,7 @@ body.animations-complete .stat {
     flex-direction: column;
     gap: 0.5rem;
     flex-shrink: 0;
+    margin-bottom: 45px;
 }
 
 .early-access-form {
@@ -778,7 +803,7 @@ body.animations-complete .stat {
 
 .email-input:hover:not(:focus) {
     border-color: var(--gray-600);
-    background: rgba(255, 255, 255, 0.02);
+    background: rgba(255, 255, 255, 0.05); /* More visible background on hover */
 }
 
 .email-input:focus {
@@ -853,11 +878,11 @@ body.animations-complete .stat {
 
 /* 3D Gravitational Canvas */
 #gravitational-canvas {
-    position: absolute !important;
+    position: fixed !important;
     top: 0 !important;
     left: 0 !important;
-    width: 100% !important;
-    height: 100% !important;
+    width: 100vw !important;
+    height: 100vh !important;
     z-index: 0 !important;
     pointer-events: none !important;
 }
@@ -1133,30 +1158,40 @@ body.animations-complete .stat {
         padding: 3px; /* Minimal padding around body edges */
     }
     
+    /* Remove pseudo-elements on mobile */
+    .hero::before,
+    .hero::after {
+        display: none !important;
+    }
+    
     .hero {
-        overflow-y: auto; /* Make hero scrollable */
+        /* Keep the same border as desktop, just adjust sizing */
+        position: relative;
+        top: 44px; /* Push down from top to align with content */
+        width: calc(100vw - 6px); /* Account for body padding of 3px on each side */
+        height: calc(100vh - 50px); /* Reduce height by the amount we pushed down */
+        margin: 0 auto;
+        overflow-y: auto;
         overflow-x: hidden;
-        align-items: flex-start; /* Start content at top */
+        align-items: flex-start;
         justify-content: flex-start;
-        padding: 33px 15px 15px 15px; /* Normal padding */
-        padding-bottom: env(safe-area-inset-bottom, 15px); /* Just safe area padding */
-        width: calc(100vw - 6px); /* Account for body padding */
-        height: calc(100vh - env(safe-area-inset-bottom, 0px)); /* Reduce height by safe area */
-        margin: 0; /* Remove margin on mobile */
-        box-sizing: border-box; /* Include padding in width calculation */
-        -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
+        padding: 20px 15px;
+        padding-bottom: env(safe-area-inset-bottom, 15px);
+        -webkit-overflow-scrolling: touch;
+        /* Hero already has border and styling from main CSS, just let it show */
     }
     
     .hero-container {
         flex-direction: column;
         text-align: center;
         padding: 0;
-        padding-top: env(safe-area-inset-top, 20px); /* Safe area for notches */
+        padding-top: env(safe-area-inset-top, 20px);
         margin: 0;
-        min-height: 100vh; /* Ensure scrollable content */
+        min-height: 100vh;
         width: 100%;
-        justify-content: flex-start; /* Start at top */
+        justify-content: flex-start;
         align-items: center;
+        border: none; /* No border on container either */
     }
     
     .hero-content {
@@ -1225,6 +1260,7 @@ body.animations-complete .stat {
     /* Add padding for fade-in-stats on mobile */
     .hero-stats.fade-in-stats {
         padding: 33px 0; /* 33px padding top and bottom */
+        margin: 45px 0; /* 45px margin top and bottom */
     }
     
     /* Ensure progress bars don't touch bullets */
@@ -1273,7 +1309,7 @@ body.animations-complete .stat {
         font-size: 1.1rem; /* Larger body text */
         line-height: 1.8; /* More generous line height */
         padding: 0 0; /* No horizontal padding to match full width */
-        margin-bottom: 33px; /* Specific padding below body copy */
+        margin-bottom: 0; /* Remove margin bottom on mobile */
         text-align: left; /* Left align text */
     }
     
@@ -1289,7 +1325,7 @@ body.animations-complete .stat {
         align-items: center;
         width: 100%;
         padding: 0 0; /* Full width */
-        margin-bottom: 33px; /* Add margin-bottom on mobile */
+        margin: 0 0 45px 0; /* Only margin bottom on mobile */
     }
     
     .early-access-form {
