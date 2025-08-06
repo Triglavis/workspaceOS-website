@@ -270,16 +270,15 @@ body {
     height: calc(100vh - 24px);
     min-height: 500px;
     display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 1rem 3rem;
-    overflow-y: auto;
+    align-items: flex-start; /* Start at top like mobile */
+    justify-content: flex-start; /* Start at top */
+    padding: 3rem;
+    overflow-y: auto; /* Scrollable like mobile */
     overflow-x: hidden;
     position: relative;
     background: linear-gradient(135deg, #0a0a0a 0%, #000000 100%);
     border: 1px solid rgba(255, 255, 255, 0.1);
     border-radius: 16px;
-    overflow: hidden;
     z-index: 1;
     box-shadow: 
         0 20px 60px rgba(0, 0, 0, 0.8),
@@ -1311,7 +1310,8 @@ body.animations-complete .stat {
     }
     
     .form-note {
-        margin-bottom: 1.5rem; /* Normal margin */
+        text-align: left; /* Left align on mobile */
+        margin-bottom: 33px; /* 33px margin below */
     }
 }
 
