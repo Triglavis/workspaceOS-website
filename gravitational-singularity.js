@@ -629,8 +629,8 @@ class GravitationalSingularity {
     }
     
     createBackgroundStars() {
-        // Create distant star field with twinkling
-        const starCount = 1500;
+        // Create a complete spherical star field that surrounds the camera
+        const starCount = 2000; // Increased for better coverage
         const geometry = new THREE.BufferGeometry();
         const positions = new Float32Array(starCount * 3);
         const colors = new Float32Array(starCount * 3);
@@ -641,14 +641,16 @@ class GravitationalSingularity {
         for (let i = 0; i < starCount; i++) {
             const i3 = i * 3;
             
-            // Place stars in far background sphere
-            const theta = Math.random() * Math.PI * 2;
-            const phi = Math.random() * Math.PI;
-            const radius = 150 + Math.random() * 200;
+            // Create a complete sphere of stars with uniform distribution
+            // Using proper spherical coordinate distribution
+            const theta = Math.random() * Math.PI * 2; // Full 360 degrees around
+            const phi = Math.acos(1 - 2 * Math.random()); // Proper uniform distribution on sphere
+            const radius = 250 + Math.random() * 100; // Stars at consistent distance from center
             
+            // Convert spherical to Cartesian coordinates
             positions[i3] = radius * Math.sin(phi) * Math.cos(theta);
             positions[i3 + 1] = radius * Math.sin(phi) * Math.sin(theta);
-            positions[i3 + 2] = -50 - Math.random() * 150;
+            positions[i3 + 2] = radius * Math.cos(phi);
             
             // Pure white to slight blue tint
             const brightness = 0.8 + Math.random() * 0.2;
@@ -674,7 +676,7 @@ class GravitationalSingularity {
             transparent: true,
             opacity: 0.8,
             sizeAttenuation: false,
-            fog: false
+            fog: false // Stars should not be affected by fog
         });
         
         this.backgroundStars = new THREE.Points(geometry, material);
