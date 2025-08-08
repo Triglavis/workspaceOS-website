@@ -405,10 +405,6 @@ body {
     font-weight: 200;
     letter-spacing: -0.01em;
     color: var(--white);
-    background: linear-gradient(135deg, #ffffff 0%, #a0a0a0 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
 }
 
 .hero-title {
@@ -442,10 +438,7 @@ body {
 }
 
 .gradient-text {
-    background: linear-gradient(135deg, var(--white) 0%, var(--gray-400) 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+    color: var(--white);
 }
 
 .hero-description {
