@@ -1156,7 +1156,15 @@ body.animations-complete .stat {
 
 @media (max-width: 768px) {
     body {
-        padding: 3px; /* Minimal padding around body edges */
+        padding: 3px; /* Keep minimal padding for border */
+        background: #000; /* Pure black to extend behind controls */
+        height: 100dvh; /* Use dynamic viewport height on mobile */
+    }
+    
+    /* Adjust Triglavis brand position on mobile */
+    .triglavis-brand {
+        bottom: 9px;
+        right: 18px;
     }
     
     /* Remove pseudo-elements on mobile */
@@ -1170,7 +1178,7 @@ body.animations-complete .stat {
         position: relative;
         top: 0; /* Remove top offset */
         width: calc(100vw - 6px); /* Account for body padding of 3px on each side */
-        height: calc(100vh - 6px); /* Full height minus body padding */
+        height: calc(100dvh - 6px); /* Use dvh for mobile viewport, account for padding */
         margin: 0 auto;
         overflow-y: auto;
         overflow-x: hidden;
@@ -1179,7 +1187,7 @@ body.animations-complete .stat {
         padding: 20px 15px;
         padding-bottom: env(safe-area-inset-bottom, 15px);
         -webkit-overflow-scrolling: touch;
-        /* Hero already has border and styling from main CSS, just let it show */
+        /* Keep border and styling from main CSS */
     }
     
     .hero-container {
@@ -1204,7 +1212,7 @@ body.animations-complete .stat {
     }
     
     .workspaceos-brand {
-        margin-top: 0;
+        margin-top: 33px; /* Move down from top */
         margin-bottom: 12px; /* 12px gap before title */
         display: flex;
         justify-content: center; /* Center the brand horizontally */
@@ -1227,7 +1235,7 @@ body.animations-complete .stat {
         flex-wrap: wrap; /* Allow wrapping to next line */
         justify-content: center;
         align-content: center; /* Use align-content instead of align-items for wrapped flex */
-        margin: 0 auto 2rem auto; /* Center with auto margins */
+        margin: 0 auto; /* Remove bottom margin */
         font-size: 3.5rem; /* Much larger font on mobile */
         line-height: 1.2; /* Tighter line height */
         padding: 0 1rem;
