@@ -1156,8 +1156,8 @@ body.animations-complete .stat {
 
 @media (max-width: 768px) {
     body {
-        padding: 0; /* Remove padding to extend background */
-        background: #000; /* Pure black to match hero */
+        padding: 3px; /* Keep minimal padding for border */
+        background: #000; /* Pure black to extend behind controls */
         height: 100dvh; /* Use dynamic viewport height on mobile */
     }
     
@@ -1177,9 +1177,9 @@ body.animations-complete .stat {
         /* Keep the same border as desktop, just adjust sizing */
         position: relative;
         top: 0; /* Remove top offset */
-        width: 100vw; /* Full width */
-        height: 100dvh; /* Use dvh for mobile viewport */
-        margin: 0;
+        width: calc(100vw - 6px); /* Account for body padding of 3px on each side */
+        height: calc(100dvh - 6px); /* Use dvh for mobile viewport, account for padding */
+        margin: 0 auto;
         overflow-y: auto;
         overflow-x: hidden;
         align-items: flex-start;
@@ -1187,10 +1187,7 @@ body.animations-complete .stat {
         padding: 20px 15px;
         padding-bottom: env(safe-area-inset-bottom, 15px);
         -webkit-overflow-scrolling: touch;
-        border: none; /* Remove border on mobile */
-        border-radius: 0; /* Remove border radius */
-        background: #000; /* Match body background */
-        /* Hero already has border and styling from main CSS, just let it show */
+        /* Keep border and styling from main CSS */
     }
     
     .hero-container {
