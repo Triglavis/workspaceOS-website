@@ -1162,8 +1162,7 @@ body.animations-complete .stat {
         right: 18px;
     }
     
-    /* Remove pseudo-elements on mobile */
-    .hero::before,
+    /* Keep gradient border, only remove bottom overlay on mobile */
     .hero::after {
         display: none !important;
     }
