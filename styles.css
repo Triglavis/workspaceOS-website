@@ -302,13 +302,13 @@ body {
     overflow-x: hidden;
     position: relative;
     background: linear-gradient(135deg, #0a0a0a 0%, #000000 100%);
-    border: 1px solid #1a1a1a;
+    border: 1px solid transparent;
     border-radius: 16px;
     z-index: 1;
     box-shadow: 
         0 20px 60px rgba(0, 0, 0, 0.8),
         0 10px 30px rgba(0, 0, 0, 0.6),
-        inset 0 1px 0 #262626,
+        inset 0 1px 0 rgba(204, 204, 204, 0.1),
         inset 0 -1px 0 rgba(0, 0, 0, 0.5),
         0 0 120px rgba(0, 0, 0, 0.02);
     position: relative;
@@ -324,9 +324,11 @@ body {
     border-radius: 16px;
     padding: 1px;
     background: linear-gradient(135deg, 
-        #333333 0%, 
-        #1a1a1a 50%, 
-        #000000 100%);
+        #cccccc 0%, 
+        #999999 25%, 
+        #666666 50%, 
+        #333333 75%, 
+        #1a1a1a 100%);
     -webkit-mask: 
         linear-gradient(#fff 0 0) content-box, 
         linear-gradient(#fff 0 0);
