@@ -302,15 +302,15 @@ body {
     overflow-x: hidden;
     position: relative;
     background: linear-gradient(135deg, #0a0a0a 0%, #000000 100%);
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    border: 1px solid #1a1a1a;
     border-radius: 16px;
     z-index: 1;
     box-shadow: 
         0 20px 60px rgba(0, 0, 0, 0.8),
         0 10px 30px rgba(0, 0, 0, 0.6),
-        inset 0 1px 0 rgba(255, 255, 255, 0.15),
+        inset 0 1px 0 #262626,
         inset 0 -1px 0 rgba(0, 0, 0, 0.5),
-        0 0 120px rgba(255, 255, 255, 0.02);
+        0 0 120px rgba(0, 0, 0, 0.02);
     position: relative;
 }
 
@@ -324,9 +324,9 @@ body {
     border-radius: 16px;
     padding: 1px;
     background: linear-gradient(135deg, 
-        rgba(255, 255, 255, 0.2) 0%, 
-        rgba(255, 255, 255, 0.05) 50%, 
-        rgba(255, 255, 255, 0) 100%);
+        #333333 0%, 
+        #1a1a1a 50%, 
+        #000000 100%);
     -webkit-mask: 
         linear-gradient(#fff 0 0) content-box, 
         linear-gradient(#fff 0 0);
@@ -405,10 +405,6 @@ body {
     font-weight: 200;
     letter-spacing: -0.01em;
     color: var(--white);
-    background: linear-gradient(135deg, #ffffff 0%, #a0a0a0 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
 }
 
 .hero-title {
@@ -442,10 +438,7 @@ body {
 }
 
 .gradient-text {
-    background: linear-gradient(135deg, var(--white) 0%, var(--gray-400) 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+    color: var(--white);
 }
 
 .hero-description {
@@ -804,19 +797,19 @@ body.animations-complete .stat {
 
 .email-input:hover:not(:focus) {
     border-color: var(--gray-600);
-    background: rgba(255, 255, 255, 0.05); /* More visible background on hover */
+    background: #0a0a0a; /* Solid dark background on hover */
 }
 
 .email-input:focus {
     outline: none;
-    border-color: rgba(255, 255, 255, 1);
-    background: rgba(255, 255, 255, 0.05);
-    box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
+    border-color: #ffffff;
+    background: #0d0d0d;
+    box-shadow: 0 0 20px rgba(100, 100, 100, 0.1);
 }
 
 .email-input:not(:placeholder-shown):not(:focus) {
-    border-color: rgba(255, 255, 255, 0.6);
-    background: rgba(255, 255, 255, 0.03);
+    border-color: #999999;
+    background: #050505;
 }
 
 .form-note {
@@ -960,7 +953,7 @@ body.animations-complete .stat {
     align-items: center;
     justify-content: center;
     background: linear-gradient(135deg, rgba(20, 20, 20, 0.9) 0%, rgba(10, 10, 10, 0.95) 100%);
-    border: 1px solid rgba(255, 255, 255, 0.15);
+    border: 1px solid #262626;
     border-radius: 18px;
     backdrop-filter: blur(20px);
     transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
@@ -968,7 +961,7 @@ body.animations-complete .stat {
     box-shadow: 
         0 4px 16px rgba(0, 0, 0, 0.4),
         0 8px 32px rgba(0, 0, 0, 0.2),
-        inset 0 1px 0 rgba(255, 255, 255, 0.1),
+        inset 0 1px 0 #1a1a1a,
         inset 0 -1px 0 rgba(0, 0, 0, 0.2);
 }
 
@@ -986,13 +979,13 @@ body.animations-complete .stat {
 
 .app-icon:hover {
     transform: scale(1.15);
-    background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%);
-    border-color: rgba(255, 255, 255, 0.4);
+    background: linear-gradient(135deg, #1a1a1a 0%, #0f0f0f 100%);
+    border-color: #404040;
     box-shadow: 
         0 8px 32px rgba(0, 0, 0, 0.6),
         0 16px 64px rgba(0, 0, 0, 0.4),
-        0 0 40px rgba(255, 255, 255, 0.2),
-        inset 0 1px 0 rgba(255, 255, 255, 0.2);
+        0 0 40px rgba(50, 50, 50, 0.2),
+        inset 0 1px 0 #333333;
 }
 
 /* Position each app icon on the orbit */
