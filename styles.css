@@ -66,7 +66,7 @@ body {
     overflow: hidden;
     position: relative;
     width: 100vw;
-    height: 100dvh;
+    height: 100vh;
     margin: 0;
     padding: 12px;
     box-sizing: border-box;
@@ -266,8 +266,8 @@ body {
 /* Triglavis Branding */
 .triglavis-brand {
     position: absolute;
-    bottom: 9px;
-    right: 18px;
+    bottom: 24px;
+    right: 24px;
     display: flex;
     align-items: center;
     gap: 6px;
@@ -1158,6 +1158,13 @@ body.animations-complete .stat {
     body {
         padding: 0; /* Remove padding to extend background */
         background: #000; /* Pure black to match hero */
+        height: 100dvh; /* Use dynamic viewport height on mobile */
+    }
+    
+    /* Adjust Triglavis brand position on mobile */
+    .triglavis-brand {
+        bottom: 9px;
+        right: 18px;
     }
     
     /* Remove pseudo-elements on mobile */
