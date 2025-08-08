@@ -322,13 +322,13 @@ body {
     right: 12px;
     bottom: 12px;
     border-radius: 16px;
-    padding: 1px;
+    padding: 2px; /* Thicker border */
     background: linear-gradient(135deg, 
-        #cccccc 0%, 
-        #999999 25%, 
-        #666666 50%, 
-        #333333 75%, 
-        #1a1a1a 100%);
+        #666666 0%,  /* Brighter starting gray */
+        #4a4a4a 25%, 
+        #333333 50%, 
+        #1a1a1a 75%, 
+        #0a0a0a 100%);
     -webkit-mask: 
         linear-gradient(#fff 0 0) content-box, 
         linear-gradient(#fff 0 0);
@@ -1151,14 +1151,14 @@ body.animations-complete .stat {
 
 @media (max-width: 768px) {
     body {
-        padding: 3px; /* Keep minimal padding for border */
+        padding: 9px; /* Multiple of 3 for border spacing */
         background: #000; /* Pure black to extend behind controls */
         height: 100dvh; /* Use dynamic viewport height on mobile */
     }
     
     /* Adjust Triglavis brand position on mobile */
     .triglavis-brand {
-        bottom: 9px;
+        bottom: 15px;
         right: 18px;
     }
     
@@ -1167,21 +1167,37 @@ body.animations-complete .stat {
         display: none !important;
     }
     
+    /* Adjust the gradient border for mobile to be less bright */
+    .hero::before {
+        top: 9px;
+        left: 9px;
+        right: 9px;
+        bottom: 9px;
+        background: linear-gradient(135deg, 
+            #333333 0%,   /* Much darker gray start */
+            #2a2a2a 25%, 
+            #1a1a1a 50%, 
+            #0a0a0a 75%, 
+            #000000 100%);
+        opacity: 0.7; /* Reduce overall border opacity */
+    }
+    
     .hero {
         /* Keep the same border as desktop, just adjust sizing */
         position: relative;
         top: 0; /* Remove top offset */
-        width: calc(100vw - 6px); /* Account for body padding of 3px on each side */
-        height: calc(100dvh - 6px); /* Use dvh for mobile viewport, account for padding */
+        width: calc(100vw - 18px); /* Account for body padding of 9px on each side */
+        height: calc(100dvh - 18px); /* Use dvh for mobile viewport, account for padding */
         margin: 0 auto;
         overflow-y: auto;
         overflow-x: hidden;
         align-items: flex-start;
         justify-content: flex-start;
-        padding: 20px 15px;
-        padding-bottom: env(safe-area-inset-bottom, 15px);
+        padding: 21px 9px; /* Multiples of 3: 21px top, 9px sides */
+        padding-bottom: env(safe-area-inset-bottom, 9px);
         -webkit-overflow-scrolling: touch;
-        /* Keep border and styling from main CSS */
+        /* Ensure content scrolls within the bordered area */
+        border-radius: 12px; /* Slightly smaller radius on mobile */
     }
     
     .hero-container {
@@ -1316,9 +1332,6 @@ body.animations-complete .stat {
         text-align: left; /* Left align text */
     }
     
-    .hero-description br {
-        display: none; /* Remove extra line breaks on mobile */
-    }
     
     .hero-description .highlight-brand {
         display: inline; /* Keep inline on mobile */
