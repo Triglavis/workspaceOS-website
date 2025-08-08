@@ -66,7 +66,7 @@ body {
     overflow: hidden;
     position: relative;
     width: 100vw;
-    height: 100vh;
+    height: 100dvh;
     margin: 0;
     padding: 12px;
     box-sizing: border-box;
@@ -266,8 +266,8 @@ body {
 /* Triglavis Branding */
 .triglavis-brand {
     position: absolute;
-    bottom: 24px;
-    right: 24px;
+    bottom: 9px;
+    right: 18px;
     display: flex;
     align-items: center;
     gap: 6px;
@@ -1156,7 +1156,8 @@ body.animations-complete .stat {
 
 @media (max-width: 768px) {
     body {
-        padding: 3px; /* Minimal padding around body edges */
+        padding: 0; /* Remove padding to extend background */
+        background: #000; /* Pure black to match hero */
     }
     
     /* Remove pseudo-elements on mobile */
@@ -1169,9 +1170,9 @@ body.animations-complete .stat {
         /* Keep the same border as desktop, just adjust sizing */
         position: relative;
         top: 0; /* Remove top offset */
-        width: calc(100vw - 6px); /* Account for body padding of 3px on each side */
-        height: calc(100vh - 6px); /* Full height minus body padding */
-        margin: 0 auto;
+        width: 100vw; /* Full width */
+        height: 100dvh; /* Use dvh for mobile viewport */
+        margin: 0;
         overflow-y: auto;
         overflow-x: hidden;
         align-items: flex-start;
@@ -1179,6 +1180,9 @@ body.animations-complete .stat {
         padding: 20px 15px;
         padding-bottom: env(safe-area-inset-bottom, 15px);
         -webkit-overflow-scrolling: touch;
+        border: none; /* Remove border on mobile */
+        border-radius: 0; /* Remove border radius */
+        background: #000; /* Match body background */
         /* Hero already has border and styling from main CSS, just let it show */
     }
     
