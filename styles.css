@@ -1316,6 +1316,9 @@ body.animations-complete .stat {
     .hero-stats .stat-value .stat-cycle {
         font-size: 1.5rem;
         min-height: auto;
+        height: auto; /* Remove fixed height on mobile */
+        -webkit-line-clamp: unset; /* Remove line clamp on mobile */
+        max-width: 100%; /* Full width on mobile */
     }
     
     .hero-stats .stat-label {
@@ -1329,6 +1332,7 @@ body.animations-complete .stat {
     .hero-stats .stat-label .stat-cycle {
         font-size: 0.875rem;
         min-height: auto;
+        height: auto; /* Remove fixed height on mobile */
     }
     
     .hero-description {
