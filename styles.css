@@ -1201,8 +1201,8 @@ body.animations-complete .stat {
         overflow-x: hidden;
         align-items: flex-start;
         justify-content: flex-start;
-        padding: 21px 9px; /* Multiples of 3: 21px top, 9px sides */
-        padding-bottom: env(safe-area-inset-bottom, 9px);
+        padding: 21px 18px; /* 21px top, 18px sides for more horizontal space */
+        padding-bottom: env(safe-area-inset-bottom, 18px);
         -webkit-overflow-scrolling: touch;
         /* Ensure content scrolls within the bordered area */
         border-radius: 12px; /* Slightly smaller radius on mobile */
