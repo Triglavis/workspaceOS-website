@@ -1037,4 +1037,73 @@ document.addEventListener('DOMContentLoaded', () => {
     
     // Initialize animation speed controller
     new AnimationSpeedController();
+    
+    // Initialize privacy modal
+    new PrivacyModalHandler();
 });
+
+// Privacy Modal Handler
+class PrivacyModalHandler {
+    constructor() {
+        this.modal = document.getElementById('privacy-modal');
+        this.openBtn = document.getElementById('privacy-link');
+        this.closeBtn = document.getElementById('privacy-close');
+        
+        this.init();
+    }
+    
+    init() {
+        if (this.openBtn) {
+            this.openBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                this.openModal();
+            });
+        }
+        
+        if (this.closeBtn) {
+            this.closeBtn.addEventListener('click', () => {
+                this.closeModal();
+            });
+        }
+        
+        // Close on outside click
+        if (this.modal) {
+            this.modal.addEventListener('click', (e) => {
+                if (e.target === this.modal) {
+                    this.closeModal();
+                }
+            });
+        }
+        
+        // Close on escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && this.modal?.classList.contains('active')) {
+                this.closeModal();
+            }
+        });
+        
+        // Handle hash links
+        if (window.location.hash === '#privacy') {
+            this.openModal();
+        }
+    }
+    
+    openModal() {
+        if (this.modal) {
+            document.body.style.overflow = 'hidden';
+            this.modal.classList.add('active');
+        }
+    }
+    
+    closeModal() {
+        if (this.modal) {
+            this.modal.classList.remove('active');
+            document.body.style.overflow = '';
+            
+            // Remove hash if it exists
+            if (window.location.hash === '#privacy') {
+                history.pushState("", document.title, window.location.pathname + window.location.search);
+            }
+        }
+    }
+}
