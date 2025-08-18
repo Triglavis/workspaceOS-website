@@ -143,7 +143,7 @@
                         </svg>
                     </button>
                 </form>
-                <p class="form-note">No spam, just updates when we launch. Your privacy is respected.</p>
+                <p class="form-note">No spam, just updates when we launch. <a href="#" id="privacy-link" class="privacy-link">Privacy Policy</a></p>
             </div>
         </div>
 
@@ -236,6 +236,289 @@
             </button>
             <h3 class="bottom-sheet-title"></h3>
             <p class="bottom-sheet-description"></p>
+        </div>
+    </div>
+
+    <!-- Privacy Policy Modal -->
+    <div class="privacy-modal" id="privacy-modal">
+        <div class="privacy-modal-content">
+            <button class="privacy-close" id="privacy-close">Close</button>
+            <div class="privacy-body">
+                <h1>Privacy Policy</h1>
+                <p class="privacy-date">Effective Date: January 17, 2025</p>
+                
+                <section>
+                    <h2>Overview</h2>
+                    <p>WorkspaceOS ("we," "our," or "us") is committed to protecting your privacy while delivering autonomous computing that enhances your productivity. This Privacy Policy explains how we collect, use, and safeguard your information when you use WorkspaceOS.</p>
+                    <p>WorkspaceOS operates primarily on your local device, processing data locally to maintain your privacy. We minimize data transmission and maximize local computation to ensure your workspace information remains under your control.</p>
+                </section>
+
+                <section>
+                    <h2>Information We Collect</h2>
+                    
+                    <h3>Screen Content & Visual Data</h3>
+                    <p>WorkspaceOS captures and analyzes screen content to understand your workflows and provide intelligent assistance. This includes:</p>
+                    <ul>
+                        <li>Screenshots of your active applications and windows</li>
+                        <li>Text extracted from your screen using optical character recognition (OCR)</li>
+                        <li>Visual patterns and UI elements across applications</li>
+                        <li>Application states and transitions</li>
+                    </ul>
+                    <p><strong>Important:</strong> All screen capture and analysis occurs locally on your device. Raw screen data is never transmitted to our servers.</p>
+
+                    <h3>Workflow Patterns</h3>
+                    <p>We analyze and store patterns of your work behavior locally, including:</p>
+                    <ul>
+                        <li>Repetitive task sequences you perform</li>
+                        <li>Application switching patterns</li>
+                        <li>Common workflows and their variations</li>
+                        <li>Time spent in different applications and contexts</li>
+                        <li>Command execution patterns and success rates</li>
+                    </ul>
+
+                    <h3>System Interactions</h3>
+                    <p>To provide autonomous assistance, we monitor:</p>
+                    <ul>
+                        <li>Application launches and closures</li>
+                        <li>File operations (create, modify, delete)</li>
+                        <li>Git repository activities and commit patterns</li>
+                        <li>Shell command history and execution results</li>
+                        <li>Network connections (metadata only, not content)</li>
+                    </ul>
+
+                    <h3>Device & Technical Information</h3>
+                    <ul>
+                        <li>Operating system version and configuration</li>
+                        <li>Hardware specifications and performance metrics</li>
+                        <li>Memory usage and optimization statistics</li>
+                        <li>Application crash reports and error logs</li>
+                        <li>WorkspaceOS version and configuration settings</li>
+                    </ul>
+                </section>
+
+                <section>
+                    <h2>How We Use Your Information</h2>
+                    
+                    <h3>Core Functionality</h3>
+                    <ul>
+                        <li><strong>Pattern Recognition:</strong> Identify repetitive tasks and workflows to automate them</li>
+                        <li><strong>Predictive Actions:</strong> Anticipate your next actions based on learned patterns</li>
+                        <li><strong>Context Understanding:</strong> Maintain awareness of your current work context</li>
+                        <li><strong>Autonomous Execution:</strong> Perform routine tasks automatically</li>
+                        <li><strong>Performance Optimization:</strong> Improve system responsiveness and efficiency</li>
+                    </ul>
+
+                    <h3>Product Improvement</h3>
+                    <ul>
+                        <li>Analyze usage patterns to improve feature design</li>
+                        <li>Identify common user workflows for automation opportunities</li>
+                        <li>Optimize performance based on typical usage scenarios</li>
+                        <li>Debug issues and improve software reliability</li>
+                    </ul>
+
+                    <h3>Security & Safety</h3>
+                    <ul>
+                        <li>Detect unusual patterns that may indicate security threats</li>
+                        <li>Prevent execution of potentially harmful commands</li>
+                        <li>Monitor system health and prevent data loss</li>
+                        <li>Ensure safe automation of sensitive operations</li>
+                    </ul>
+                </section>
+
+                <section>
+                    <h2>Data Storage and Processing</h2>
+                    
+                    <h3>Local Processing</h3>
+                    <p>WorkspaceOS is designed with privacy-first architecture:</p>
+                    <ul>
+                        <li><strong>Local Storage:</strong> All personal data is stored encrypted on your device</li>
+                        <li><strong>Local Analysis:</strong> Pattern recognition and AI inference happen locally</li>
+                        <li><strong>No Cloud Dependency:</strong> Core functionality works entirely offline</li>
+                        <li><strong>Encrypted Storage:</strong> Data at rest is encrypted using industry-standard encryption</li>
+                    </ul>
+
+                    <h3>Optional Cloud Features</h3>
+                    <p>Some features may optionally use cloud services:</p>
+                    <ul>
+                        <li><strong>Team Synchronization:</strong> Share patterns with team members (opt-in)</li>
+                        <li><strong>Backup & Sync:</strong> Encrypted backup of your patterns (opt-in)</li>
+                        <li><strong>Anonymous Analytics:</strong> Aggregated usage statistics (opt-out available)</li>
+                    </ul>
+                    <p>You have full control over which features use cloud services.</p>
+
+                    <h3>Data Retention</h3>
+                    <ul>
+                        <li><strong>Screen Captures:</strong> Stored locally for 30 days, then automatically deleted</li>
+                        <li><strong>Workflow Patterns:</strong> Retained until you choose to delete them</li>
+                        <li><strong>System Logs:</strong> Kept for 90 days for debugging purposes</li>
+                        <li><strong>Usage Analytics:</strong> Aggregated data retained for 2 years maximum</li>
+                    </ul>
+                </section>
+
+                <section>
+                    <h2>Data Sharing and Disclosure</h2>
+                    <p>We follow a strict no-sharing policy for your personal data:</p>
+                    
+                    <h3>What We Don't Share</h3>
+                    <ul>
+                        <li>Screen captures or OCR text</li>
+                        <li>Your specific workflow patterns</li>
+                        <li>File contents or file names</li>
+                        <li>Command history or shell interactions</li>
+                        <li>Any personally identifiable information</li>
+                    </ul>
+
+                    <h3>Limited Disclosure Scenarios</h3>
+                    <p>We may disclose aggregated, anonymized data only:</p>
+                    <ul>
+                        <li><strong>Legal Requirements:</strong> When required by law or court order</li>
+                        <li><strong>Safety Concerns:</strong> To prevent harm to users or others</li>
+                        <li><strong>Research:</strong> Anonymized workflow patterns for academic research (with your consent)</li>
+                        <li><strong>Service Providers:</strong> Encrypted data to trusted cloud providers for backup services only</li>
+                    </ul>
+
+                    <h3>Team Features</h3>
+                    <p>When you enable team features:</p>
+                    <ul>
+                        <li>Only specific patterns you choose to share are transmitted</li>
+                        <li>Data is encrypted end-to-end between team members</li>
+                        <li>You can revoke sharing permissions at any time</li>
+                        <li>Shared patterns are marked clearly in the interface</li>
+                    </ul>
+                </section>
+
+                <section>
+                    <h2>Security Measures</h2>
+                    
+                    <h3>Technical Safeguards</h3>
+                    <ul>
+                        <li><strong>Encryption:</strong> AES-256 encryption for data at rest and in transit</li>
+                        <li><strong>Local Processing:</strong> Sensitive analysis occurs entirely on your device</li>
+                        <li><strong>Secure Communication:</strong> TLS 1.3 for any network communications</li>
+                        <li><strong>Code Signing:</strong> All software releases are cryptographically signed</li>
+                        <li><strong>Regular Updates:</strong> Automatic security updates with user consent</li>
+                    </ul>
+
+                    <h3>Access Controls</h3>
+                    <ul>
+                        <li>Multi-factor authentication for team features</li>
+                        <li>Role-based permissions for shared workflows</li>
+                        <li>Audit logs for all data access and modifications</li>
+                        <li>Regular security assessments and penetration testing</li>
+                    </ul>
+
+                    <h3>Incident Response</h3>
+                    <p>In the event of a security incident:</p>
+                    <ul>
+                        <li>We will notify affected users within 72 hours</li>
+                        <li>Detailed incident reports will be published</li>
+                        <li>Immediate steps will be taken to secure systems</li>
+                        <li>Independent security audits will be conducted</li>
+                    </ul>
+                </section>
+
+                <section>
+                    <h2>Your Privacy Rights</h2>
+                    
+                    <h3>Access and Control</h3>
+                    <p>You have comprehensive control over your data:</p>
+                    <ul>
+                        <li><strong>Data Access:</strong> View all data WorkspaceOS has collected</li>
+                        <li><strong>Data Export:</strong> Export your patterns and data in standard formats</li>
+                        <li><strong>Data Deletion:</strong> Delete specific patterns or all data</li>
+                        <li><strong>Processing Control:</strong> Disable specific types of data collection</li>
+                        <li><strong>Sharing Control:</strong> Manage what data is shared with team members</li>
+                    </ul>
+
+                    <h3>Consent Management</h3>
+                    <ul>
+                        <li>Granular consent for different types of data collection</li>
+                        <li>Easy opt-out mechanisms for all optional features</li>
+                        <li>Clear notifications when new data collection begins</li>
+                        <li>Regular consent renewal for sensitive permissions</li>
+                    </ul>
+
+                    <h3>System Permissions</h3>
+                    <p>WorkspaceOS requires certain system permissions to function:</p>
+                    <ul>
+                        <li><strong>Screen Recording:</strong> To understand your workspace</li>
+                        <li><strong>Accessibility:</strong> To interact with applications on your behalf</li>
+                        <li><strong>Full Disk Access:</strong> To monitor file operations and Git repositories</li>
+                        <li><strong>Automation:</strong> To execute actions autonomously</li>
+                    </ul>
+                    <p>You can revoke these permissions at any time through your system settings, though this may limit functionality.</p>
+
+                    <h3>Data Portability</h3>
+                    <p>You can request a complete copy of your data in standard formats (JSON, CSV) at any time through the application settings.</p>
+                </section>
+
+                <section>
+                    <h2>Children's Privacy</h2>
+                    <p>WorkspaceOS is not intended for use by individuals under the age of 16. We do not knowingly collect personal information from children under 16. If you become aware that a child has provided us with personal information, please contact us.</p>
+                </section>
+
+                <section>
+                    <h2>International Data Transfers</h2>
+                    <p>WorkspaceOS processes data locally on your device. When you enable team features using P2P networking, data may be transmitted directly between team members' devices across international borders. These transfers:</p>
+                    <ul>
+                        <li>Occur directly between devices (peer-to-peer)</li>
+                        <li>Are encrypted end-to-end</li>
+                        <li>Do not pass through our servers</li>
+                        <li>Are subject to your team's data governance policies</li>
+                    </ul>
+                </section>
+
+                <section>
+                    <h2>California Privacy Rights</h2>
+                    <p>California residents have additional rights under the California Consumer Privacy Act (CCPA):</p>
+                    <ul>
+                        <li>Right to know what personal information is collected</li>
+                        <li>Right to know if personal information is sold or disclosed</li>
+                        <li>Right to opt-out of the sale of personal information</li>
+                        <li>Right to delete personal information</li>
+                        <li>Right to non-discrimination for exercising privacy rights</li>
+                    </ul>
+                    <p>To exercise these rights, please contact us at privacy@workspaceos.com.</p>
+                </section>
+
+                <section>
+                    <h2>Updates to This Policy</h2>
+                    <p>We may update this Privacy Policy from time to time. We will notify you of any changes by:</p>
+                    <ul>
+                        <li>Posting the new Privacy Policy on our website</li>
+                        <li>Updating the "Effective Date" at the top of this policy</li>
+                        <li>Sending you an in-app notification for material changes</li>
+                    </ul>
+                    <p>Your continued use of WorkspaceOS after changes indicates acceptance of the updated policy.</p>
+                </section>
+
+                <section>
+                    <h2>Contact Us</h2>
+                    <p>If you have questions or concerns about this Privacy Policy or our data practices, please contact us:</p>
+                    <ul>
+                        <li><strong>Email:</strong> privacy@workspaceos.com</li>
+                        <li><strong>Website:</strong> https://tryworkspaceos.com</li>
+                        <li><strong>Mail:</strong> Triglavis LLC, Attn: Privacy, [Address]</li>
+                    </ul>
+                    <p>For security vulnerabilities, please use our responsible disclosure program at security@workspaceos.com.</p>
+                </section>
+
+                <section>
+                    <h2>Legal Basis for Processing (GDPR)</h2>
+                    <p>For users in the European Economic Area, we process personal data based on:</p>
+                    <ul>
+                        <li><strong>Consent:</strong> You explicitly consent to screen monitoring and pattern learning</li>
+                        <li><strong>Contract:</strong> Processing necessary to provide WorkspaceOS services</li>
+                        <li><strong>Legitimate Interests:</strong> Improving our service and ensuring security</li>
+                        <li><strong>Legal Obligations:</strong> Compliance with applicable laws</li>
+                    </ul>
+                </section>
+
+                <div class="privacy-footer">
+                    <p>© 2025 Triglavis LLC. All rights reserved.</p>
+                    <p>WorkspaceOS is a trademark of Triglavis LLC.</p>
+                </div>
+            </div>
         </div>
     </div>
 
