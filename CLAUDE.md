@@ -177,33 +177,34 @@ GitHub automatically provisions SSL after DNS verification (can take up to 24 ho
 
 ### In Progress Stories
 
-#### ✅ Story 2: Form Backend Integration
+#### ✅ Story 2: Enhanced Waitlist Integration
 **Status**: COMPLETE
 **Priority**: HIGH
 **Dependencies**: None
 **Delivered**: January 21, 2025
 
-**Acceptance Criteria Met**:
-- ✓ Email validation and sanitization (client + server-side)
-- ✓ Variant tracking in submissions
-- ✓ Rate limiting (5 submissions per IP/hour)
-- ✓ Success/error feedback UI with loading states
-- ✓ GDPR compliance with required consent checkbox
-- ⏳ Automated welcome email (ready for SendGrid/Resend integration)
+**Current State**:
+- **Waitlist**: Already connected to Google Sheets via Apps Script
+- **Future Accounts**: Supabase schema ready for user account creation
 
-**Implementation Details**:
-- Supabase backend with RLS policies
-- `waitlist` and `waitlist_rate_limit` tables
-- Server-side validation function `add_to_waitlist()`
-- Client-side form handler with loading/success/error states
-- GDPR + marketing consent checkboxes
-- Full tracking of UTM parameters and browser metadata
-- Mock mode for local development
+**Waitlist Enhancement Delivered**:
+- ✓ GDPR consent checkbox UI (required)
+- ✓ Marketing consent checkbox (optional)
+- ✓ Variant tracking integration
+- ✓ Enhanced success/error UI states
+- ✓ Analytics event tracking
 
-**Files Created**:
-- `waitlist-schema.sql` - Database schema and functions
-- `waitlist.js` - Client-side form handler
-- `WAITLIST_SETUP.md` - Setup and testing guide
+**Account System Prepared** (for future launch):
+- ✓ Supabase schema for user accounts
+- ✓ Authentication tables and RLS policies
+- ✓ Rate limiting infrastructure
+- ✓ Server-side validation functions
+
+**Files Created/Modified**:
+- `waitlist.js` - Enhanced form handler with consent UI
+- `supabase-schema.sql` - For alpha testing logs (existing)
+- `waitlist-schema.sql` - For future account creation
+- `google-apps-script.js` - Existing Google Sheets integration
 
 #### 📋 Story 3: Analytics & Conversion Tracking
 **Status**: NOT STARTED
