@@ -645,6 +645,13 @@ class StatCycler {
         this.init();
     }
     
+    reinitialize() {
+        // Re-query elements after variant change
+        this.cycleElements = document.querySelectorAll('.stat-cycle');
+        this.statsContainer = document.querySelector('.hero-stats');
+        this.progressBars = document.querySelectorAll('.stat-progress-bar');
+    }
+    
     init() {
         // Add hover listeners to pause/resume
         if (this.statsContainer) {
@@ -1028,6 +1035,13 @@ document.addEventListener('DOMContentLoaded', () => {
     
     // Initialize stat cycling
     window.statCycler = new StatCycler();
+    
+    // Make reinitialize function available globally for variant switching
+    window.initRotatingText = () => {
+        if (window.statCycler) {
+            window.statCycler.reinitialize();
+        }
+    };
     
     // Initialize scroll shadows
     new ScrollShadowHandler();

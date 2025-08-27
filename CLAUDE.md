@@ -148,6 +148,153 @@ ssh -T git@github.com
 ### HTTPS Certificate
 GitHub automatically provisions SSL after DNS verification (can take up to 24 hours).
 
+## Current Milestone: Q1 2025 GTM Preparation
+
+### Milestone Overview
+**Goal**: Prepare website for multi-channel go-to-market with targeted messaging
+**Timeline**: January 2025
+**Status**: IN PROGRESS
+
+### Completed Stories
+
+#### ✅ Story 1: Variant Switching System
+**Status**: COMPLETE - PR #4 submitted
+**Delivered**:
+- URL parameter-based variant switching (?user=dev|ai|vision)
+- 4 variants with targeted messaging
+- Zero layout shift implementation
+- Analytics tracking integration
+- Developer console API
+- Test harness at /test-variants.html
+
+**Success Criteria Met**:
+- ✓ No content flash or layout shifts
+- ✓ Rotating bullets preserved
+- ✓ Graceful fallback on network errors
+- ✓ UTM campaign parameter support
+- ✓ DataLayer events for analytics
+- ✓ Lighthouse scores unchanged
+
+### In Progress Stories
+
+#### ✅ Story 2: Enhanced Waitlist Integration
+**Status**: COMPLETE
+**Priority**: HIGH
+**Dependencies**: None
+**Delivered**: January 21, 2025
+
+**Current State**:
+- **Waitlist**: Already connected to Google Sheets via Apps Script
+- **Future Accounts**: Supabase schema ready for user account creation
+
+**Waitlist Enhancement Delivered**:
+- ✓ GDPR consent checkbox UI (required)
+- ✓ Marketing consent checkbox (optional)
+- ✓ Variant tracking integration
+- ✓ Enhanced success/error UI states
+- ✓ Analytics event tracking
+
+**Account System Prepared** (for future launch):
+- ✓ Supabase schema for user accounts
+- ✓ Authentication tables and RLS policies
+- ✓ Rate limiting infrastructure
+- ✓ Server-side validation functions
+
+**Files Created/Modified**:
+- `waitlist.js` - Enhanced form handler with consent UI
+- `supabase-schema.sql` - For alpha testing logs (existing)
+- `waitlist-schema.sql` - For future account creation
+- `google-apps-script.js` - Existing Google Sheets integration
+
+#### 📋 Story 3: Analytics & Conversion Tracking
+**Status**: NOT STARTED
+**Priority**: HIGH
+**Dependencies**: Form backend (Story 2)
+
+**Acceptance Criteria**:
+- [ ] Google Analytics 4 integration
+- [ ] Conversion events for waitlist signups
+- [ ] Variant performance tracking
+- [ ] Scroll depth tracking
+- [ ] Engagement time metrics
+- [ ] A/B test framework ready
+
+**Implementation Plan**:
+1. Set up GA4 property and data streams
+2. Implement gtag.js with consent management
+3. Create custom events for variant views
+4. Set up conversion tracking for form submissions
+5. Create GTM container for marketing team access
+6. Document event taxonomy
+
+#### 🎨 Story 4: Visual Polish & Performance
+**Status**: NOT STARTED
+**Priority**: MEDIUM
+**Dependencies**: None
+
+**Acceptance Criteria**:
+- [ ] Lighthouse Performance score > 95
+- [ ] First Contentful Paint < 1.5s
+- [ ] Cumulative Layout Shift < 0.1
+- [ ] WebGL fallback for unsupported browsers
+- [ ] Reduced motion support
+- [ ] Image optimization (WebP with fallbacks)
+
+**Implementation Plan**:
+1. Audit current performance metrics
+2. Implement critical CSS inlining
+3. Add WebGL feature detection with canvas fallback
+4. Optimize Three.js bundle (tree-shaking)
+5. Add prefers-reduced-motion support
+6. Convert images to WebP with fallbacks
+
+### Upcoming Stories (Backlog)
+
+#### 📱 Story 5: Mobile Experience Enhancement
+**Priority**: MEDIUM
+**Estimated Effort**: 3 days
+**Dependencies**: Visual Polish (Story 4)
+
+#### 🌍 Story 6: Internationalization Prep
+**Priority**: LOW
+**Estimated Effort**: 2 days
+**Dependencies**: Variant System (Story 1) - COMPLETE
+
+#### 🔒 Story 7: Security & Compliance
+**Priority**: HIGH
+**Estimated Effort**: 2 days
+**Dependencies**: Form Backend (Story 2)
+
+### Risk Mitigation
+
+| Risk | Impact | Mitigation |
+|------|--------|------------|
+| Form backend choice delays implementation | HIGH | Time-boxed decision by Jan 22 |
+| GA4 configuration complexity | MEDIUM | Use GTM for flexibility |
+| Performance regression from analytics | MEDIUM | Lazy-load analytics after interaction |
+| GDPR compliance requirements | HIGH | Legal review before launch |
+| Variant system bugs | LOW | Comprehensive test coverage |
+
+### Dependencies Map
+```
+Story 1 (COMPLETE) → Story 6
+Story 2 → Story 3, Story 7
+Story 4 → Story 5
+```
+
+### Success Metrics
+- **Conversion Rate**: >3% waitlist signup (industry avg: 2%)
+- **Variant Performance**: Identify winning variant within 2 weeks
+- **Page Speed**: Maintain <2s load time
+- **Engagement**: >45s average time on page
+- **Bounce Rate**: <60%
+
+### Technical Debt & Notes
+- Consider migrating to Next.js for better performance and SEO
+- Evaluate CDN for Three.js library (currently self-hosted)
+- Add error tracking (Sentry) before public launch
+- Implement feature flags for gradual rollout
+
 ## Contact
 For questions about the WorkspaceOS vision or product, the landing page currently uses placeholder emails/links that should be updated when ready.
 

@@ -1,0 +1,110 @@
+{
+  "default": {
+    "headline": "Work at the Speed of Thought",
+    "subheadline": "Your computer already sees your patterns. Now it acts on them. No more explaining what you're doing—your work explains itself.",
+    "body": "WorkspaceOS is the intelligence layer across all your tools. Through screen-level awareness (works with anything you can see), it connects patterns between your disconnected apps. Once it learns your workflow through Pattern-First Computing, it handles the coordination permanently—status updates write themselves, context follows you between tools, repetitive tasks disappear. Our Comprehensive Project Memory connects actions across time and context.\n\nYour focus stays unbroken while the 58% of your day spent on 'work about work' gets handled automatically. Unlike passive AI tools, WorkspaceOS actively anticipates what's needed next.\n\nStay in deep focus. Your AI partner handles everything else.",
+    "bullets": [
+      {
+        "title": "Pattern-First Computing",
+        "desc": "Workflows cached locally",
+        "rotatingTitles": ["Pattern-First Computing", "Learns Your Daily Workflows", "Caches Patterns Locally"],
+        "rotatingDescs": ["Workflows cached locally", "Patterns recognized intelligently", "Eliminates redundant processing"]
+      },
+      {
+        "title": "Active AI Collaboration",
+        "desc": "Drafts updates from your progress",
+        "rotatingTitles": ["Active AI Collaboration", "Acts Before You Even Ask", "Handles Full Team Context"],
+        "rotatingDescs": ["Drafts updates from your progress", "Connects work across teams", "Proactive workspace assistance"]
+      },
+      {
+        "title": "Screen-Level Intelligence",
+        "desc": "Connects work patterns across teams",
+        "rotatingTitles": ["Screen-Level Intelligence", "Universal App Support", "Zero Integrations Required"],
+        "rotatingDescs": ["Connects work patterns across teams", "Works with any application", "Visual understanding of your workspace"]
+      }
+    ],
+    "ctaNote": "No spam, just updates when we launch.",
+    "metaDescription": "Anticipatory computing that learns your workflows and reduces coordination overhead by up to 40%. Currently achieving 94% accuracy in workspace understanding with 100x cost reduction through pattern caching."
+  },
+  "dev": {
+    "headline": "Your AI-powered Engineering Co-pilot",
+    "subheadline": "WorkspaceOS eliminates 40% of status meetings by making your tools update each other automatically.",
+    "body": "WorkspaceOS watches your engineering workflow and eliminates the coordination tax. Through screen-level awareness, it sees when you push code, update tickets, or discuss blockers—then handles the cross-tool updates automatically. Your PR gets merged? Jira updates itself. Deploy hits production? Slack notifies the team with context. Debug session discovers root cause? Documentation writes itself. Every pattern you repeat becomes a permanent automation, cached locally for instant execution. No APIs needed—works with any tool you can see on screen.",
+    "bullets": [
+      {
+        "title": "Self-updating status",
+        "desc": "Jira tickets update themselves when you push code",
+        "rotatingTitles": ["Self-updating status", "Jira syncs with Git", "PRs update tickets"],
+        "rotatingDescs": ["Jira tickets update themselves when you push code", "Git commits link to issues automatically", "Pull requests sync status in real-time"]
+      },
+      {
+        "title": "Dependency awareness",
+        "desc": "Knows who's blocked when your PR isn't reviewed",
+        "rotatingTitles": ["Dependency awareness", "Blocker detection", "Team coordination"],
+        "rotatingDescs": ["Knows who's blocked when your PR isn't reviewed", "Alerts team when dependencies change", "Tracks cross-team blockers automatically"]
+      },
+      {
+        "title": "Code-to-issue memory",
+        "desc": "Remembers which commits fixed which bugs forever",
+        "rotatingTitles": ["Code-to-issue memory", "Bug fix tracking", "Solution persistence"],
+        "rotatingDescs": ["Remembers which commits fixed which bugs forever", "Links solutions to problems permanently", "Builds knowledge base from your fixes"]
+      }
+    ],
+    "ctaNote": "Built for engineering teams.",
+    "metaDescription": "WorkspaceOS eliminates 40% of status meetings by making your tools update each other automatically. Self-updating Jira, dependency awareness, and permanent workflow memory."
+  },
+  "ai": {
+    "headline": "One OS for All Your AI",
+    "subheadline": "WorkspaceOS connects your AI agents into a unified intelligence layer that shares context across every tool.",
+    "body": "Your AI tools are islands—Claude doesn't know what Copilot wrote, ChatGPT can't see your Cursor sessions, and none of them remember yesterday's work. WorkspaceOS creates persistent memory across all AI interactions. When you debug with Copilot, your ChatGPT sessions know the context. When Claude writes documentation, it sees what you built in Cursor. Through screen-level pattern recognition, every AI agent shares the same understanding of your project. One conversation continues across all tools, with patterns cached permanently for zero-cost replay.",
+    "bullets": [
+      {
+        "title": "AI tools that talk to each other",
+        "desc": "Context flows between Claude, GPT, and Copilot automatically",
+        "rotatingTitles": ["AI tools that talk to each other", "Claude knows Copilot", "GPT sees Cursor"],
+        "rotatingDescs": ["Context flows between Claude, GPT, and Copilot automatically", "Your AI agents share the same understanding", "One unified intelligence layer"]
+      },
+      {
+        "title": "One memory across agents",
+        "desc": "Yesterday's debugging session informs today's feature development",
+        "rotatingTitles": ["One memory across agents", "Persistent AI context", "Cross-tool intelligence"],
+        "rotatingDescs": ["Yesterday's debugging session informs today's feature development", "Every AI remembers your project history", "Context persists across all sessions"]
+      },
+      {
+        "title": "Real-time context sharing",
+        "desc": "Every AI sees your full workspace state instantly",
+        "rotatingTitles": ["Real-time context sharing", "Instant synchronization", "Live AI collaboration"],
+        "rotatingDescs": ["Every AI sees your full workspace state instantly", "Changes propagate across all agents", "Unified view of your work"]
+      }
+    ],
+    "ctaNote": "Ready for AI-native teams.",
+    "metaDescription": "WorkspaceOS connects your AI agents into a unified intelligence layer that shares context across every tool. Claude, GPT, and Copilot finally work together."
+  },
+  "vision": {
+    "headline": "Computing That Learns Your Patterns",
+    "subheadline": "WorkspaceOS transforms repeated workflows into permanent computational primitives that execute at zero cost.",
+    "body": "Every workflow you repeat becomes a first-class object in WorkspaceOS. Like files and processes in traditional computing, your patterns become permanent, shareable, and composable. The first time you handle a payment error by checking logs, updating the dashboard, and notifying ops—that pattern is captured forever. Next time, it executes instantly at zero marginal cost. Through universal screen-level awareness, these patterns work across any application, any version, any platform. Your workflows become the new assembly language of knowledge work.",
+    "bullets": [
+      {
+        "title": "Workflows become objects",
+        "desc": "Save, share, and compose patterns like files",
+        "rotatingTitles": ["Workflows become objects", "Patterns as primitives", "Composable automation"],
+        "rotatingDescs": ["Save, share, and compose patterns like files", "Your workflows are first-class citizens", "Build complex patterns from simple ones"]
+      },
+      {
+        "title": "Memory across time",
+        "desc": "Today's fix remembers last quarter's similar issue",
+        "rotatingTitles": ["Memory across time", "Pattern permanence", "Historical awareness"],
+        "rotatingDescs": ["Today's fix remembers last quarter's similar issue", "Patterns evolve with your experience", "Knowledge accumulates automatically"]
+      },
+      {
+        "title": "Universal compatibility",
+        "desc": "Patterns work on any app you can see on screen",
+        "rotatingTitles": ["Universal compatibility", "Works everywhere", "Platform agnostic"],
+        "rotatingDescs": ["Patterns work on any app you can see on screen", "No APIs or integrations required", "Future-proof automation"]
+      }
+    ],
+    "ctaNote": "Join early access.",
+    "metaDescription": "WorkspaceOS transforms repeated workflows into permanent computational primitives that execute at zero cost. Your workflows become the new assembly language of knowledge work."
+  }
+}

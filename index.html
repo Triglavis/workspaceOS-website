@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<!-- Build trigger: 2025-01-27 -->
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -84,7 +85,7 @@
                     <span class="workspaceos-name">WorkspaceOS</span>
                 </div>
                 
-                <h1 class="hero-title">
+                <h1 class="hero-title" data-copy="headline">
                 <span class="word-reveal">Work</span>
                 <span class="word-reveal">at</span>
                 <span class="word-reveal">the</span>
@@ -94,8 +95,8 @@
                 <span class="word-reveal gradient-text">Thought</span>
             </h1>
             
-            <p class="hero-description fade-in-description">
-                Your computer already sees your patterns. Now it acts on them. No more explaining what you're doing—your work explains itself.
+            <p class="hero-description fade-in-description" data-copy="body">
+                <span data-copy="subheadline">Your computer already sees your patterns. Now it acts on them. No more explaining what you're doing—your work explains itself.</span>
                 <br><br>
                 <span class="highlight-brand">WorkspaceOS</span> is the intelligence layer across all your tools. Through <span class="tooltip-trigger">screen-level awareness<span class="tooltip-content">Like having an AI that sees your entire screen. Works with legacy enterprise software, brand new SaaS tools, even websites without APIs.</span></span> (works with anything you can see), it connects patterns between your disconnected apps. Once it learns your workflow through <span class="tooltip-trigger">Pattern-First Computing<span class="tooltip-content">First time: learns the pattern. Forever after: executes directly. Your repeated workflows become permanent, cost-free automations.</span></span>, it handles the coordination permanently—status updates write themselves, context follows you between tools, repetitive tasks disappear. Our <span class="tooltip-trigger">Comprehensive Project Memory<span class="tooltip-content">Remembers that you always check logs after payment errors, always update Jira after pushing code, always notify Sarah when deploying. Acts on these patterns without being asked.</span></span> connects actions across time and context.
                 <br><br>
@@ -108,26 +109,26 @@
                 <div class="stat-progress-bar top"></div>
                 <div class="stat" data-cycle="1">
                     <div class="stat-value">
-                        <span class="stat-cycle" data-messages='["Pattern-First Computing", "Learns Your Daily Workflows", "Caches Patterns Locally"]'>Pattern-First Computing</span>
+                        <span class="stat-cycle" data-messages='["Pattern-First Computing", "Learns Your Daily Workflows", "Caches Patterns Locally"]' data-copy="bullet-0-title">Pattern-First Computing</span>
                     </div>
                     <div class="stat-label">
-                        <span class="stat-cycle" data-messages='["Workflows cached locally", "Patterns recognized intelligently", "Eliminates redundant processing"]'>Workflows cached locally</span>
+                        <span class="stat-cycle" data-messages='["Workflows cached locally", "Patterns recognized intelligently", "Eliminates redundant processing"]' data-copy="bullet-0-desc">Workflows cached locally</span>
                     </div>
                 </div>
                 <div class="stat" data-cycle="2">
                     <div class="stat-value">
-                        <span class="stat-cycle" data-messages='["Active AI Collaboration", "Acts Before You Even Ask", "Handles Full Team Context"]'>Active AI Collaboration</span>
+                        <span class="stat-cycle" data-messages='["Active AI Collaboration", "Acts Before You Even Ask", "Handles Full Team Context"]' data-copy="bullet-1-title">Active AI Collaboration</span>
                     </div>
                     <div class="stat-label">
-                        <span class="stat-cycle" data-messages='["Drafts updates from your progress", "Connects work across teams", "Proactive workspace assistance"]'>Drafts updates from your progress</span>
+                        <span class="stat-cycle" data-messages='["Drafts updates from your progress", "Connects work across teams", "Proactive workspace assistance"]' data-copy="bullet-1-desc">Drafts updates from your progress</span>
                     </div>
                 </div>
                 <div class="stat" data-cycle="3">
                     <div class="stat-value">
-                        <span class="stat-cycle" data-messages='["Screen-Level Intelligence", "Universal App Support", "Zero Integrations Required"]'>Screen-Level Intelligence</span>
+                        <span class="stat-cycle" data-messages='["Screen-Level Intelligence", "Universal App Support", "Zero Integrations Required"]' data-copy="bullet-2-title">Screen-Level Intelligence</span>
                     </div>
                     <div class="stat-label">
-                        <span class="stat-cycle" data-messages='["Connects work patterns across teams", "Works with any application", "Visual understanding of your workspace"]'>Connects work patterns across teams</span>
+                        <span class="stat-cycle" data-messages='["Connects work patterns across teams", "Works with any application", "Visual understanding of your workspace"]' data-copy="bullet-2-desc">Connects work patterns across teams</span>
                     </div>
                 </div>
                 <div class="stat-progress-bar bottom"></div>
@@ -143,7 +144,7 @@
                         </svg>
                     </button>
                 </form>
-                <p class="form-note">No spam, just updates when we launch. <a href="#" id="privacy-link" class="privacy-link">Privacy Policy</a></p>
+                <p class="form-note"><span data-copy="cta-note">No spam, just updates when we launch.</span> <a href="#" id="privacy-link" class="privacy-link">Privacy Policy</a></p>
             </div>
         </div>
 
@@ -219,8 +220,137 @@
     </section>
 
 
+    <!-- Variant Switching Script -->
+    <script>
+    (function() {
+        // Fetch variants on load
+        fetch('/variants.json', { cache: 'force-cache' })
+            .then(res => res.json())
+            .then(variants => {
+                // Parse URL params
+                const q = new URLSearchParams(location.search);
+                
+                // Get variant from user param or utm_campaign
+                const getVariantFromUtm = () => {
+                    const utm = (q.get('utm_campaign') || '').toLowerCase();
+                    if (['dev', 'ai', 'vision'].includes(utm)) return utm;
+                    return null;
+                };
+                
+                const userParam = (q.get('user') || '').toLowerCase();
+                const wanted = userParam || getVariantFromUtm() || 'default';
+                const variant = variants[wanted] ? wanted : 'default';
+                
+                // Helper to set text content
+                function setText(selector, text) {
+                    const el = document.querySelector(`[data-copy="${selector}"]`);
+                    if (el && typeof text === 'string') {
+                        // Handle headline special case with word-reveal spans
+                        if (selector === 'headline') {
+                            // Split headline into words and rebuild with spans
+                            const words = text.split(' ');
+                            let html = '';
+                            let hasLineBreak = false;
+                            
+                            // Determine where to put line break based on word count
+                            const breakPoint = Math.ceil(words.length / 2);
+                            
+                            words.forEach((word, i) => {
+                                if (i === breakPoint && !hasLineBreak) {
+                                    html += '<br>';
+                                    hasLineBreak = true;
+                                }
+                                const isLast = i === words.length - 1;
+                                html += `<span class="word-reveal${isLast ? ' gradient-text' : ''}">${word}</span>`;
+                                if (i < words.length - 1) html += ' ';
+                            });
+                            el.innerHTML = html;
+                        } else {
+                            el.textContent = text;
+                        }
+                    }
+                }
+                
+                // Helper to set bullet with rotating messages
+                function setBullet(idx, bullet) {
+                    if (!bullet) return;
+                    
+                    setText(`bullet-${idx}-title`, bullet.title);
+                    setText(`bullet-${idx}-desc`, bullet.desc);
+                    
+                    // Update rotating messages in data-messages attribute
+                    const titleEl = document.querySelector(`[data-copy="bullet-${idx}-title"]`);
+                    const descEl = document.querySelector(`[data-copy="bullet-${idx}-desc"]`);
+                    
+                    if (titleEl && bullet.rotatingTitles) {
+                        titleEl.setAttribute('data-messages', JSON.stringify(bullet.rotatingTitles));
+                    }
+                    if (descEl && bullet.rotatingDescs) {
+                        descEl.setAttribute('data-messages', JSON.stringify(bullet.rotatingDescs));
+                    }
+                }
+                
+                // Apply variant copy
+                const v = variants[variant];
+                if (!v) return;
+                
+                setText('headline', v.headline);
+                setText('subheadline', v.subheadline);
+                setText('body', v.body);
+                setText('cta-note', v.ctaNote || '');
+                
+                // Apply bullets
+                (v.bullets || []).slice(0, 3).forEach((b, i) => setBullet(i, b));
+                
+                // Update meta description
+                const meta = document.querySelector('meta[name="description"]');
+                if (meta && v.metaDescription) {
+                    meta.setAttribute('content', v.metaDescription);
+                }
+                
+                // Tag CTA links with shown variant
+                document.querySelectorAll('.btn-primary').forEach(btn => {
+                    const form = btn.closest('form');
+                    if (form) {
+                        form.addEventListener('submit', (e) => {
+                            e.preventDefault();
+                            const email = form.querySelector('.email-input').value;
+                            // In production, you'd send this to your backend with the variant
+                            console.log('Waitlist signup:', { email, variant });
+                            // Add visual feedback
+                            btn.innerHTML = '<span>✓ You\'re on the list!</span>';
+                            btn.disabled = true;
+                        });
+                    }
+                });
+                
+                // Analytics event
+                window.dataLayer = window.dataLayer || [];
+                window.dataLayer.push({ event: 'variant_applied', variant });
+                console.log('Variant applied:', variant);
+                
+                // Dev console API
+                window.__wosSetVariant = (name) => {
+                    const p = new URL(location.href);
+                    p.searchParams.set('user', name);
+                    location.href = p.toString();
+                };
+                
+                // Re-initialize rotating text with new messages
+                if (window.initRotatingText) {
+                    window.initRotatingText();
+                }
+            })
+            .catch(err => {
+                console.error('Failed to load variants:', err);
+                // Fail gracefully - keep default content
+            });
+    })();
+    </script>
+    
     <script src="script.js"></script>
     <script src="gravitational-singularity.js"></script>
+    <script src="waitlist-enhanced.js"></script>
     
     <!-- Cloudflare Web Analytics -->
     <script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "c71909abc8ce48cd99072246781b8353"}'></script>
