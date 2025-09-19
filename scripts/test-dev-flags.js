@@ -81,7 +81,7 @@ if (hasErrors) {
     console.error('To fix this issue:');
     console.error('1. Open the files listed above');
     console.error('2. Set all DEV_FLAGS values to false');
-    console.error('3. Run this test again: node test-dev-flags.js\n');
+    console.error('3. Run this test again: node scripts/test-dev-flags.js\n');
     
     process.exit(1);
 } else {

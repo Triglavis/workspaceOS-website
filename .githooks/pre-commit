@@ -6,7 +6,7 @@
 echo "🔍 Running pre-commit checks..."
 
 # Run the dev flags test
-node test-dev-flags.js
+node scripts/test-dev-flags.js
 
 if [ $? -ne 0 ]; then
     echo ""

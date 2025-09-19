@@ -165,7 +165,7 @@ GitHub automatically provisions SSL after DNS verification (can take up to 24 ho
 - Zero layout shift implementation
 - Analytics tracking integration
 - Developer console API
-- Test harness at /test-variants.html
+- Internal test harness removed; use `scripts/test-dev-flags.js`
 
 **Success Criteria Met**:
 - ✓ No content flash or layout shifts
@@ -201,10 +201,11 @@ GitHub automatically provisions SSL after DNS verification (can take up to 24 ho
 - ✓ Server-side validation functions
 
 **Files Created/Modified**:
-- `waitlist.js` - Enhanced form handler with consent UI
-- `supabase-schema.sql` - For alpha testing logs (existing)
-- `waitlist-schema.sql` - For future account creation
-- `google-apps-script.js` - Existing Google Sheets integration
+- `api/waitlist.js` - Serverless handler (SendGrid Marketing API)
+- `api/waitlist-simple.js` - Serverless notification-only variant
+- `docs/schemas/supabase-schema.sql` - Alpha testing logs schema
+- `docs/schemas/waitlist-schema.sql` - Future account creation schema
+- (Removed) Google Sheets Apps Script integration
 
 #### 📋 Story 3: Analytics & Conversion Tracking
 **Status**: NOT STARTED
