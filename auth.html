@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>WorkspaceOS — Account Access</title>
+    <meta name="description" content="Sign in or create your WorkspaceOS account to access autonomous computing that learns your workflows.">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" sizes="32x32" href="workspaceos-icon.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="workspaceos-icon.png">
+    <link rel="shortcut icon" type="image/png" href="workspaceos-icon.png">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600;700;900&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="auth-styles.css">
+    
+    <!-- Supabase -->
+    <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
+</head>
+<body>
+    <!-- Ambient Background -->
+    <div class="ambient-bg">
+        <div class="gradient-orbs">
+            <div class="orb orb-1"></div>
+            <div class="orb orb-2"></div>
+            <div class="orb orb-3"></div>
+        </div>
+    </div>
+
+    <!-- Back to Home -->
+    <a href="/" class="back-to-home">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+            <path d="M13 10H7M7 10L10 13M7 10L10 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <span>Back</span>
+    </a>
+
+    <!-- Auth Container -->
+    <div class="auth-container">
+        <div class="auth-card">
+            <!-- Logo -->
+            <div class="auth-logo">
+                <svg width="60" height="60" viewBox="0 0 120 120" fill="none">
+                    <circle cx="60" cy="60" r="8" fill="white"/>
+                    <circle cx="60" cy="60" r="15" stroke="white" stroke-width="2" opacity="0.8"/>
+                    <circle cx="60" cy="60" r="24" stroke="white" stroke-width="1.5" opacity="0.6"/>
+                    <circle cx="60" cy="60" r="34" stroke="white" stroke-width="1" opacity="0.4"/>
+                </svg>
+            </div>
+
+            <h1 class="auth-title">Welcome to WorkspaceOS</h1>
+            <p class="auth-subtitle">Autonomous computing that runs ahead of your intent</p>
+
+            <!-- Tab Switcher -->
+            <div class="auth-tabs">
+                <button class="auth-tab active" data-tab="signin">Sign In</button>
+                <button class="auth-tab" data-tab="signup">Create Account</button>
+            </div>
+
+            <!-- Sign In Form -->
+            <form id="signin-form" class="auth-form active">
+                <div class="form-group">
+                    <label for="signin-email">Email</label>
+                    <input type="email" id="signin-email" placeholder="you@example.com" required>
+                </div>
+                <div class="form-group">
+                    <label for="signin-password">Password</label>
+                    <input type="password" id="signin-password" placeholder="••••••••" required>
+                </div>
+                <div class="form-options">
+                    <label class="checkbox-label">
+                        <input type="checkbox" id="remember-me">
+                        <span>Remember me</span>
+                    </label>
+                    <a href="#" class="forgot-password">Forgot password?</a>
+                </div>
+                <button type="submit" class="auth-submit">
+                    <span>Sign In</span>
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" class="button-icon">
+                        <path d="M7 10H13M13 10L10 7M13 10L10 13" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </button>
+            </form>
+
+            <!-- Sign Up Form -->
+            <form id="signup-form" class="auth-form">
+                <div class="form-group">
+                    <label for="signup-email">Email</label>
+                    <input type="email" id="signup-email" placeholder="you@example.com" required>
+                </div>
+                <div class="form-group">
+                    <label for="signup-password">Password</label>
+                    <input type="password" id="signup-password" placeholder="Min 8 characters" required minlength="8">
+                </div>
+                <div class="form-group">
+                    <label for="signup-confirm">Confirm Password</label>
+                    <input type="password" id="signup-confirm" placeholder="••••••••" required>
+                </div>
+                <div class="form-options">
+                    <label class="checkbox-label">
+                        <input type="checkbox" id="agree-terms" required>
+                        <span>I agree to the <a href="#" id="terms-link">Terms</a> and <a href="#" id="privacy-auth-link">Privacy Policy</a></span>
+                    </label>
+                </div>
+                <button type="submit" class="auth-submit">
+                    <span>Create Account</span>
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" class="button-icon">
+                        <path d="M7 10H13M13 10L10 7M13 10L10 13" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </button>
+            </form>
+
+            <!-- Reset Password Form -->
+            <form id="reset-form" class="auth-form">
+                <p class="reset-instructions">Enter your email and we'll send you a link to reset your password.</p>
+                <div class="form-group">
+                    <label for="reset-email">Email</label>
+                    <input type="email" id="reset-email" placeholder="you@example.com" required>
+                </div>
+                <button type="submit" class="auth-submit">
+                    <span>Send Reset Link</span>
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" class="button-icon">
+                        <path d="M7 10H13M13 10L10 7M13 10L10 13" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </button>
+                <a href="#" class="back-to-signin">Back to Sign In</a>
+            </form>
+
+            <!-- OAuth Options -->
+            <div class="auth-divider">
+                <span>or continue with</span>
+            </div>
+            
+            <div class="oauth-buttons">
+                <button class="oauth-button" id="apple-auth">
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                        <path d="M15.7348 16.9135C15.1219 18.0739 14.8458 18.0739 13.973 18.0739C13.1016 18.0739 12.8638 18.0739 12.2509 16.9135C11.3651 15.2318 10.4767 12.942 10.4767 10.4361C10.4767 7.50866 11.7955 6.30556 13.4118 6.30556C14.0863 6.30556 14.6948 6.56471 15.1506 6.76999C15.4029 6.88295 15.6179 6.97975 15.7841 6.97975C15.9093 6.97975 16.0884 6.89778 16.3009 6.79966C16.7567 6.58762 17.4437 6.2627 18.2589 6.2627C18.2602 6.2627 18.2628 6.2627 18.2641 6.2627C18.9584 6.2627 20.245 6.38825 21.1841 7.72265L21.5052 8.20888L21.0378 8.5486C20.5254 8.92123 19.8225 9.55704 19.8225 10.9287C19.8225 12.5572 20.6478 13.2352 21.2241 13.666C21.4788 13.8527 21.7757 14.0702 21.7757 14.5116C21.7757 14.8462 20.3118 18.0739 18.2576 18.0739C17.5514 18.0739 17.0588 17.8712 16.6244 17.6914C16.1835 17.5085 15.803 17.3497 15.2789 17.3497C15.0372 17.3497 14.7635 17.4522 14.4572 17.567C13.9895 17.7428 13.4303 17.9536 12.7711 17.9536C10.9999 17.9523 9.09985 16.5621 7.89026 14.1759C6.48813 11.416 6.66919 6.97845 8.9012 4.55617C9.93328 3.41854 11.3807 2.73926 12.8523 2.73926C13.6266 2.73926 14.3118 2.97842 14.8644 3.17239C15.2334 3.30065 15.5549 3.41286 15.8127 3.41286C16.0265 3.41286 16.317 3.31288 16.6641 3.19269C17.2545 2.98715 17.9959 2.73145 18.7877 2.73926C18.7891 2.73926 18.7917 2.73926 18.793 2.73926C20.0299 2.74057 21.5781 3.16759 22.7536 4.59026L22.754 4.5905C22.7606 4.59789 22.7564 4.60737 22.743 4.60867C22.4026 4.64448 19.1151 4.99111 19.1151 9.05466C19.1151 13.7066 22.9439 14.7441 23.0468 14.7767C23.043 14.789 23.0404 14.7961 23.0378 14.8058C22.9675 15.0706 22.5268 16.5089 21.5871 18.0011C20.7652 19.3142 19.9094 20.6221 18.2641 20.6221C17.5022 20.6221 16.9536 20.4029 16.4606 20.2049C15.9454 19.9978 15.4901 19.8137 14.8463 19.8137C14.1621 19.8137 13.6586 20.0058 13.1103 20.2141C12.6276 20.3989 12.1137 20.595 11.4779 20.6169C11.4101 20.6195 11.3424 20.6208 11.2759 20.6208C9.74164 20.6208 8.87338 19.3402 8.17779 18.2087L8.17388 18.202C6.51258 15.2968 5.11359 11.7479 5.11359 8.39245C5.11359 4.65196 7.47457 2.68695 10.2038 2.68695C11.119 2.68695 11.9765 2.95161 12.6887 3.17109C13.0993 3.29795 13.4688 3.41286 13.7734 3.41286C14.0416 3.41286 14.3846 3.31028 14.7822 3.19009C15.515 2.96645 16.4648 2.67995 17.4683 2.68695C17.4701 2.68695 17.4729 2.68695 17.4747 2.68695C18.868 2.69004 21.1178 2.9646 22.754 4.5905L15.7348 16.9135ZM13.4443 1.88125C13.3467 0.829552 13.7745 -0.231445 14.5007 -0.990917C15.3193 -1.85319 16.5423 -2.36016 17.6009 -2.25C17.6919 -1.09031 17.2057 0.0585461 16.5137 0.810954C15.6994 1.70234 14.6451 2.32135 13.4443 1.88125Z" fill="currentColor" opacity="0.8"/>
+                    </svg>
+                    <span>Apple</span>
+                </button>
+                <button class="oauth-button" id="google-auth">
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                        <path d="M18.1713 8.36795H17.5V8.33337H10V11.6667H14.7096C14.0225 13.6071 12.1763 15 10 15C7.23875 15 5 12.7613 5 10C5 7.23875 7.23875 5.00004 10 5.00004C11.2746 5.00004 12.4342 5.48087 13.3171 6.26629L15.6742 3.90921C14.1858 2.52212 12.1946 1.66671 10 1.66671C5.39792 1.66671 1.66666 5.39796 1.66666 10C1.66666 14.6021 5.39792 18.3334 10 18.3334C14.6021 18.3334 18.3333 14.6021 18.3333 10C18.3333 9.44129 18.2758 8.89587 18.1713 8.36795Z" fill="currentColor" opacity="0.8"/>
+                    </svg>
+                    <span>Google</span>
+                </button>
+                <button class="oauth-button" id="github-auth">
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                        <path d="M10 1.66666C5.39542 1.66666 1.66666 5.39541 1.66666 10C1.66666 13.6871 4.05374 16.8029 7.36499 17.9004C7.78166 17.9758 7.9375 17.72 7.9375 17.5004C7.9375 17.3033 7.93041 16.7371 7.92624 15.9775C5.59707 16.4841 5.11124 14.6516 5.11124 14.6516C4.73207 13.6866 4.18082 13.4316 4.18082 13.4316C3.41832 12.9129 4.23749 12.9233 4.23749 12.9233C5.07791 12.9829 5.52041 13.7916 5.52041 13.7916C6.2625 15.0766 7.46457 14.6908 7.95291 14.4783C8.02832 13.9333 8.24374 13.5608 8.48249 13.3554C6.54916 13.1479 4.52249 12.43 4.52249 9.21874C4.52249 8.30207 4.84707 7.55166 5.53624 6.96249C5.45041 6.75499 5.16499 5.90166 5.61791 4.74499C5.61791 4.74499 6.31749 4.52166 7.91791 5.60541C8.58041 5.41999 9.29249 5.32749 10 5.32416C10.7075 5.32749 11.42 5.41999 12.0837 5.60541C13.6825 4.52166 14.3808 4.74499 14.3808 4.74499C14.835 5.90166 14.5496 6.75499 14.4637 6.96249C15.1542 7.55166 15.4762 8.30207 15.4762 9.21874C15.4762 12.4379 13.4462 13.1458 11.5058 13.3487C11.8046 13.6037 12.0729 14.1058 12.0729 14.8741C12.0729 15.9829 12.0629 16.8779 12.0629 17.5004C12.0629 17.7216 12.2162 17.9796 12.6387 17.8996C15.9479 16.8004 18.3333 13.6858 18.3333 10C18.3333 5.39541 14.6046 1.66666 10 1.66666Z" fill="currentColor" opacity="0.8"/>
+                    </svg>
+                    <span>GitHub</span>
+                </button>
+            </div>
+
+            <!-- Success/Error Messages -->
+            <div id="auth-message" class="auth-message"></div>
+        </div>
+
+        <!-- Features -->
+        <div class="auth-features">
+            <div class="feature-item">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                    <path d="M9 12L11 14L15 10M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                <span>30-day free trial</span>
+            </div>
+            <div class="feature-item">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                    <path d="M12 15V17M6 21H18C19.1046 21 20 20.1046 20 19V13C20 11.8954 19.1046 11 18 11H17V8C17 5.23858 14.7614 3 12 3C9.23858 3 7 5.23858 7 8V11H6C4.89543 11 4 11.8954 4 13V19C4 20.1046 4.89543 21 6 21Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                <span>End-to-end encryption</span>
+            </div>
+            <div class="feature-item">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                    <path d="M8 7V3M16 7V3M7 11H17M5 21H19C20.1046 21 21 20.1046 21 19V7C21 5.89543 20.1046 5 19 5H5C3.89543 5 3 5.89543 3 7V19C3 20.1046 3.89543 21 5 21Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                <span>Cancel anytime</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Success Modal -->
+    <div id="success-modal" class="success-modal">
+        <div class="success-content">
+            <svg width="60" height="60" viewBox="0 0 60 60" fill="none" class="success-icon">
+                <circle cx="30" cy="30" r="30" fill="rgba(255, 255, 255, 0.1)"/>
+                <path d="M20 30L26 36L40 22" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <h2>Check Your Email</h2>
+            <p>We've sent you a confirmation link. Please check your email to verify your account.</p>
+            <button class="success-close">Got it</button>
+        </div>
+    </div>
+
+    <script src="auth.js"></script>
+    <!-- Cloudflare Web Analytics --><script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "c71909abc8ce48cd99072246781b8353"}'></script><!-- End Cloudflare Web Analytics -->
+</body>
+</html>
