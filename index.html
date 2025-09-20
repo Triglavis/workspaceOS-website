@@ -340,6 +340,11 @@
                 if (window.initRotatingText) {
                     window.initRotatingText();
                 }
+
+                // Recompute animation delays now that headline/bullets may have changed
+                if (window.applyDynamicDelays) {
+                    window.applyDynamicDelays();
+                }
             })
             .catch(err => {
                 console.error('Failed to load variants:', err);

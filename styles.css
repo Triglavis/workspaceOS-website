@@ -585,7 +585,9 @@ body {
 }
 
 .fade-in-stats .stat-progress-bar::after {
-    animation: progressSweep 7s linear 5.2s infinite;
+    /* Start after stats are visible; JS sets --progress-delay dynamically */
+    animation: progressSweep 7s linear infinite;
+    animation-delay: var(--progress-delay, 5.2s);
 }
 
 .stat-progress-bar.paused::after {

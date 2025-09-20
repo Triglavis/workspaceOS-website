@@ -664,12 +664,12 @@ class StatCycler {
             });
         }
         
-        // Wait for stats to be fully visible before starting
-        // Stats fade in at 4.6s, need to wait for animation to complete
+        // Wait for stats to be fully visible before starting (dynamic)
+        const fallbackMs = 5200; // legacy timing
+        const startMs = (window.__animationDelays && window.__animationDelays.startCycleAfterMs) || fallbackMs;
         setTimeout(() => {
-            // Now start the countdown timer which takes 7 seconds
             this.scheduleCycle(7000);
-        }, 5200); // 5.2s = 4.6s (last stat fade-in) + 0.6s (animation duration)
+        }, startMs);
     }
     
     pause() {
@@ -1018,6 +1018,10 @@ class AnimationSpeedController {
 
 // Initialize everything
 document.addEventListener('DOMContentLoaded', () => {
+    // Apply dynamic animation delays to ensure consistent reveal order
+    if (typeof window.applyDynamicDelays === 'function') {
+        window.applyDynamicDelays();
+    }
     // Initialize gravitational field
     const canvas = document.getElementById('particles');
     if (canvas) {
@@ -1055,6 +1059,71 @@ document.addEventListener('DOMContentLoaded', () => {
     // Initialize privacy modal
     new PrivacyModalHandler();
 });
+
+// Compute and apply dynamic animation delays based on headline word count.
+// Ensures consistent order: brand -> headline -> body -> bullets.
+window.applyDynamicDelays = function applyDynamicDelays() {
+    try {
+        const brandDelay = 1.9; // workspaceos-brand starts at 1.9s
+        const headlineBase = brandDelay + 0.1; // start headline shortly after brand
+        const step = 0.1; // 100ms between words
+
+        const heroTitle = document.querySelector('.hero-title');
+        if (!heroTitle) return;
+
+        // Set per-word delays
+        const words = Array.from(heroTitle.querySelectorAll('.word-reveal'));
+        let wordIndex = 0;
+        words.forEach((span) => {
+            span.style.animationDelay = `${(headlineBase + (wordIndex * step)).toFixed(2)}s`;
+            wordIndex++;
+        });
+
+        // Description appears after last word starts
+        const desc = document.querySelector('.hero-description.fade-in-description');
+        const lastWordStart = headlineBase + Math.max(0, (wordIndex - 1)) * step;
+        const descDelay = lastWordStart + 0.3; // 300ms after last word begins
+        if (desc) {
+            desc.style.animationDelay = `${descDelay.toFixed(2)}s`;
+        }
+
+        // Stats (bullets) after description
+        const stats = document.querySelector('.hero-stats.fade-in-stats');
+        const statElems = stats ? Array.from(stats.querySelectorAll('.stat')) : [];
+        const statsDelay = descDelay + 1.0; // 1s after description begins
+        if (stats) {
+            stats.style.animationDelay = `${statsDelay.toFixed(2)}s`;
+            // Progress sweep delay for ::after via CSS var
+            const progressDelay = statsDelay + 1.4; // keep visual sweep timing
+            stats.style.setProperty('--progress-delay', `${progressDelay.toFixed(2)}s`);
+        }
+        // Stagger stat columns (override CSS nth-child)
+        statElems.forEach((el, i) => {
+            const extra = i * 0.2; // 0, 0.2, 0.4
+            el.style.animationDelay = `${(statsDelay + extra).toFixed(2)}s`;
+        });
+
+        // Form after stats start
+        const form = document.querySelector('.hero-actions.fade-in-form');
+        if (form) {
+            const formDelay = statsDelay + 0.5; // half-second after stats start
+            form.style.animationDelay = `${formDelay.toFixed(2)}s`;
+        }
+
+        // Share timing for other components (e.g., StatCycler)
+        window.__animationDelays = {
+            brandDelay,
+            headlineBase,
+            wordCount: wordIndex,
+            descDelay,
+            statsDelay,
+            lastStatStart: statsDelay + 0.4, // right-most column
+            startCycleAfterMs: Math.round((statsDelay + 0.4 + 0.8 + 0.6) * 1000) // last stat start + duration + buffer
+        };
+    } catch (e) {
+        console.warn('applyDynamicDelays error:', e);
+    }
+};
 
 // Privacy Modal Handler
 class PrivacyModalHandler {
