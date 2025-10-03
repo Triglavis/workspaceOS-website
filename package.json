@@ -5,6 +5,7 @@
   "scripts": {
     "dev": "npx http-server -p 3000 -o",
     "serve": "python3 -m http.server 3000",
+    "inject:analytics": "node scripts/inject-analytics-token.js",
     "test:flags": "node scripts/test-dev-flags.js",
     "precommit": "node scripts/test-dev-flags.js"
   },

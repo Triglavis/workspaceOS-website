@@ -9,6 +9,14 @@ if [ ! -f "index.html" ]; then
     exit 1
 fi
 
+# Inject analytics token if available
+echo "🔍 Preparing analytics token..."
+if [ -n "$CLOUDFLARE_ANALYTICS_TOKEN" ]; then
+    node scripts/inject-analytics-token.js
+else
+    echo "⚠️  CLOUDFLARE_ANALYTICS_TOKEN not set; skipping token injection."
+fi
+
 # Check git status
 echo "📋 Checking git status..."
 git status

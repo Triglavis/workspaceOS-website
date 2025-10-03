@@ -26,6 +26,17 @@ npx http-server -p 3000
 
 Site auto-deploys via GitHub Actions when pushing to `main` branch.
 
+## Cloudflare Analytics
+
+Use the helper script to update the Cloudflare Web Analytics token across all HTML files:
+
+```bash
+export CLOUDFLARE_ANALYTICS_TOKEN="your-production-token"
+npm run inject:analytics
+```
+
+`deploy.sh` runs the same script automatically when the environment variable is present, so set it before deploying to ensure the correct token reaches production.
+
 ## Development
 
 See `CLAUDE.md` for detailed implementation requirements and vision.
