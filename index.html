@@ -96,14 +96,14 @@
                 <span class="word-reveal gradient-text">Thought</span>
             </h1>
             
-            <p class="hero-description fade-in-description" data-copy="body">
+            <p class="hero-description fade-in-description">
                 <span data-copy="subheadline">Your computer already sees your patterns. Now it acts on them. No more explaining what you're doing—your work explains itself.</span>
                 <br><br>
-                <span class="highlight-brand">WorkspaceOS</span> is the intelligence layer across all your tools. Through <span class="tooltip-trigger">screen-level awareness<span class="tooltip-content">Like having an AI that sees your entire screen. Works with legacy enterprise software, brand new SaaS tools, even websites without APIs.</span></span> (works with anything you can see), it connects patterns between your disconnected apps. Once it learns your workflow through <span class="tooltip-trigger">Pattern-First Computing<span class="tooltip-content">First time: learns the pattern. Forever after: executes directly. Your repeated workflows become permanent, cost-free automations.</span></span>, it handles the coordination permanently—status updates write themselves, context follows you between tools, repetitive tasks disappear. Our <span class="tooltip-trigger">Comprehensive Project Memory<span class="tooltip-content">Remembers that you always check logs after payment errors, always update Jira after pushing code, always notify Sarah when deploying. Acts on these patterns without being asked.</span></span> connects actions across time and context.
+                <span data-copy="body"><span class="highlight-brand">WorkspaceOS</span> is the intelligence layer across all your tools. Through <span class="tooltip-trigger">Hybrid Intelligence<span class="tooltip-content">Combining Screen-Level Vision with deep API integration for 100% truth.</span></span> (works with anything you can see + APIs), it connects patterns between your disconnected apps. Once it learns your workflow through <span class="tooltip-trigger">Pattern-First Computing<span class="tooltip-content">First time: learns the pattern. Forever after: executes directly. Your repeated workflows become permanent, cost-free automations.</span></span>, it handles the coordination permanently—status updates write themselves, context follows you between tools, repetitive tasks disappear. Unlike passive AI tools, WorkspaceOS uses an internal <span class="tooltip-trigger">Agent Parliament<span class="tooltip-content">A 'Red Team' AI challenges every plan for security and logic flaws before the 'Executor' AI acts, ensuring safety.</span></span> to verify every autonomous action, ensuring safety before execution.
                 <br><br>
-                Your focus stays unbroken while the 58% of your day spent on 'work about work' gets handled automatically. Unlike passive AI tools, WorkspaceOS actively anticipates what's needed next.
+                Your focus stays unbroken while the 58% of your day spent on 'work about work' gets handled automatically.
                 <br><br>
-                Stay in deep focus. Your AI partner handles everything else.
+                Stay in deep focus. Your safe, self-governing AI partner handles everything else.</span>
             </p>
             
             <div class="hero-stats fade-in-stats">
@@ -118,18 +118,18 @@
                 </div>
                 <div class="stat" data-cycle="2">
                     <div class="stat-value">
-                        <span class="stat-cycle" data-messages='["Active AI Collaboration", "Acts Before You Even Ask", "Handles Full Team Context"]' data-copy="bullet-1-title">Active AI Collaboration</span>
+                        <span class="stat-cycle" data-messages='["Verified Autonomy", "Agent Parliament", "Safety First"]' data-copy="bullet-1-title">Verified Autonomy</span>
                     </div>
                     <div class="stat-label">
-                        <span class="stat-cycle" data-messages='["Drafts updates from your progress", "Connects work across teams", "Proactive workspace assistance"]' data-copy="bullet-1-desc">Drafts updates from your progress</span>
+                        <span class="stat-cycle" data-messages='["Agent Parliament verifies every action", "Red Team checks for risks before execution", "Proactive workspace assistance with safety"]' data-copy="bullet-1-desc">Agent Parliament verifies every action</span>
                     </div>
                 </div>
                 <div class="stat" data-cycle="3">
                     <div class="stat-value">
-                        <span class="stat-cycle" data-messages='["Screen-Level Intelligence", "Universal App Support", "Zero Integrations Required"]' data-copy="bullet-2-title">Screen-Level Intelligence</span>
+                        <span class="stat-cycle" data-messages='["Hybrid Intelligence", "Screen Vision + API Truth", "Universal App Support"]' data-copy="bullet-2-title">Hybrid Intelligence</span>
                     </div>
                     <div class="stat-label">
-                        <span class="stat-cycle" data-messages='["Connects work patterns across teams", "Works with any application", "Visual understanding of your workspace"]' data-copy="bullet-2-desc">Connects work patterns across teams</span>
+                        <span class="stat-cycle" data-messages='["Screen Vision + API Truth", "Works with any application", "Visual understanding + Data verification"]' data-copy="bullet-2-desc">Screen Vision + API Truth</span>
                     </div>
                 </div>
                 <div class="stat-progress-bar bottom"></div>
@@ -266,6 +266,8 @@
                                 if (i < words.length - 1) html += ' ';
                             });
                             el.innerHTML = html;
+                        } else if (selector === 'body') {
+                            el.innerHTML = text;
                         } else {
                             el.textContent = text;
                         }
