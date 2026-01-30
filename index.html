@@ -221,7 +221,7 @@
     <script>
     (function() {
         // Fetch variants on load
-        fetch('/variants.json', { cache: 'force-cache' })
+        fetch('/variants.json', { cache: 'no-cache' })
             .then(res => res.json())
             .then(variants => {
                 // Parse URL params
