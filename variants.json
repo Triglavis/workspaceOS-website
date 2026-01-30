@@ -1,35 +1,35 @@
 {
   "default": {
-    "headline": "Work at the Speed of Thought",
-    "subheadline": "Your computer already sees your patterns. Now it acts on them. No more explaining what you're doing—your work explains itself.",
-    "body": "WorkspaceOS is the intelligence layer across all your tools. Through <span class='tooltip-trigger'>Hybrid Intelligence<span class='tooltip-content'>Combining Screen-Level Vision with deep API integration for 100% truth.</span></span> (works with anything you can see + APIs), it connects patterns between your disconnected apps. Once it learns your workflow through <span class='tooltip-trigger'>Pattern-First Computing<span class='tooltip-content'>First time: learns the pattern. Forever after: executes directly. Your repeated workflows become permanent, cost-free automations.</span></span>, it handles the coordination permanently—status updates write themselves, context follows you between tools, repetitive tasks disappear. Unlike passive AI tools, WorkspaceOS uses an internal <span class='tooltip-trigger'>Agent Parliament<span class='tooltip-content'>A 'Red Team' AI challenges every plan for security and logic flaws before the 'Executor' AI acts, ensuring safety.</span></span> to verify every autonomous action, ensuring safety before execution.\n\nYour focus stays unbroken while the 58% of your day spent on 'work about work' gets handled automatically.\n\nStay in deep focus. Your safe, self-governing AI partner handles everything else.",
+    "headline": "The OS That Dreams",
+    "subheadline": "While you work, it learns. While you sleep, it optimizes. The first operating surface that turns downtime into intelligence.",
+    "body": "WorkspaceOS is your Exocortex—a second brain that lives in your operating system. While you work, its <span class='tooltip-trigger'>Living Library<span class='tooltip-content'>Actively consumes and connects everything you view—PDFs, chats, sites, code—into a searchable Concept Graph.</span></span> captures and connects every document, chat, and pixel you see. When you step away, it enters a <span class='tooltip-trigger'>Dreaming State<span class='tooltip-content'>Uses system idle time to verify claims, find supporting data, refactor messy work, and draft automations for tomorrow.</span></span>, analyzing your day's friction and solving problems in the background. By the time you return, your work is organized, your research is connected, and your next steps are ready. All governed by an internal <span class='tooltip-trigger'>Agent Parliament<span class='tooltip-content'>A Red Team/Blue Team governance layer that validates every autonomous insight before it reaches you.</span></span> to ensure safety and rigor.\n\nStop managing files. Start cultivating thoughts.",
     "bullets": [
       {
-        "title": "Pattern-First Computing",
-        "desc": "Workflows cached locally",
-        "rotatingTitles": ["Pattern-First Computing", "Learns Your Daily Workflows", "Caches Patterns Locally"],
-        "rotatingDescs": ["Workflows cached locally", "Patterns recognized intelligently", "Eliminates redundant processing"]
+        "title": "Living Library",
+        "desc": "Auto-curates everything you see",
+        "rotatingTitles": ["Living Library", "The Exocortex", "Total Recall"],
+        "rotatingDescs": ["Auto-curates everything you see", "Connects PDFs, chats, and pixels", "Your second brain, built in"]
+      },
+      {
+        "title": "Lucid Dreaming",
+        "desc": "Optimizes work while you sleep",
+        "rotatingTitles": ["Lucid Dreaming", "Background Intelligence", "Always On"],
+        "rotatingDescs": ["Optimizes work while you sleep", "Refactors and organizes in background", "Turns downtime into value"]
       },
       {
         "title": "Verified Autonomy",
         "desc": "Agent Parliament verifies every action",
         "rotatingTitles": ["Verified Autonomy", "Agent Parliament", "Safety First"],
         "rotatingDescs": ["Agent Parliament verifies every action", "Red Team checks for risks before execution", "Proactive workspace assistance with safety"]
-      },
-      {
-        "title": "Hybrid Intelligence",
-        "desc": "Screen Vision + API Truth",
-        "rotatingTitles": ["Hybrid Intelligence", "Screen Vision + API Truth", "Universal App Support"],
-        "rotatingDescs": ["Screen Vision + API Truth", "Works with any application", "Visual understanding + Data verification"]
       }
     ],
-    "ctaNote": "No spam, just updates when we launch.",
-    "metaDescription": "Anticipatory computing that learns your workflows. Features Hybrid Intelligence (Screen+API) and an Agent Parliament for verified, safe autonomy."
+    "ctaNote": "Join the waitlist for the Exocortex.",
+    "metaDescription": "The OS That Dreams. WorkspaceOS acts as an Exocortex, building a Living Library of your work and optimizing it while you sleep."
   },
   "dev": {
-    "headline": "Your AI-powered Engineering Co-pilot",
-    "subheadline": "WorkspaceOS eliminates 40% of status meetings through Self-Governing Autonomy.",
-    "body": "WorkspaceOS watches your engineering workflow and eliminates the coordination tax. By combining <span class='tooltip-trigger'>Screen-Level Vision<span class='tooltip-content'>Like having an AI that sees your entire screen. Works with legacy enterprise software, brand new SaaS tools, even websites without APIs.</span></span> with deep <strong>API & Git Integration</strong>, it builds a <span class='tooltip-trigger'>Hybrid Causal Graph<span class='tooltip-content'>Connects what it sees (Screen) with what it knows (Git/API) to build a graph of 100% truth.</span></span> of your engineering reality. Your PR gets merged? Jira updates itself—verified by Git. Debug session discovers root cause? Documentation writes itself. Unlike standard copilots, WorkspaceOS uses an internal <span class='tooltip-trigger'>Agent Parliament<span class='tooltip-content'>A 'Red Team' AI challenges every plan for security and logic flaws before the 'Executor' AI acts, ensuring safety.</span></span> to debate and verify every autonomous action before execution. Every pattern you repeat becomes a permanent automation, cached locally for instant execution through <span class='tooltip-trigger'>Pattern-First Computing<span class='tooltip-content'>First time: learns the pattern. Forever after: executes directly. Your repeated workflows become permanent, cost-free automations.</span></span>.",
+    "headline": "Your AI-powered Engineering Partner",
+    "subheadline": "The OS that refactors your code while you sleep. WorkspaceOS eliminates the coordination tax through Self-Governing Autonomy.",
+    "body": "WorkspaceOS is more than a copilot; it's a partner that works when you don't. Using <span class='tooltip-trigger'>Shadow Git<span class='tooltip-content'>Spins up invisible shadow branches to attempt risky refactors or documentation passes without touching your working tree.</span></span>, it enters a 'Dreaming State' during downtime to optimize technical debt, update documentation, and verify dependencies. It builds a **Hybrid Causal Graph** of your repo, allowing for <span class='tooltip-trigger'>Time Travel Debugging<span class='tooltip-content'>Scrub back through the causal history of your project to see exactly why a decision was made or a bug was introduced.</span></span>. All governed by an internal **Agent Parliament** that debates and verifies every commit before it's proposed.",
     "bullets": [
       {
         "title": "Hybrid Intelligence",
@@ -38,20 +38,20 @@
         "rotatingDescs": ["Combines visual cues with Git/API verification", "No more 'did you update the ticket?' checks", "Sees what you see, verifies with what it knows"]
       },
       {
+        "title": "Background Refactoring",
+        "desc": "Optimizes code while you sleep",
+        "rotatingTitles": ["Background Refactoring", "Lucid Dreaming", "Shadow Git"],
+        "rotatingDescs": ["Optimizes code while you sleep", "Attempts refactors in shadow branches", "Turns downtime into clean code"]
+      },
+      {
         "title": "Verified Autonomy",
         "desc": "An internal 'Agent Parliament' debates every action",
         "rotatingTitles": ["Verified Autonomy", "Agent Parliament", "Red Team Security"],
         "rotatingDescs": ["An internal 'Agent Parliament' debates every action", "The Red Team checks for risks before execution", "Ensures your AI never breaks production"]
-      },
-      {
-        "title": "Causal Reasoning",
-        "desc": "Traces the 'Why' behind every line of code",
-        "rotatingTitles": ["Causal Reasoning", "The 'Why' Engine", "Root Cause Tracing"],
-        "rotatingDescs": ["Traces the 'Why' behind every line of code", "Connects bugs back to the original Slack decision", "Full provenance from idea to production"]
       }
     ],
     "ctaNote": "Built for engineering teams.",
-    "metaDescription": "WorkspaceOS eliminates 40% of status meetings with Self-Governing Autonomy. Features Hybrid Intelligence, Agent Parliament for safety, and Causal Reasoning."
+    "metaDescription": "WorkspaceOS: The engineering partner that refactors code while you sleep. Features Hybrid Intelligence, Shadow Git, and Agent Parliament."
   },
   "ai": {
     "headline": "One OS for All Your AI",

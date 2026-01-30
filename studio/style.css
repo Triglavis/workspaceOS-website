@@ -1,0 +1,19 @@
+body {
+    margin: 0;
+    overflow: hidden;
+    background-color: #000; /* Deep Obsidian */
+}
+
+#render-canvas {
+    width: 100vw;
+    height: 100vh;
+    display: block;
+}
+
+#studio-ui {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    pointer-events: none; /* Let clicks pass through to canvas unless on UI elements */
+}

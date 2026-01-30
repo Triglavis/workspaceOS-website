@@ -5,9 +5,19 @@
   "scripts": {
     "dev": "npx http-server -p 3000 -o",
     "serve": "python3 -m http.server 3000",
+    "studio": "vite studio",
     "inject:analytics": "node scripts/inject-analytics-token.js",
     "test:flags": "node scripts/test-dev-flags.js",
     "precommit": "node scripts/test-dev-flags.js"
+  },
+  "dependencies": {
+    "three": "^0.160.0",
+    "@theatre/core": "^0.7.0",
+    "@theatre/studio": "^0.7.0",
+    "ccapture.js": "^1.1.0"
+  },
+  "devDependencies": {
+    "vite": "^5.0.0"
   },
   "keywords": ["workspaceos", "ambient-intelligence", "productivity", "tools"],
   "author": "Triglavis",
