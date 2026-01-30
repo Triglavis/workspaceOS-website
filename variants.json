@@ -1,53 +1,53 @@
 {
   "default": {
     "headline": "The OS That Dreams",
-    "subheadline": "While you work, it learns. While you sleep, it optimizes. The first operating surface that turns downtime into intelligence.",
-    "body": "WorkspaceOS is your Exocortex—a second brain that lives in your operating system. While you work, its <span class='tooltip-trigger'>Living Library<span class='tooltip-content'>Actively consumes and connects everything you view—PDFs, chats, sites, code—into a searchable Concept Graph.</span></span> captures and connects every document, chat, and pixel you see. When you step away, it enters a <span class='tooltip-trigger'>Dreaming State<span class='tooltip-content'>Uses system idle time to verify claims, find supporting data, refactor messy work, and draft automations for tomorrow.</span></span>, analyzing your day's friction and solving problems in the background. By the time you return, your work is organized, your research is connected, and your next steps are ready. All governed by an internal <span class='tooltip-trigger'>Agent Parliament<span class='tooltip-content'>A Red Team/Blue Team governance layer that validates every autonomous insight before it reaches you.</span></span> to ensure safety and rigor.\n\nStop managing files. Start cultivating thoughts.",
+    "subheadline": "While you work, it indexes. While you sleep, it resolves. The first operating surface that turns downtime into committed value.",
+    "body": "WorkspaceOS is your Exocortex—a second brain that runs locally on your machine. While you work, its <span class='tooltip-trigger'>Living Library<span class='tooltip-content'>Builds a local, private Vector Index of your active context—PDFs, DOM elements, chat threads, and code.</span></span> builds a structured graph of everything you view. When you step away, it enters a <span class='tooltip-trigger'>Dreaming State<span class='tooltip-content'>Spins up sandboxed background processes to verify your citations, run exhaustive tests, and attempt shadow refactors.</span></span>, utilizing idle compute to resolve friction found during the day. By the time you return, your research is verified, your citations are linked, and your drafts are ready. All governed by an internal <span class='tooltip-trigger'>Agent Parliament<span class='tooltip-content'>A deterministic governance layer that validates every autonomous output against your defined safety rules.</span></span> to ensure rigor.\n\nStop managing files. Start cultivating thoughts.",
     "bullets": [
       {
         "title": "Living Library",
-        "desc": "Auto-curates everything you see",
-        "rotatingTitles": ["Living Library", "The Exocortex", "Total Recall"],
-        "rotatingDescs": ["Auto-curates everything you see", "Connects PDFs, chats, and pixels", "Your second brain, built in"]
+        "desc": "Indexes your context locally",
+        "rotatingTitles": ["Living Library", "Local Vector Graph", "Total Recall"],
+        "rotatingDescs": ["Indexes your context locally", "Connects documents, chats, and code", "Your private knowledge graph"]
       },
       {
         "title": "Lucid Dreaming",
-        "desc": "Optimizes work while you sleep",
-        "rotatingTitles": ["Lucid Dreaming", "Background Intelligence", "Always On"],
-        "rotatingDescs": ["Optimizes work while you sleep", "Refactors and organizes in background", "Turns downtime into value"]
+        "desc": "Resolves tasks during idle time",
+        "rotatingTitles": ["Lucid Dreaming", "Background Runtime", "Shadow Work"],
+        "rotatingDescs": ["Resolves tasks during idle time", "Runs tests and verifications in background", "Turns idle cycles into value"]
       },
       {
         "title": "Verified Autonomy",
-        "desc": "Agent Parliament verifies every action",
-        "rotatingTitles": ["Verified Autonomy", "Agent Parliament", "Safety First"],
-        "rotatingDescs": ["Agent Parliament verifies every action", "Red Team checks for risks before execution", "Proactive workspace assistance with safety"]
+        "desc": "Agent Parliament validates outputs",
+        "rotatingTitles": ["Verified Autonomy", "Agent Parliament", "Deterministic Safety"],
+        "rotatingDescs": ["Agent Parliament validates outputs", "Red Team checks for risks before execution", "Proactive assistance, mathematically verified"]
       }
     ],
     "ctaNote": "Join the waitlist for the Exocortex.",
-    "metaDescription": "The OS That Dreams. WorkspaceOS acts as an Exocortex, building a Living Library of your work and optimizing it while you sleep."
+    "metaDescription": "The OS That Dreams. WorkspaceOS acts as an Exocortex, indexing your work and resolving tasks in the background."
   },
   "dev": {
     "headline": "Your AI-powered Engineering Partner",
     "subheadline": "The OS that refactors your code while you sleep. WorkspaceOS eliminates the coordination tax through Self-Governing Autonomy.",
-    "body": "WorkspaceOS is more than a copilot; it's a partner that works when you don't. Using <span class='tooltip-trigger'>Shadow Git<span class='tooltip-content'>Spins up invisible shadow branches to attempt risky refactors or documentation passes without touching your working tree.</span></span>, it enters a 'Dreaming State' during downtime to optimize technical debt, update documentation, and verify dependencies. It builds a **Hybrid Causal Graph** of your repo, allowing for <span class='tooltip-trigger'>Time Travel Debugging<span class='tooltip-content'>Scrub back through the causal history of your project to see exactly why a decision was made or a bug was introduced.</span></span>. All governed by an internal **Agent Parliament** that debates and verifies every commit before it's proposed.",
+    "body": "WorkspaceOS is more than a copilot; it's a partner that works when you don't. Using <span class='tooltip-trigger'>Shadow Git<span class='tooltip-content'>Spins up invisible shadow branches to attempt risky refactors or documentation passes without touching your working tree.</span></span>, it utilizes system idle time to run exhaustive test suites, update stale documentation, and verify dependencies. It builds a **Hybrid Causal Graph** of your repo, allowing for <span class='tooltip-trigger'>Time Travel Debugging<span class='tooltip-content'>Scrub back through the causal history of your project to see exactly why a decision was made or a bug was introduced.</span></span>. All governed by an internal **Agent Parliament** that debates and verifies every commit in a sandbox before it's ever proposed to you.",
     "bullets": [
       {
         "title": "Hybrid Intelligence",
-        "desc": "Combines visual cues with Git/API verification",
+        "desc": "Combines Screen Vision with API Truth",
         "rotatingTitles": ["Hybrid Intelligence", "Visual + API Verification", "100% Truth"],
-        "rotatingDescs": ["Combines visual cues with Git/API verification", "No more 'did you update the ticket?' checks", "Sees what you see, verifies with what it knows"]
+        "rotatingDescs": ["Combines Screen Vision with API Truth", "No more 'did you update the ticket?' checks", "Sees what you see, verifies with what it knows"]
       },
       {
         "title": "Background Refactoring",
-        "desc": "Optimizes code while you sleep",
+        "desc": "Runs test-driven refactors on idle",
         "rotatingTitles": ["Background Refactoring", "Lucid Dreaming", "Shadow Git"],
-        "rotatingDescs": ["Optimizes code while you sleep", "Attempts refactors in shadow branches", "Turns downtime into clean code"]
+        "rotatingDescs": ["Runs test-driven refactors on idle", "Attempts changes in shadow branches", "Turns downtime into clean code"]
       },
       {
         "title": "Verified Autonomy",
-        "desc": "An internal 'Agent Parliament' debates every action",
+        "desc": "Agent Parliament debates every commit",
         "rotatingTitles": ["Verified Autonomy", "Agent Parliament", "Red Team Security"],
-        "rotatingDescs": ["An internal 'Agent Parliament' debates every action", "The Red Team checks for risks before execution", "Ensures your AI never breaks production"]
+        "rotatingDescs": ["Agent Parliament debates every commit", "The Red Team checks for risks before execution", "Ensures your AI never breaks production"]
       }
     ],
     "ctaNote": "Built for engineering teams.",
