@@ -6,102 +6,150 @@
     "bullets": [
       {
         "title": "Universal Vision",
-        "desc": "Passive ingestion of screen, file, and API signals into a unified graph.",
+        "desc": "Passive ingestion of screen, file, and API signals into a unified Knowledge Graph. It provides agents with complete situational awareness, eliminating the need for manual context-stuffing.",
         "rotatingTitles": ["Universal Vision", "The Eyes", "Unified Graph"],
-        "rotatingDescs": ["Passive ingestion of screen, file, and API signals into a unified graph.", "Sees screen, file, and API", "Ingests everything"]
+        "rotatingDescs": [
+          "Passive ingestion of screen, file, and API signals into a unified Knowledge Graph.",
+          "Sees screen, file, and API signals simultaneously.",
+          "Ingests everything into a single, queryable graph."
+        ]
       },
       {
         "title": "Causal World Model",
-        "desc": "A persistent \"System 2\" brain that reasons about state and context.",
+        "desc": "A persistent \"System 2\" architecture that maintains state across sessions. Unlike stateless LLMs, it models the *why* behind your work using Causal Graphs to enable long-horizon planning.",
         "rotatingTitles": ["Causal World Model", "The Brain", "Teleological Graph"],
-        "rotatingDescs": ["A persistent \"System 2\" brain that reasons about state and context.", "Persistent context", "Reasoning, not guessing"]
+        "rotatingDescs": [
+          "A persistent \"System 2\" architecture that maintains state across sessions.",
+          "Persistent context that survives browser refreshes.",
+          "Reasoning, not guessing, based on historical causality."
+        ]
       },
       {
         "title": "Agent Parliament",
-        "desc": "Internal governance agents debate and verify every action.",
+        "desc": "A novel governance protocol where specialized internal agents debate every autonomous action. It mathematically resolves conflicts against your project's constraints to guarantee safety before execution.",
         "rotatingTitles": ["Agent Parliament", "The Conscience", "Governance Layer"],
-        "rotatingDescs": ["Internal governance agents debate and verify every action.", "Security & quality agents", "Verified execution"]
+        "rotatingDescs": [
+          "A novel governance protocol where specialized internal agents debate every autonomous action.",
+          "Security & Quality agents verify every step.",
+          "Mathematically verified execution against constraints."
+        ]
       }
     ],
     "ctaNote": "No spam, just updates when we launch.",
     "metaDescription": "Work at the speed of thought. The First Self-Governing AI Operating Layer. WorkspaceOS combines Universal Vision with a Causal World Model for true System 2 reasoning."
   },
   "dev": {
-    "headline": "Your AI-powered Engineering Partner",
-    "subheadline": "The active partner that refactors your code while you sleep. WorkspaceOS eliminates the coordination tax through Self-Governing Autonomy.",
-    "body": "WorkspaceOS is more than a copilot; it's a partner that works when you don't. Using <span class='tooltip-trigger'>Pattern-First Computing<span class='tooltip-content'>Observes your manual git/terminal workflows and compiles them into reusable, cached automation primitives.</span></span>, it turns your daily repetitive tasks into permanent assets. It utilizes system idle time to spin up <span class='tooltip-trigger'>Shadow Git<span class='tooltip-content'>Invisible branches for running risky refactors or documentation passes without touching your working tree.</span></span> environments, running exhaustive tests and updating documentation in the background. It builds a **Hybrid Causal Graph** (Screen + API) for perfect context awareness, all governed by an internal **Agent Parliament** that debates and verifies every commit before it's proposed.",
+    "headline": "Your Self-Governing Engineering Partner",
+    "subheadline": "The active partner that refactors your code while you sleep. Governed by the Agent Parliament.",
+    "body": "WorkspaceOS is not just a copilot; it is a Partner that respects production safety. Using <span class='tooltip-trigger'>Universal Active Inference<span class='tooltip-content'>Continuous observation of your git/terminal workflows to compile reusable automation primitives.</span></span>, it turns manual toil into managed assets. It utilizes system idle time to spin up <span class='tooltip-trigger'>Shadow Environments<span class='tooltip-content'>Invisible branches for running risky refactors or documentation passes without touching your working tree.</span></span>, running exhaustive tests in the background. It builds a **Hybrid Causal Graph** (Screen + API) for perfect context, all governed by an internal **Agent Parliament** that debates and verifies every commit before it's proposed.",
     "bullets": [
       {
         "title": "Hybrid Causal Graph",
-        "desc": "Combines Screen Vision with API Truth",
-        "rotatingTitles": ["Hybrid Causal Graph", "Visual + API Verification", "100% Truth"],
-        "rotatingDescs": ["Combines Screen Vision with API Truth", "No more 'did you update the ticket?' checks", "Sees what you see, verifies with what it knows"]
+        "desc": "Fuses visual data from your IDE with ground-truth API signals. This ensures the agent never hallucinates a file state that contradicts the actual git HEAD.",
+        "rotatingTitles": ["Hybrid Causal Graph", "Visual + API Verification", "Grounded Truth"],
+        "rotatingDescs": [
+          "Fuses visual data from your IDE with ground-truth API signals.",
+          "No more 'did you update the ticket?' checks.",
+          "Sees what you see, verifies with what it knows."
+        ]
       },
       {
         "title": "Pattern-First Automation",
-        "desc": "Learns workflows from observation",
-        "rotatingTitles": ["Pattern-First Automation", "Zero-Config DevOps", "Behavioral Caching"],
-        "rotatingDescs": ["Learns workflows from observation", "Compiles manual tasks into agents", "Automates the 'glue code' of your job"]
+        "desc": "Compiles your repetitive manual workflows into governed agents. The system observes your terminal history and crystallizes frequent command sequences into reusable automation.",
+        "rotatingTitles": ["Pattern-First Automation", "Zero-Config DevOps", "Behavioral Compilation"],
+        "rotatingDescs": [
+          "Compiles your repetitive manual workflows into governed agents.",
+          "Turns manual tasks into system assets automatically.",
+          "Automates the 'glue code' of your job without writing scripts."
+        ]
       },
       {
         "title": "Verified Autonomy",
-        "desc": "Agent Parliament debates every commit",
+        "desc": "The Agent Parliament debates every commit against your safety constraints. A 'Red Team' agent actively tries to find security risks before any code is pushed.",
         "rotatingTitles": ["Verified Autonomy", "Agent Parliament", "Red Team Security"],
-        "rotatingDescs": ["Agent Parliament debates every commit", "The Red Team checks for risks before execution", "Ensures your AI never breaks production"]
+        "rotatingDescs": [
+          "The Agent Parliament debates every commit against your safety constraints.",
+          "The Red Team checks for risks before execution.",
+          "Ensures your AI never breaks production."
+        ]
       }
     ],
     "ctaNote": "Built for engineering teams.",
     "metaDescription": "WorkspaceOS: The engineering partner that learns your patterns. Features Hybrid Causal Graph, Shadow Git, and Agent Parliament."
   },
   "ai": {
-    "headline": "One OS for All Your AI",
-    "subheadline": "WorkspaceOS connects your AI agents into a unified intelligence layer that shares context across every tool.",
-    "body": "Your AI tools are islands—Claude doesn't know what Copilot wrote, ChatGPT can't see your Cursor sessions, and none of them remember yesterday's work. WorkspaceOS creates persistent memory across all AI interactions. When you debug with Copilot, your ChatGPT sessions know the context. When Claude writes documentation, it sees what you built in Cursor. Through screen-level pattern recognition, every AI agent shares the same understanding of your project. One conversation continues across all tools, with patterns cached permanently for zero-cost replay.",
+    "headline": "The Universal World Model for AI",
+    "subheadline": "WorkspaceOS unifies your AI agents into a single Causal Graph that shares context across every tool.",
+    "body": "Your AI tools are islands—Claude doesn't know what Copilot wrote, and ChatGPT can't see your Cursor sessions. WorkspaceOS creates a **Persistent Causal World Model** across all interactions. When you debug with Copilot, your ChatGPT sessions inherit that context. When Claude writes documentation, it references the graph built in Cursor. Through **Universal Vision**, every agent shares the same ground truth. One 'System 2' reasoning loop continues across all tools, with patterns cached permanently in the graph.",
     "bullets": [
       {
-        "title": "AI tools that talk to each other",
-        "desc": "Context flows between Claude, GPT, and Copilot automatically",
-        "rotatingTitles": ["AI tools that talk to each other", "Claude knows Copilot", "GPT sees Cursor"],
-        "rotatingDescs": ["Context flows between Claude, GPT, and Copilot automatically", "Your AI agents share the same understanding", "One unified intelligence layer"]
+        "title": "Unified World Model",
+        "desc": "A single, shared graph that allows context to flow between Claude, GPT, and Copilot. When one agent learns a fact, it is instantly available to all others.",
+        "rotatingTitles": ["Unified World Model", "Shared Intelligence", "One Graph"],
+        "rotatingDescs": [
+          "A single, shared graph that allows context to flow between Claude, GPT, and Copilot.",
+          "Your AI agents share the same understanding of the codebase.",
+          "One unified intelligence layer for all tools."
+        ]
       },
       {
-        "title": "One memory across agents",
-        "desc": "Yesterday's debugging session informs today's feature development",
-        "rotatingTitles": ["One memory across agents", "Persistent AI context", "Cross-tool intelligence"],
-        "rotatingDescs": ["Yesterday's debugging session informs today's feature development", "Every AI remembers your project history", "Context persists across all sessions"]
+        "title": "Persistent State",
+        "desc": "Yesterday's debugging session informs today's feature development. The system maintains a long-term memory of decisions, preventing circular conversations.",
+        "rotatingTitles": ["Persistent State", "Long-Term Memory", "Cross-Tool Reasoning"],
+        "rotatingDescs": [
+          "Yesterday's debugging session informs today's feature development.",
+          "Every AI remembers your project history.",
+          "Context persists across all sessions and reboots."
+        ]
       },
       {
-        "title": "Real-time context sharing",
-        "desc": "Every AI sees your full workspace state instantly",
-        "rotatingTitles": ["Real-time context sharing", "Instant synchronization", "Live AI collaboration"],
-        "rotatingDescs": ["Every AI sees your full workspace state instantly", "Changes propagate across all agents", "Unified view of your work"]
+        "title": "Real-time Synchronization",
+        "desc": "Changes propagate across the World Model instantly. If you rename a file in VS Code, your browser-based agents see the change immediately via the OS layer.",
+        "rotatingTitles": ["Real-time Synchronization", "Instant Propagation", "Live Collaboration"],
+        "rotatingDescs": [
+          "Changes propagate across the World Model instantly.",
+          "If you rename a file, all agents know immediately.",
+          "Unified view of your work across applications."
+        ]
       }
     ],
     "ctaNote": "Ready for AI-native teams.",
     "metaDescription": "WorkspaceOS connects your AI agents into a unified intelligence layer that shares context across every tool. Claude, GPT, and Copilot finally work together."
   },
   "vision": {
-    "headline": "Computing That Learns Your Patterns",
-    "subheadline": "WorkspaceOS transforms repeated workflows into permanent computational primitives that execute at zero cost.",
-    "body": "Every workflow you repeat becomes a first-class object in WorkspaceOS. Like files and processes in traditional computing, your patterns become permanent, shareable, and composable. The first time you handle a payment error by checking logs, updating the dashboard, and notifying ops—that pattern is captured forever. Next time, it executes instantly at zero marginal cost. Through universal screen-level awareness, these patterns work across any application, any version, any platform. Your workflows become the new assembly language of knowledge work.",
+    "headline": "Computing That Compiles Your Intent",
+    "subheadline": "WorkspaceOS transforms repeated workflows into permanent computational primitives (Entities, Actions, Constraints).",
+    "body": "Every workflow you repeat becomes a first-class object in the **Omniverse**. Like files and processes in traditional computing, your patterns become permanent, shareable **Teleological Primitives**. The first time you handle a payment error by checking logs, updating the dashboard, and notifying ops—that pattern is captured as a reusable **Action**. Next time, it executes instantly under the supervision of the **Agent Parliament**. Through universal screen-level awareness, these patterns work across any application, becoming the new assembly language of knowledge work.",
     "bullets": [
       {
-        "title": "Workflows become objects",
-        "desc": "Save, share, and compose patterns like files",
-        "rotatingTitles": ["Workflows become objects", "Patterns as primitives", "Composable automation"],
-        "rotatingDescs": ["Save, share, and compose patterns like files", "Your workflows are first-class citizens", "Build complex patterns from simple ones"]
+        "title": "Workflows as Objects",
+        "desc": "Your patterns are saved as Teleological Primitives that can be edited, shared, and versioned. Automation becomes as manageable as a file on your desktop.",
+        "rotatingTitles": ["Workflows as Objects", "Teleological Primitives", "Composable Automation"],
+        "rotatingDescs": [
+          "Your patterns are saved as Teleological Primitives.",
+          "Edit, share, and version your workflows like code.",
+          "Build complex patterns from simple ones."
+        ]
       },
       {
         "title": "Memory across time",
-        "desc": "Today's fix remembers last quarter's similar issue",
-        "rotatingTitles": ["Memory across time", "Pattern permanence", "Historical awareness"],
-        "rotatingDescs": ["Today's fix remembers last quarter's similar issue", "Patterns evolve with your experience", "Knowledge accumulates automatically"]
+        "desc": "The system caches successful outcomes, so today's fix remembers last quarter's similar issue. Knowledge accumulates automatically in the graph, reducing organizational amnesia.",
+        "rotatingTitles": ["Memory across time", "Pattern Permanence", "Historical Caching"],
+        "rotatingDescs": [
+          "The system caches successful outcomes automatically.",
+          "Patterns evolve with your experience over time.",
+          "Knowledge accumulates in the graph, reducing amnesia."
+        ]
       },
       {
-        "title": "Universal compatibility",
-        "desc": "Patterns work on any app you can see on screen",
-        "rotatingTitles": ["Universal compatibility", "Works everywhere", "Platform agnostic"],
-        "rotatingDescs": ["Patterns work on any app you can see on screen", "No APIs or integrations required", "Future-proof automation"]
+        "title": "Universal Compatibility",
+        "desc": "Because patterns are grounded in Visual Primitives, they survive UI updates and work across any application without brittle API integrations.",
+        "rotatingTitles": ["Universal Compatibility", "Visual Grounding", "Platform Agnostic"],
+        "rotatingDescs": [
+          "Patterns use Visual Primitives, not brittle APIs.",
+          "Works on any app you can see on screen.",
+          "Future-proof automation that survives updates."
+        ]
       }
     ],
     "ctaNote": "Join early access.",
