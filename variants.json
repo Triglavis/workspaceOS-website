@@ -1,30 +1,30 @@
 {
   "default": {
     "headline": "Work at the Speed of Thought",
-    "subheadline": "Your computer learns your patterns. Now it acts on them. The intelligence layer that turns repetitive work into permanent automation.",
-    "body": "Through <span class='tooltip-trigger'>Screen-Level Vision<span class='tooltip-content'>Like having an AI that sees your entire screen. Works with legacy enterprise software, brand new SaaS tools, even websites without APIs.</span></span>, WorkspaceOS connects actions between your disconnected apps. Once it learns your workflow through <span class='tooltip-trigger'>Pattern-First Computing<span class='tooltip-content'>First time: learns the pattern. Forever after: executes directly. Your repeated workflows become permanent, cost-free automations.</span></span>, it handles the coordination permanently. When you step away, it enters a <span class='tooltip-trigger'>Background Runtime<span class='tooltip-content'>Spins up invisible shadow processes to verify citations, run tests, and refactor messy work without interrupting you.</span></span> to resolve friction and optimize your environment. All governed by an internal <span class='tooltip-trigger'>Agent Parliament<span class='tooltip-content'>A Red Team/Blue Team governance layer that validates every autonomous action against strict safety rules before execution.</span></span> to ensure 100% deterministic safety.\n\nYour focus stays unbroken. Your AI partner handles the rest.",
+    "subheadline": "The First Self-Governing AI Operating Layer",
+    "body": "Move from \"Stateless Prediction\" to Universal Active Inference. WorkspaceOS combines Universal Vision with a Causal World Model to give agents the context they need—and the Governance you trust.<br><br>We reject the idea that AI is just a chatbot; instead, we model work as a Teleological System—an Omniverse of entities, actions, and constraints. By grounding agents in a persistent Causal Graph, we enable true System 2 reasoning. This architecture allows our Agent Parliament to mathematically resolve conflicts and guarantee safety before execution.",
     "bullets": [
       {
-        "title": "Pattern-First Computing",
-        "desc": "Automates repetitive workflows",
-        "rotatingTitles": ["Pattern-First Computing", "Learns From Observation", "Cached Workflows"],
-        "rotatingDescs": ["Automates repetitive workflows", "First time: learns. Next time: executes.", "Zero-marginal-cost automation"]
+        "title": "Universal Vision",
+        "desc": "Passive ingestion of screen, file, and API signals into a unified graph.",
+        "rotatingTitles": ["Universal Vision", "The Eyes", "Unified Graph"],
+        "rotatingDescs": ["Passive ingestion of screen, file, and API signals into a unified graph.", "Sees screen, file, and API", "Ingests everything"]
       },
       {
-        "title": "Background Intelligence",
-        "desc": "Refactors and verifies while you sleep",
-        "rotatingTitles": ["Background Intelligence", "Shadow Runtime", "The OS That Dreams"],
-        "rotatingDescs": ["Refactors and verifies while you sleep", "Runs tests in shadow branches", "Resolves technical debt on idle"]
+        "title": "Causal World Model",
+        "desc": "A persistent \"System 2\" brain that reasons about state and context.",
+        "rotatingTitles": ["Causal World Model", "The Brain", "Teleological Graph"],
+        "rotatingDescs": ["A persistent \"System 2\" brain that reasons about state and context.", "Persistent context", "Reasoning, not guessing"]
       },
       {
-        "title": "Verified Autonomy",
-        "desc": "Agent Parliament guarantees safety",
-        "rotatingTitles": ["Verified Autonomy", "Agent Parliament", "Red Team Security"],
-        "rotatingDescs": ["Agent Parliament guarantees safety", "Deterministic validation of every action", "Proactive assistance, mathematically verified"]
+        "title": "Agent Parliament",
+        "desc": "Internal governance agents debate and verify every action.",
+        "rotatingTitles": ["Agent Parliament", "The Conscience", "Governance Layer"],
+        "rotatingDescs": ["Internal governance agents debate and verify every action.", "Security & quality agents", "Verified execution"]
       }
     ],
     "ctaNote": "No spam, just updates when we launch.",
-    "metaDescription": "Work at the speed of thought. WorkspaceOS uses Pattern-First Computing to automate workflows and an Agent Parliament to ensure safe autonomy."
+    "metaDescription": "Work at the speed of thought. The First Self-Governing AI Operating Layer. WorkspaceOS combines Universal Vision with a Causal World Model for true System 2 reasoning."
   },
   "dev": {
     "headline": "Your AI-powered Engineering Partner",
