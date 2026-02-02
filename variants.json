@@ -6,30 +6,30 @@
     "bullets": [
       {
         "title": "Universal Vision",
-        "desc": "Passive ingestion of screen, file, and API signals into a unified Knowledge Graph. It provides agents with complete situational awareness, eliminating the need for manual context-stuffing.",
+        "desc": "Passive ingestion of screen, file, and API signals into a single graph.",
         "rotatingTitles": ["Universal Vision", "The Eyes", "Unified Graph"],
         "rotatingDescs": [
-          "Passive ingestion of screen, file, and API signals into a unified Knowledge Graph.",
+          "Passive ingestion of screen, file, and API signals into a single graph.",
           "Sees screen, file, and API signals simultaneously.",
           "Ingests everything into a single, queryable graph."
         ]
       },
       {
         "title": "Causal World Model",
-        "desc": "A persistent \"System 2\" architecture that maintains state across sessions. Unlike stateless LLMs, it models the *why* behind your work using Causal Graphs to enable long-horizon planning.",
+        "desc": "A persistent \"System 2\" brain that reasons about state and context.",
         "rotatingTitles": ["Causal World Model", "The Brain", "Teleological Graph"],
         "rotatingDescs": [
-          "A persistent \"System 2\" architecture that maintains state across sessions.",
+          "A persistent \"System 2\" brain that reasons about state and context.",
           "Persistent context that survives browser refreshes.",
-          "Reasoning, not guessing, based on historical causality."
+          "Reasoning, not guessing, based on causality."
         ]
       },
       {
         "title": "Agent Parliament",
-        "desc": "A novel governance protocol where specialized internal agents debate every autonomous action. It mathematically resolves conflicts against your project's constraints to guarantee safety before execution.",
+        "desc": "Internal governance agents debate and verify every autonomous action.",
         "rotatingTitles": ["Agent Parliament", "The Conscience", "Governance Layer"],
         "rotatingDescs": [
-          "A novel governance protocol where specialized internal agents debate every autonomous action.",
+          "Internal governance agents debate and verify every autonomous action.",
           "Security & Quality agents verify every step.",
           "Mathematically verified execution against constraints."
         ]
@@ -45,7 +45,7 @@
     "bullets": [
       {
         "title": "Hybrid Causal Graph",
-        "desc": "Fuses visual data from your IDE with ground-truth API signals. This ensures the agent never hallucinates a file state that contradicts the actual git HEAD.",
+        "desc": "Fuses visual data from your IDE with ground-truth API signals.",
         "rotatingTitles": ["Hybrid Causal Graph", "Visual + API Verification", "Grounded Truth"],
         "rotatingDescs": [
           "Fuses visual data from your IDE with ground-truth API signals.",
@@ -55,20 +55,20 @@
       },
       {
         "title": "Pattern-First Automation",
-        "desc": "Compiles your repetitive manual workflows into governed agents. The system observes your terminal history and crystallizes frequent command sequences into reusable automation.",
+        "desc": "Compiles manual workflows into governed agents automatically.",
         "rotatingTitles": ["Pattern-First Automation", "Zero-Config DevOps", "Behavioral Compilation"],
         "rotatingDescs": [
-          "Compiles your repetitive manual workflows into governed agents.",
-          "Turns manual tasks into system assets automatically.",
-          "Automates the 'glue code' of your job without writing scripts."
+          "Compiles manual workflows into governed agents automatically.",
+          "Turns manual tasks into system assets instantly.",
+          "Automates the 'glue code' of your job."
         ]
       },
       {
         "title": "Verified Autonomy",
-        "desc": "The Agent Parliament debates every commit against your safety constraints. A 'Red Team' agent actively tries to find security risks before any code is pushed.",
+        "desc": "Agent Parliament debates every commit against safety constraints.",
         "rotatingTitles": ["Verified Autonomy", "Agent Parliament", "Red Team Security"],
         "rotatingDescs": [
-          "The Agent Parliament debates every commit against your safety constraints.",
+          "Agent Parliament debates every commit against safety constraints.",
           "The Red Team checks for risks before execution.",
           "Ensures your AI never breaks production."
         ]
@@ -84,27 +84,27 @@
     "bullets": [
       {
         "title": "Unified World Model",
-        "desc": "A single, shared graph that allows context to flow between Claude, GPT, and Copilot. When one agent learns a fact, it is instantly available to all others.",
+        "desc": "Context flows between Claude, GPT, and Copilot via the shared Graph.",
         "rotatingTitles": ["Unified World Model", "Shared Intelligence", "One Graph"],
         "rotatingDescs": [
-          "A single, shared graph that allows context to flow between Claude, GPT, and Copilot.",
-          "Your AI agents share the same understanding of the codebase.",
+          "Context flows between Claude, GPT, and Copilot via the shared Graph.",
+          "Your AI agents share the same understanding.",
           "One unified intelligence layer for all tools."
         ]
       },
       {
         "title": "Persistent State",
-        "desc": "Yesterday's debugging session informs today's feature development. The system maintains a long-term memory of decisions, preventing circular conversations.",
+        "desc": "Yesterday's debugging session informs today's feature development.",
         "rotatingTitles": ["Persistent State", "Long-Term Memory", "Cross-Tool Reasoning"],
         "rotatingDescs": [
           "Yesterday's debugging session informs today's feature development.",
           "Every AI remembers your project history.",
-          "Context persists across all sessions and reboots."
+          "Context persists across all sessions."
         ]
       },
       {
         "title": "Real-time Synchronization",
-        "desc": "Changes propagate across the World Model instantly. If you rename a file in VS Code, your browser-based agents see the change immediately via the OS layer.",
+        "desc": "Changes propagate across the World Model instantly.",
         "rotatingTitles": ["Real-time Synchronization", "Instant Propagation", "Live Collaboration"],
         "rotatingDescs": [
           "Changes propagate across the World Model instantly.",
@@ -123,32 +123,32 @@
     "bullets": [
       {
         "title": "Workflows as Objects",
-        "desc": "Your patterns are saved as Teleological Primitives that can be edited, shared, and versioned. Automation becomes as manageable as a file on your desktop.",
+        "desc": "Save, share, and compose patterns like files on your desktop.",
         "rotatingTitles": ["Workflows as Objects", "Teleological Primitives", "Composable Automation"],
         "rotatingDescs": [
-          "Your patterns are saved as Teleological Primitives.",
-          "Edit, share, and version your workflows like code.",
+          "Save, share, and compose patterns like files on your desktop.",
+          "Your workflows are first-class citizens.",
           "Build complex patterns from simple ones."
         ]
       },
       {
         "title": "Memory across time",
-        "desc": "The system caches successful outcomes, so today's fix remembers last quarter's similar issue. Knowledge accumulates automatically in the graph, reducing organizational amnesia.",
+        "desc": "Today's fix remembers last quarter's similar issue.",
         "rotatingTitles": ["Memory across time", "Pattern Permanence", "Historical Caching"],
         "rotatingDescs": [
-          "The system caches successful outcomes automatically.",
-          "Patterns evolve with your experience over time.",
-          "Knowledge accumulates in the graph, reducing amnesia."
+          "Today's fix remembers last quarter's similar issue.",
+          "Patterns evolve with your experience.",
+          "Knowledge accumulates automatically."
         ]
       },
       {
         "title": "Universal Compatibility",
-        "desc": "Because patterns are grounded in Visual Primitives, they survive UI updates and work across any application without brittle API integrations.",
+        "desc": "Patterns work on any app via Visual Grounding, not brittle APIs.",
         "rotatingTitles": ["Universal Compatibility", "Visual Grounding", "Platform Agnostic"],
         "rotatingDescs": [
-          "Patterns use Visual Primitives, not brittle APIs.",
+          "Patterns work on any app via Visual Grounding, not brittle APIs.",
           "Works on any app you can see on screen.",
-          "Future-proof automation that survives updates."
+          "Future-proof automation."
         ]
       }
     ],
